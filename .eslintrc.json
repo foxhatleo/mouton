@@ -1,3 +1,186 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "block-scoped-var": [
+      "warn"
+    ],
+    "curly": [
+      "error"
+    ],
+    "default-case-last": [
+      "error"
+    ],
+    "no-constructor-return": [
+      "error"
+    ],
+    "no-eval": [
+      "error",
+      {
+        "allowIndirect": false
+      }
+    ],
+    "no-implied-eval": [
+      "error"
+    ],
+    "no-invalid-this": [
+      "error",
+      {
+        "capIsConstructor": true
+      }
+    ],
+    "no-iterator": [
+      "error"
+    ],
+    "no-proto": [
+      "error"
+    ],
+    "no-useless-return": [
+      "error"
+    ],
+    "no-useless-call": [
+      "error"
+    ],
+    "no-useless-catch": [
+      "error"
+    ],
+    "no-useless-concat": [
+      "error"
+    ],
+    "no-useless-escape": [
+      "error"
+    ],
+    "arrow-parens": [
+      "error",
+      "always",
+      {
+        "requireForBlockBody": false
+      }
+    ],
+    "arrow-body-style": [
+      "error"
+    ],
+    "constructor-super": [
+      "error"
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "generator-star-spacing": [
+      "error"
+    ],
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": true
+      }
+    ],
+    "no-const-assign": [
+      "error"
+    ],
+    "no-dupe-class-members": [
+      "error"
+    ],
+    "no-duplicate-imports": [
+      "error",
+      {
+        "includeExports": true
+      }
+    ],
+    "no-this-before-super": [
+      "off"
+    ],
+    "no-useless-computed-key": [
+      "error",
+      {
+        "enforceForClassMembers": false
+      }
+    ],
+    "no-useless-constructor": [
+      "error"
+    ],
+    "no-console": [
+      "warn"
+    ],
+    "no-debugger": [
+      "warn"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "always",
+      {
+        "singleValue": true,
+        "objectsInArrays": true,
+        "arraysInArrays": true
+      }
+    ],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "camelcase": [
+      "error",
+      {
+        "ignoreDestructuring": false,
+        "ignoreImports": false,
+        "ignoreGlobals": false
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "after": true
+      }
+    ],
+    "comma-style": [
+      "error",
+      "last"
+    ],
+    "consistent-this": [
+      "off",
+      []
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "max-depth": [
+      "off"
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 120
+      }
+    ],
+    "semi": [
+      "error"
+    ],
+    "quotes": [
+      "error"
+    ],
+    "react-hooks/exhaustive-deps": [
+      "off"
+    ]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {}
+  }
 }
