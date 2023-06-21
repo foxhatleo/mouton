@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
 import gsap from "gsap";
+import {blue} from "material-colors-ts";
 // @ts-ignore
 import Timeline = gsap.core.Timeline;
-import {blue} from "material-colors-ts";
 
 const TIMESTAMPS = [
     [ 0, 2 ],
@@ -27,7 +27,9 @@ const Avatar: React.ComponentType = () => {
     const [ lowPower, setLowPower ] = useState<boolean>(false);
 
     const doEmote = (evt?: any) => {
-        if (!video1Ref.current || !video2Ref.current || state.current !== 2) { return; }
+        if (!video1Ref.current || !video2Ref.current || state.current !== 2) {
+            return;
+        }
         clearTimeout(timeout.current);
         timeout.current = null;
         let nextEmote = -1;
@@ -61,7 +63,9 @@ const Avatar: React.ComponentType = () => {
     };
 
     const startVideo = () => {
-        if (!video1Ref.current!.paused) { return; }
+        if (!video1Ref.current!.paused) {
+            return;
+        }
         video1Ref.current!.currentTime = .3;
         video1Ref.current!.play().then(() => {
             const tl = gsap.timeline();
@@ -74,11 +78,14 @@ const Avatar: React.ComponentType = () => {
         }).catch(() => {
             setLowPower(true);
         });
-        video2Ref.current!.play().catch(() => {});
+        video2Ref.current!.play().catch(() => {
+        });
     };
 
     const timeUpdateHandler = () => {
-        if (!video1Ref.current || state.current === 0 || state.current === 2) { return; }
+        if (!video1Ref.current || state.current === 0 || state.current === 2) {
+            return;
+        }
         const endTime = TIMESTAMPS[state.current < 3 ? 0 : (state.current - 2)][1];
         if (video1Ref.current.currentTime >= endTime && video1Ref.current!.style.opacity == "1") {
             state.current = 2;
@@ -89,7 +96,9 @@ const Avatar: React.ComponentType = () => {
     };
 
     const scrollHandler = () => {
-        if (!video1Ref.current || state.current > 0) {return;}
+        if (!video1Ref.current || state.current > 0) {
+            return;
+        }
         const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
         const videoTop = video1Ref.current.getBoundingClientRect().top;
 
@@ -124,21 +133,21 @@ const Avatar: React.ComponentType = () => {
             startVideo();
             doEmote();
         }} className={"avatar-container" + (lowPower ? " low-power" : "")}>
-            <div className={"background"} />
+            <div className={"background"}/>
             <div className={"video-container"}>
                 <video preload="all" className={"v1"}
                     muted={true} autoPlay={false} playsInline={true} controls={false}
                     ref={video1Ref} onTimeUpdate={timeUpdateHandler}>
-                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"} />
-                    <source src={"/memoji.webm"} type={"video/webm"} />
+                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                    <source src={"/memoji.webm"} type={"video/webm"}/>
                 </video>
                 <video preload="all" className={"v2"}
                     muted={true} autoPlay={false} playsInline={true} controls={false}
                     ref={video2Ref} onTimeUpdate={timeUpdateHandler}>
-                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"} />
-                    <source src={"/memoji.webm"} type={"video/webm"} />
+                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                    <source src={"/memoji.webm"} type={"video/webm"}/>
                 </video>
-                <img src={"/memoji.png"} />
+                <img src={"/memoji.png"}/>
             </div>
             <div className={"low-power-prompt"}>
                 Click or tap to play.

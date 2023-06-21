@@ -15,7 +15,7 @@ export default function RootLayout({
             <body style={{opacity: 0}}>
                 <noscript>JavaScript is required for this website.</noscript>
                 {children}
-                <GlobalStyle />
+                <GlobalStyle/>
             </body>
         </html>
     );

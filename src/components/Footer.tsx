@@ -4,7 +4,7 @@ import Rainbow from "@/components/Rainbow";
 const Footer: React.ComponentType = () => (
     <>
         <div className={"rainbow"}>
-            <Rainbow footer={true} />
+            <Rainbow footer={true}/>
         </div>
         <footer className={"container"}>
             Built by Wenhao “Leo” Liang using React.<br/>
@@ -18,6 +18,7 @@ const Footer: React.ComponentType = () => (
                 height: 50vh;
                 z-index: -10;
             }
+
             footer {
                 overflow: hidden;
                 text-align: center;

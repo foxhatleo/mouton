@@ -12,9 +12,9 @@ export type HeaderProps = {
 const Header: React.ComponentType<HeaderProps> = (p) => (
     <header className={"entry-transition container alt"}>
         <Link href={"/"}>
-            <Logo />
+            <Logo/>
         </Link>
-        <Nav />
+        <Nav/>
         <style jsx>{`
             header {
                 position: ${p.absolute ? "absolute" : "relative"};

@@ -23,6 +23,7 @@ const NavItem: React.ComponentType<NavItemProps> = (p) => (
                 text-decoration: none;
                 color: inherit;
             }
+
             .link :global(a)::before {
                 content: "";
                 position: absolute;
@@ -37,19 +38,23 @@ const NavItem: React.ComponentType<NavItemProps> = (p) => (
                 transition: .3s ease-in-out bottom, .3s ease-in-out opacity;
                 will-change: opacity;
             }
+
             .link :global(a):hover::before, .link :global(a):active::before {
                 bottom: -.1em;
                 opacity: 1;
             }
+
             @media (prefers-color-scheme: dark) {
                 .link :global(a) {
                     color: black;
                 }
             }
+
             @media (max-width: ${Responsive.SIZE_M - 1}px) and (prefers-color-scheme: dark) {
                 .link :global(a) {
                     color: white;
                 }
+
                 .link :global(a)::before {
                     background: white;
                 }

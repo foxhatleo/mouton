@@ -57,13 +57,13 @@ const Home: React.ComponentType = () => {
         <main>
             <Rainbow/>
             <section className={"section1"}>
-                <Header absolute={true} />
+                <Header absolute={true}/>
                 <div className={"content container v-layout"}>
                     <h1 className={"entry-transition"}>
-                        My passion is to<br />
+                        My passion is to<br/>
                         create useful &<br/>
-                        delightful experience<br />
-                        with the power of<br />
+                        delightful experience<br/>
+                        with the power of<br/>
                         technology.
                     </h1>
                 </div>
@@ -91,7 +91,7 @@ const Home: React.ComponentType = () => {
                             </p>
                         </div>
                         <div className={"avatar-container"}>
-                            <Avatar />
+                            <Avatar/>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ const Home: React.ComponentType = () => {
                     </ul>
                 </div>
             </section>
-            <Footer />
+            <Footer/>
             <style jsx>{`
                 .section1 .content {
                     width: 100vw;
@@ -132,11 +132,13 @@ const Home: React.ComponentType = () => {
                     justify-content: center;
                     padding-bottom: 0;
                 }
+
                 @media (max-width: 350px) {
                     .section1 .content h1 {
                         font-size: 2.5em;
                     }
                 }
+
                 .section2 .content {
                     display: flex;
                     flex-direction: row;
@@ -144,14 +146,17 @@ const Home: React.ComponentType = () => {
                     align-items: center;
                     gap: 1em;
                 }
+
                 .section2 .content div {
                     flex-grow: 1;
                 }
+
                 .section2 .content .text-container {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                 }
+
                 .section2 .content .avatar-container {
                     width: 300px;
                     height: 300px;
@@ -160,22 +165,27 @@ const Home: React.ComponentType = () => {
                     justify-content: center;
                     flex-grow: 0;
                 }
+
                 @media (max-width: ${Responsive.SIZE_L - 1}px) {
                     .section2 .content {
                         flex-direction: column-reverse;
                     }
+
                     .section2 .content .avatar-container {
                         width: 100%;
                     }
+
                     .section2 .content .text-container {
                         width: 100%;
                     }
                 }
+
                 .section3 ul li :global(a) {
                     text-decoration: none;
                     color: inherit;
                     display: block;
                 }
+
                 .section3 ul li :global(a) .ind-container {
                     position: absolute;
                     top: 0;
@@ -186,6 +196,7 @@ const Home: React.ComponentType = () => {
                     justify-content: center;
                     align-items: center;
                 }
+
                 .section3 ul li :global(a) .ind-container .ind {
                     transition: .1s ease-in-out color, .1s ease-in-out opacity;
                     font-size: 7em;
@@ -195,17 +206,21 @@ const Home: React.ComponentType = () => {
                     color: var(--item-color-500);
                     opacity: .2;
                 }
+
                 .section3 ul li:nth-child(even) :global(a) .ind-container .ind {
                     margin-left: -1.8em;
                 }
+
                 @media (max-width: ${Responsive.SIZE_S - 1}px) {
                     .section3 ul li :global(a) .ind-container .ind {
                         margin-left: 1.6em;
                     }
+
                     .section3 ul li:nth-child(even) :global(a) .ind-container .ind {
                         margin-left: -1.2em;
                     }
                 }
+
                 .section3 ul li :global(a) .portfolio-link {
                     display: flex;
                     flex-direction: column;
@@ -215,26 +230,32 @@ const Home: React.ComponentType = () => {
                     transition: .1s ease-in-out transform;
                     transform: scale(.95);
                 }
+
                 .section3 ul li :global(a) .portfolio-link h3 {
                     transition: .1s ease-in-out color;
                     color: var(--item-color-900);
                 }
+
                 .section3 ul li :global(a):hover .ind-container .ind,
                 .section3 ul li :global(a):active .ind-container .ind {
                     opacity: .4;
                 }
+
                 .section3 ul li :global(a):hover .portfolio-link,
                 .section3 ul li :global(a):active .portfolio-link {
                     transform: scale(1);
                 }
+
                 .section3 ul li :global(a):hover .portfolio-link h3,
                 .section3 ul li :global(a):active .portfolio-link h3 {
                     color: var(--item-color-700);
                 }
+
                 @media (prefers-color-scheme: dark) {
                     .section3 ul li :global(a) .portfolio-link h3 {
                         color: var(--item-color-500);
                     }
+
                     .section3 ul li :global(a):hover .portfolio-link h3,
                     .section3 ul li :global(a):active .portfolio-link h3 {
                         color: var(--item-color-200);

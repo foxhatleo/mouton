@@ -37,9 +37,11 @@ const Nav: React.ComponentType = () => {
             gsap.killTweensOf(item);
             gsap.to(item, {opacity: 0, translateY: -20, delay: i * .05, duration: .15});
         });
-        gsap.to(desktopNav.current!, {opacity: 0, duration: .15, delay: .2, onComplete: () => {
-            desktopNav.current!.style.display = "none";
-        }});
+        gsap.to(desktopNav.current!, {
+            opacity: 0, duration: .15, delay: .2, onComplete: () => {
+                desktopNav.current!.style.display = "none";
+            },
+        });
     };
 
     const mobileToggleHandler = (evt?: { preventDefault: () => void; }) => {
@@ -57,7 +59,7 @@ const Nav: React.ComponentType = () => {
     };
 
     const resizeHandler = () => {
-        const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth|| 0);
+        const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
         if (viewportWidth > Responsive.SIZE_M) {
             hide(true);
         }
@@ -95,9 +97,11 @@ const Nav: React.ComponentType = () => {
                     align-items: center;
                     gap: 1.5em;
                 }
+
                 .mobile.nav {
                     display: none;
                 }
+
                 .mobile-button {
                     width: 20px;
                     height: 25px;
@@ -105,19 +109,23 @@ const Nav: React.ComponentType = () => {
                     flex-direction: column;
                     justify-content: space-between;
                 }
+
                 .line {
                     width: 100%;
                     height: 10%;
                     background: black;
                     border-radius: 5px;
                 }
+
                 .desktop.nav :global(span:first-child) {
                     display: none;
                 }
+
                 @media (max-width: ${Responsive.SIZE_M - 1}px) {
                     .mobile.nav {
                         display: flex;
                     }
+
                     .desktop.nav {
                         position: fixed;
                         display: none;
@@ -132,20 +140,24 @@ const Nav: React.ComponentType = () => {
                         align-items: flex-end;
                         padding: 2em;
                     }
+
                     .desktop.nav :global(span:first-child) {
                         display: block;
                     }
                 }
+
                 @media (max-width: ${Responsive.SIZE_M - 1}px) and (prefers-color-scheme: dark) {
                     .desktop.nav {
                         background: rgba(0, 0, 0, .7);
                     }
                 }
+
                 @media (min-width: ${Responsive.SIZE_L}px) and (max-width: ${Responsive.SIZE_XL - 1}px) {
                     nav {
                         gap: 1.4em;
                     }
                 }
+
                 @media (min-width: ${Responsive.SIZE_M}px) and (max-width: ${Responsive.SIZE_L - 1}px) {
                     nav {
                         gap: 1.2em;

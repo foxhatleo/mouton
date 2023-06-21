@@ -5,7 +5,9 @@ import gsap from "gsap";
 
 export default function usePageTransition() {
     React.useEffect(() => {
-        if (typeof document === "undefined") {return;}
+        if (typeof document === "undefined") {
+            return;
+        }
         const containers = Array.from(document.body.querySelectorAll(".entry-transition-container"));
         const pageTransitions = Array.from(document.body.querySelectorAll(".entry-transition")).filter((n) => {
             let parent: HTMLElement | Element | null = n;
