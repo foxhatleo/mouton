@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import {blue, green, orange, purple, red} from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
+import Head from "next/head";
 
 type Color = {
     "50": string;
@@ -55,6 +56,9 @@ const Home: React.ComponentType = () => {
     usePageTransition();
     return (
         <main>
+            <Head>
+                <title>Leo Liang</title>
+            </Head>
             <Rainbow/>
             <section className={"section1"}>
                 <Header absolute={true}/>
