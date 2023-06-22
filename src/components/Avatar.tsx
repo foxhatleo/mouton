@@ -161,6 +161,7 @@ const Avatar: React.ComponentType = () => {
                     text-decoration: none;
                     cursor: default;
                 }
+
                 .background {
                     position: absolute;
                     z-index: -1;
@@ -168,37 +169,43 @@ const Avatar: React.ComponentType = () => {
                     height: 250px;
                     border-radius: 125px;
                     margin: 25px;
-                    background: linear-gradient(
-                        90deg,
-                        rgba(255, 0, 0, 1) 0%,
-                        rgba(255, 154, 0, 1) 10%,
-                        rgba(208, 222, 33, 1) 20%,
-                        rgba(79, 220, 74, 1) 30%,
-                        rgba(63, 218, 216, 1) 40%,
-                        rgba(47, 201, 226, 1) 50%,
-                        rgba(28, 127, 238, 1) 60%,
-                        rgba(95, 21, 242, 1) 70%,
-                        rgba(186, 12, 248, 1) 80%,
-                        rgba(251, 7, 217, 1) 90%,
-                        rgba(255, 0, 0, 1) 100%
-                    );
+                    background: linear-gradient(90deg,
+                    rgba(255, 0, 0, 1) 0%,
+                    rgba(255, 154, 0, 1) 10%,
+                    rgba(208, 222, 33, 1) 20%,
+                    rgba(79, 220, 74, 1) 30%,
+                    rgba(63, 218, 216, 1) 40%,
+                    rgba(47, 201, 226, 1) 50%,
+                    rgba(28, 127, 238, 1) 60%,
+                    rgba(95, 21, 242, 1) 70%,
+                    rgba(186, 12, 248, 1) 80%,
+                    rgba(251, 7, 217, 1) 90%,
+                    rgba(255, 0, 0, 1) 100%);
                     filter: blur(35px);
                     opacity: .5;
                     animation-name: rainbow-circle;
                     animation-duration: 30s;
                     animation-iteration-count: infinite;
                 }
+
                 @keyframes rainbow-circle {
-                    from { transform: rotate(0turn); }
-                    to { transform: rotate(1turn); }
+                    from {
+                        transform: rotate(0turn);
+                    }
+                    to {
+                        transform: rotate(1turn);
+                    }
                 }
+
                 .video-container {
                     transform: translateX(5px) translateY(10px) scale(.8);
                 }
+
                 video {
                     opacity: 0;
                     will-change: opacity, transform;
                 }
+
                 .v2, img {
                     position: absolute;
                     top: 0;
@@ -206,6 +213,7 @@ const Avatar: React.ComponentType = () => {
                     right: 0;
                     bottom: 0;
                 }
+
                 .low-power-prompt {
                     text-align: center;
                     text-decoration: none;
@@ -215,16 +223,20 @@ const Avatar: React.ComponentType = () => {
                     pointer-events: none;
                     transition: .2s ease-in-out opacity;
                 }
+
                 .avatar-container img {
                     opacity: 0;
                     transition: .2s ease-in-out opacity;
                 }
+
                 .avatar-container.low-power {
                     cursor: pointer;
                 }
+
                 .avatar-container.low-power img {
                     opacity: 1;
                 }
+
                 .avatar-container.low-power .low-power-prompt {
                     opacity: 1;
                 }

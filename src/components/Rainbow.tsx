@@ -5,12 +5,14 @@ import {blue, green, orange, purple, red, yellow} from "material-colors-ts";
 
 const Rainbow: React.ComponentType<{ footer?: boolean; }> = (p) => (
     <div className={"root"}>
-        <div className={"bubble b2"}/>
-        <div className={"bubble b4"}/>
-        <div className={"bubble b6"}/>
-        <div className={"bubble b1"}/>
-        <div className={"bubble b3"}/>
-        <div className={"bubble b5"}/>
+        <div className={"stretcher"}>
+            <div className={"bubble b2"}/>
+            <div className={"bubble b4"}/>
+            <div className={"bubble b6"}/>
+            <div className={"bubble b1"}/>
+            <div className={"bubble b3"}/>
+            <div className={"bubble b5"}/>
+        </div>
         <style jsx>{`
             .root {
                 position: absolute;
@@ -22,12 +24,25 @@ const Rainbow: React.ComponentType<{ footer?: boolean; }> = (p) => (
                 right: 0;
             }
 
+            @media (max-aspect-ratio: 1/1) {
+                .stretcher {
+                    transform: scaleY(${p.footer ? 1 : 2});
+                }
+            }
+
+            @media (max-aspect-ratio: 2/3) {
+                .stretcher {
+                    transform: scaleY(${p.footer ? 1 : 3.5});
+                }
+            }
+
             .bubble {
                 position: absolute;
                 width: 25vw;
                 height: 25vw;
                 margin-left: -12vw;
-                margin-top: ${p.footer ? "40vh" : "-6vw"};
+                margin-top: ${p.footer ? "35vh" : "-6vw"};
+                bottom: 0;
                 filter: blur(10vw);
                 transform-origin: 15vw 15vw;
                 border-radius: 12vw;
