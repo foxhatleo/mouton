@@ -26,27 +26,27 @@ type Color = {
 const WORKS: { name: string; desc: string; color: Color; }[] = [
     {
         name: "EGOS-2000 Extension",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        desc: "Extension to incorporate C standard library in a minimal OS.",
         color: red,
     },
     {
         name: "Xi Compiler",
-        desc: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        desc: "A fully functional compiler written from scratch.",
         color: orange,
     },
     {
         name: "Panic Painter",
-        desc: "Sed vulputate mi sit amet mauris commodo quis imperdiet massa.",
+        desc: "A cross-platform mobile game written in C++.",
         color: green,
     },
     {
         name: "CMSX",
-        desc: "In pellentesque massa placerat duis ultricies lacus sed.",
+        desc: "Cornell's CS department course management website.",
         color: blue,
     },
     {
         name: "Fallen Flame",
-        desc: "Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis.",
+        desc: "A cross-platform desktop game written in Java.",
         color: purple,
     },
 ];
