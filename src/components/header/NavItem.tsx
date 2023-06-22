@@ -36,7 +36,7 @@ const NavItem: React.ComponentType<NavItemProps> = (p) => (
                 border-radius: .12em;
                 background: black;
                 transition: .3s ease-in-out bottom, .3s ease-in-out opacity;
-                will-change: opacity;
+                //will-change: opacity;
             }
 
             .link :global(a):hover::before, .link :global(a):active::before {

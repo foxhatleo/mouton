@@ -15,7 +15,7 @@ const Footer: React.ComponentType = () => (
                 position: absolute;
                 bottom: 0;
                 width: 100vw;
-                height: 50vh;
+                height: 100vh;
                 z-index: -10;
             }
 

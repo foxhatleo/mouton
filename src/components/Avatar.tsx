@@ -37,10 +37,13 @@ const Avatar: React.ComponentType = () => {
             nextEmote = Math.max(0, Math.floor(Math.random() * (TIMESTAMPS.length + 15)) - 16);
         }
         state.current = nextEmote + 3;
-        if (video1Ref.current.currentTime <= TIMESTAMPS[1][1] + .3 && nextEmote === 0) {
+        video1Ref.current!.pause();
+        if (nextEmote === 0) {
             video1Ref.current.currentTime = TIMESTAMPS[1][0];
-            video1Ref.current.playbackRate = 1;
             video1Ref.current.style.opacity = "1";
+            video1Ref.current!.play().catch(() => {
+                setLowPower(true);
+            });
         } else {
             video2Ref.current.currentTime = TIMESTAMPS[nextEmote + 1][0];
             video1Ref.current.style.opacity = "0.99";
@@ -48,24 +51,28 @@ const Avatar: React.ComponentType = () => {
                 onComplete: () => {
                     video1Ref.current!.style.opacity = "1";
                     video2Ref.current!.style.opacity = "0";
-                    video1Ref.current!.playbackRate = 1;
+                    video1Ref.current!.play().catch(() => {
+                        setLowPower(true);
+                    });
                 },
             });
             tl.fromTo(video2Ref.current, {opacity: 0}, {
                 opacity: 1, duration: 1, onComplete: () => {
                     video1Ref.current!.currentTime = TIMESTAMPS[nextEmote + 1][0];
+                    video1Ref.current!.pause();
                 },
             });
-            tl.fromTo(video1Ref.current, {opacity: .99}, {opacity: 0, duration: 1}, ">-.2 ");
+            tl.fromTo(video1Ref.current, {opacity: .99}, {opacity: 0, duration: 1}, ">-.1");
             tl.play();
             animation.current = tl;
         }
     };
 
     const startVideo = () => {
-        if (!video1Ref.current!.paused) {
+        if (video1Ref.current!.currentTime >= .5) {
             return;
         }
+        state.current = 1;
         video1Ref.current!.currentTime = .3;
         video1Ref.current!.play().then(() => {
             const tl = gsap.timeline();
@@ -79,6 +86,7 @@ const Avatar: React.ComponentType = () => {
             setLowPower(true);
         });
         video2Ref.current!.play().catch(() => {
+            setLowPower(true);
         });
     };
 
@@ -90,7 +98,7 @@ const Avatar: React.ComponentType = () => {
         if (video1Ref.current.currentTime >= endTime && video1Ref.current!.style.opacity == "1") {
             state.current = 2;
             video1Ref.current.currentTime = endTime;
-            video1Ref.current.playbackRate = 0.001;
+            video1Ref.current.pause();
             timeout.current = setTimeout(doEmote, 2000 + Math.random() * 1500);
         }
     };
@@ -112,7 +120,6 @@ const Avatar: React.ComponentType = () => {
     useEffect(() => {
         video1Ref.current!.setAttribute("style", "");
         video2Ref.current!.setAttribute("style", "");
-        video2Ref.current!.playbackRate = 0.001;
         if (state.current === 0) {
             window.addEventListener("scroll", scrollHandler);
         }
@@ -126,6 +133,11 @@ const Avatar: React.ComponentType = () => {
             }
         };
     }, []);
+
+    useEffect(() => {
+        video1Ref.current!.removeAttribute("style");
+        video2Ref.current!.removeAttribute("style");
+    }, [ lowPower ]);
 
     return (
         <a href={"#"} onMouseEnter={doEmote} onTouchEnd={doEmote} onClick={(evt) => {
@@ -161,7 +173,6 @@ const Avatar: React.ComponentType = () => {
                     text-decoration: none;
                     cursor: default;
                 }
-
                 .background {
                     position: absolute;
                     z-index: -1;
@@ -187,7 +198,6 @@ const Avatar: React.ComponentType = () => {
                     animation-duration: 30s;
                     animation-iteration-count: infinite;
                 }
-
                 @keyframes rainbow-circle {
                     from {
                         transform: rotate(0turn);
@@ -196,16 +206,13 @@ const Avatar: React.ComponentType = () => {
                         transform: rotate(1turn);
                     }
                 }
-
                 .video-container {
                     transform: translateX(5px) translateY(10px) scale(.8);
                 }
-
                 video {
                     opacity: 0;
-                    will-change: opacity, transform;
+                    //will-change: opacity, transform;
                 }
-
                 .v2, img {
                     position: absolute;
                     top: 0;
@@ -213,7 +220,6 @@ const Avatar: React.ComponentType = () => {
                     right: 0;
                     bottom: 0;
                 }
-
                 .low-power-prompt {
                     text-align: center;
                     text-decoration: none;
@@ -223,22 +229,21 @@ const Avatar: React.ComponentType = () => {
                     pointer-events: none;
                     transition: .2s ease-in-out opacity;
                 }
-
                 .avatar-container img {
                     opacity: 0;
                     transition: .2s ease-in-out opacity;
                 }
-
                 .avatar-container.low-power {
                     cursor: pointer;
                 }
-
                 .avatar-container.low-power img {
                     opacity: 1;
                 }
-
                 .avatar-container.low-power .low-power-prompt {
                     opacity: 1;
+                }
+                .avatar-container.low-power video {
+                    opacity: 0 !important;
                 }
             `}</style>
         </a>
