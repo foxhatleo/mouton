@@ -3,6 +3,7 @@
 import React, {useEffect} from "react";
 import Responsive from "@/components/Responsive";
 import gsap from "gsap";
+import {blue, orange, purple} from "material-colors-ts";
 
 const GlobalStyle: React.ComponentType = () => {
     useEffect(() => {
@@ -11,7 +12,7 @@ const GlobalStyle: React.ComponentType = () => {
     return <>
         <link rel={"preconnect"} href={"https://fonts.googleapis.com"}/>
         <link rel={"preconnect"} href={"https://fonts.gstatic.com"} crossOrigin={"anonymous"}/>
-        <link href={"https://fonts.googleapis.com/css2?family=Inter&family=Vollkorn:wght@600&display=swap"}
+        <link href={"https://fonts.googleapis.com/css2?family=Oxygen&family=Vollkorn:wght@600&display=swap"}
             rel={"stylesheet"}/>
         <style jsx global>{`
             html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym,
@@ -23,13 +24,13 @@ const GlobalStyle: React.ComponentType = () => {
                 padding: 0;
                 border: 0;
                 font-size: 100%;
-                font-family: Inter, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-family: Oxygen, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
                 vertical-align: baseline;
                 box-sizing: border-box;
                 position: relative;
             }
 
-            article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
                 display: block;
             }
 
@@ -90,6 +91,12 @@ const GlobalStyle: React.ComponentType = () => {
                 font-size: 1em;
             }
 
+            article {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5em;
+            }
+
             .v-layout {
                 display: flex;
                 flex-direction: column;
@@ -118,7 +125,20 @@ const GlobalStyle: React.ComponentType = () => {
             }
 
             body {
-                font-size: 24px;
+                font-size: 20px;
+            }
+
+            a {
+                color: ${blue["500"]};
+                transition: .1s ease-in-out color;
+            }
+
+            a:hover {
+                color: ${orange["500"]};
+            }
+
+            a:active {
+                color: ${purple["500"]};
             }
 
             @media (min-width: ${Responsive.SIZE_L}px) and (max-width: ${Responsive.SIZE_XL - 1}px) {
@@ -131,7 +151,7 @@ const GlobalStyle: React.ComponentType = () => {
                 }
 
                 body {
-                    font-size: 22px;
+                    font-size: 19px;
                 }
             }
 
@@ -145,7 +165,7 @@ const GlobalStyle: React.ComponentType = () => {
                 }
 
                 body {
-                    font-size: 20px;
+                    font-size: 18px;
                 }
             }
 
@@ -159,7 +179,7 @@ const GlobalStyle: React.ComponentType = () => {
                 }
 
                 body {
-                    font-size: 18px;
+                    font-size: 16px;
                 }
             }
 

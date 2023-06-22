@@ -37,7 +37,7 @@ const Avatar: React.ComponentType = () => {
             nextEmote = Math.max(0, Math.floor(Math.random() * (TIMESTAMPS.length + 15)) - 16);
         }
         state.current = nextEmote + 3;
-        video1Ref.current!.pause();
+        video1Ref.current.pause();
         if (nextEmote === 0) {
             video1Ref.current.currentTime = TIMESTAMPS[1][0];
             video1Ref.current.style.opacity = "1";
@@ -46,6 +46,7 @@ const Avatar: React.ComponentType = () => {
             });
         } else {
             video2Ref.current.currentTime = TIMESTAMPS[nextEmote + 1][0];
+            video2Ref.current.pause();
             video1Ref.current.style.opacity = "0.99";
             const tl = gsap.timeline({
                 onComplete: () => {
@@ -173,6 +174,7 @@ const Avatar: React.ComponentType = () => {
                     text-decoration: none;
                     cursor: default;
                 }
+
                 .background {
                     position: absolute;
                     z-index: -1;
@@ -198,6 +200,7 @@ const Avatar: React.ComponentType = () => {
                     animation-duration: 30s;
                     animation-iteration-count: infinite;
                 }
+
                 @keyframes rainbow-circle {
                     from {
                         transform: rotate(0turn);
@@ -206,13 +209,16 @@ const Avatar: React.ComponentType = () => {
                         transform: rotate(1turn);
                     }
                 }
+
                 .video-container {
                     transform: translateX(5px) translateY(10px) scale(.8);
                 }
+
                 video {
                     opacity: 0;
                     //will-change: opacity, transform;
                 }
+
                 .v2, img {
                     position: absolute;
                     top: 0;
@@ -220,6 +226,7 @@ const Avatar: React.ComponentType = () => {
                     right: 0;
                     bottom: 0;
                 }
+
                 .low-power-prompt {
                     text-align: center;
                     text-decoration: none;
@@ -229,19 +236,24 @@ const Avatar: React.ComponentType = () => {
                     pointer-events: none;
                     transition: .2s ease-in-out opacity;
                 }
+
                 .avatar-container img {
                     opacity: 0;
                     transition: .2s ease-in-out opacity;
                 }
+
                 .avatar-container.low-power {
                     cursor: pointer;
                 }
+
                 .avatar-container.low-power img {
                     opacity: 1;
                 }
+
                 .avatar-container.low-power .low-power-prompt {
                     opacity: 1;
                 }
+
                 .avatar-container.low-power video {
                     opacity: 0 !important;
                 }

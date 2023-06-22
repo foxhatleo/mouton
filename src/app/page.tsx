@@ -72,7 +72,7 @@ const Home: React.ComponentType = () => {
                 <div className={"v-layout"}>
                     <h2 className={"entry-transition center"}>About Me</h2>
                     <div className={"content"}>
-                        <div className={"text-container container alt v-layout"}>
+                        <article className={"text-container container alt"}>
                             <p className={"entry-transition"}>
                                 Welcome! I’m Leo, an ambitious software engineer and recent Master’s graduate in
                                 Computer Science from Cornell University. I’m eager to contribute my skills and
@@ -89,7 +89,7 @@ const Home: React.ComponentType = () => {
                                 exploring the world. Thank you for visiting my website — enjoy discovering more about my
                                 passions and pursuits.
                             </p>
-                        </div>
+                        </article>
                         <div className={"avatar-container"}>
                             <Avatar/>
                         </div>

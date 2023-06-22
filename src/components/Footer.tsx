@@ -8,7 +8,7 @@ const Footer: React.ComponentType = () => (
         </div>
         <footer className={"container"}>
             Built by Wenhao “Leo” Liang using React.<br/>
-            Source available at GitHub.
+            Source available at <a href={"https://github.com/foxhatleo/mouton"}>GitHub</a>.
         </footer>
         <style jsx>{`
             .rainbow {
