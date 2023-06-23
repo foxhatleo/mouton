@@ -24,6 +24,7 @@ const Footer: React.ComponentType = () => (
                 text-align: center;
                 font-size: .8em;
                 color: black;
+                margin-top: 3em;
             }
         `}</style>
     </>

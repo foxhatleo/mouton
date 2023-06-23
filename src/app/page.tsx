@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
@@ -10,57 +10,65 @@ import {blue, green, orange, purple, red} from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
 import Head from "next/head";
+import {Color} from "@/components/Color";
 
-type Color = {
-    "50": string;
-    "100": string;
-    "200": string;
-    "300": string;
-    "400": string;
-    "500": string;
-    "600": string;
-    "700": string;
-    "800": string;
-    "900": string;
-};
-
-const WORKS: { name: string; desc: string; color: Color; }[] = [
+const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
     {
         name: "EGOS-2000 Extension",
         desc: "Extension to incorporate C standard library in a minimal OS.",
+        link: "/egos-2000-extension/",
         color: red,
     },
     {
         name: "Xi Compiler",
         desc: "A fully functional compiler written from scratch.",
+        link: "/",
         color: orange,
     },
     {
         name: "Panic Painter",
         desc: "A cross-platform mobile game written in C++.",
+        link: "/",
         color: green,
     },
     {
         name: "CMSX",
         desc: "Cornell's CS department course management website.",
+        link: "/",
         color: blue,
     },
     {
         name: "Fallen Flame",
         desc: "A cross-platform desktop game written in Java.",
+        link: "/",
         color: purple,
     },
 ];
 
 const Home: React.ComponentType = () => {
     usePageTransition();
+    const [ scrollDown, setScrollDown ] = useState(true);
+
+    const scrollHandler = () => {
+        if (window.scrollY >= 120) {
+            setScrollDown(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", scrollHandler);
+        return () => {
+            window.removeEventListener("scroll", scrollHandler);
+        };
+    }, []);
+
     return (
         <main>
             <Head>
                 <title>Leo Liang</title>
             </Head>
             <Rainbow/>
-            <section className={"section1"}>
+            <section className={"section1" + (scrollDown ? " scroll-down" : "")}>
                 <Header absolute={true}/>
                 <div className={"content container v-layout"}>
                     <h1 className={"entry-transition"}>
@@ -71,8 +79,11 @@ const Home: React.ComponentType = () => {
                         technology.
                     </h1>
                 </div>
+                <div className={"scroll-down"}>
+                    Scroll down to learn more
+                </div>
             </section>
-            <section id={"about"} className={"section2 container entry-transition-container"}>
+            <section id={"about"} className={"section2 container entry-transition-group"}>
                 <div className={"v-layout"}>
                     <h2 className={"entry-transition center"}>About Me</h2>
                     <div className={"content"}>
@@ -100,7 +111,7 @@ const Home: React.ComponentType = () => {
                     </div>
                 </div>
             </section>
-            <section id={"works"} className={"section3 container entry-transition-container"}>
+            <section id={"works"} className={"section3 container entry-transition-group"}>
                 <div className={"v-layout center"}>
                     <h2 className={"entry-transition"}>Works</h2>
                     <ul className={"v-layout"}>
@@ -111,9 +122,8 @@ const Home: React.ComponentType = () => {
                                     "--item-color-500": data.color["500"],
                                     "--item-color-700": data.color["700"],
                                     "--item-color-900": data.color["900"],
-                                    pointerEvents: "none",
                                 } as React.CSSProperties}>
-                                <Link href={"/"}>
+                                <Link href={data.link}>
                                     <div className={"ind-container"}>
                                         <div className={"ind"}>{`0${ind + 1}`.slice(-2)}</div>
                                     </div>
@@ -132,9 +142,23 @@ const Home: React.ComponentType = () => {
                 .section1 .content {
                     width: 100vw;
                     height: 100vh;
-                    min-height: 50vw;
+                    min-height: 40em;
                     justify-content: center;
-                    padding-bottom: 0;
+                    padding-bottom: 3em;
+                }
+
+                .section1 .scroll-down {
+                    position: absolute;
+                    bottom: 4em;
+                    width: 100%;
+                    text-align: center;
+                    opacity: .5;
+                    transition: .3s ease-in-out opacity, .3s ease-in-out bottom;
+                }
+
+                .section1:not(.scroll-down) .scroll-down {
+                    opacity: 0;
+                    bottom: 4em;
                 }
 
                 @media (max-width: 350px) {

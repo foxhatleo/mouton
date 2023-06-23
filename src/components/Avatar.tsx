@@ -74,16 +74,20 @@ const Avatar: React.ComponentType = () => {
             return;
         }
         state.current = 1;
+        video1Ref.current!.style.opacity = "0";
+        video2Ref.current!.style.opacity = "0";
         video1Ref.current!.currentTime = .3;
+        debugger;
         video1Ref.current!.play().then(() => {
             const tl = gsap.timeline();
-            tl.to(video1Ref.current, {duration: .3, opacity: 1});
+            tl.fromTo(video1Ref.current, {opacity: 0}, {duration: .3, opacity: 1});
             tl.fromTo(video1Ref.current,
                 {scale: .01}, {scale: 1, duration: 3.5, ease: "elastic.out(1.2, 0.75)"});
             tl.play();
             animation.current = tl;
             setLowPower(false);
         }).catch(() => {
+            state.current = 0;
             setLowPower(true);
         });
         video2Ref.current!.play().catch(() => {
@@ -135,11 +139,6 @@ const Avatar: React.ComponentType = () => {
         };
     }, []);
 
-    useEffect(() => {
-        video1Ref.current!.removeAttribute("style");
-        video2Ref.current!.removeAttribute("style");
-    }, [ lowPower ]);
-
     return (
         <a href={"#"} onMouseEnter={doEmote} onTouchEnd={doEmote} onClick={(evt) => {
             evt.preventDefault();
@@ -148,18 +147,20 @@ const Avatar: React.ComponentType = () => {
         }} className={"avatar-container" + (lowPower ? " low-power" : "")}>
             <div className={"background"}/>
             <div className={"video-container"}>
-                <video preload="all" className={"v1"}
-                    muted={true} autoPlay={false} playsInline={true} controls={false}
-                    ref={video1Ref} onTimeUpdate={timeUpdateHandler}>
-                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
-                    <source src={"/memoji.webm"} type={"video/webm"}/>
-                </video>
-                <video preload="all" className={"v2"}
-                    muted={true} autoPlay={false} playsInline={true} controls={false}
-                    ref={video2Ref} onTimeUpdate={timeUpdateHandler}>
-                    <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
-                    <source src={"/memoji.webm"} type={"video/webm"}/>
-                </video>
+                <div className={"videos"}>
+                    <video preload="all" className={"v1"}
+                        muted={true} autoPlay={false} playsInline={true} controls={false}
+                        ref={video1Ref} onTimeUpdate={timeUpdateHandler}>
+                        <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                        <source src={"/memoji.webm"} type={"video/webm"}/>
+                    </video>
+                    <video preload="all" className={"v2"}
+                        muted={true} autoPlay={false} playsInline={true} controls={false}
+                        ref={video2Ref} onTimeUpdate={timeUpdateHandler}>
+                        <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                        <source src={"/memoji.webm"} type={"video/webm"}/>
+                    </video>
+                </div>
                 <img src={"/memoji.png"}/>
             </div>
             <div className={"low-power-prompt"}>
@@ -214,12 +215,16 @@ const Avatar: React.ComponentType = () => {
                     transform: translateX(5px) translateY(10px) scale(.8);
                 }
 
+                .avatar-container.low-power .videos {
+                    display: none;
+                }
+
                 video {
                     opacity: 0;
                     //will-change: opacity, transform;
                 }
 
-                .v2, img {
+                .v1, .v2 {
                     position: absolute;
                     top: 0;
                     left: 0;

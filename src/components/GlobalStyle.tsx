@@ -35,7 +35,7 @@ const GlobalStyle: React.ComponentType = () => {
             }
 
             body {
-                line-height: 1.25;
+                line-height: 1.5;
                 overflow-x: hidden;
             }
 
@@ -61,6 +61,10 @@ const GlobalStyle: React.ComponentType = () => {
             h1, h2, h3, h4, h5, h6 {
                 font-family: Vollkorn, "Times New Roman", Times, serif;
                 font-weight: 600;
+            }
+
+            code {
+                font-family: "Fira Code", Dina, Hack, "Anonymous Pro", "Courier New", sans-serif;
             }
 
             .glow {
