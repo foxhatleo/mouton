@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body style={{opacity: 0}}>
+            <body>
                 <noscript>JavaScript is required for this website.</noscript>
                 {children}
                 <GlobalStyle/>

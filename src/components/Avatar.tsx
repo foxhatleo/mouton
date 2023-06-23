@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import gsap from "gsap";
 import {blue} from "material-colors-ts";
+import useScroll from "@/hooks/useScroll";
 // @ts-ignore
 import Timeline = gsap.core.Timeline;
 
@@ -77,7 +78,6 @@ const Avatar: React.ComponentType = () => {
         video1Ref.current!.style.opacity = "0";
         video2Ref.current!.style.opacity = "0";
         video1Ref.current!.currentTime = .3;
-        debugger;
         video1Ref.current!.play().then(() => {
             const tl = gsap.timeline();
             tl.fromTo(video1Ref.current, {opacity: 0}, {duration: .3, opacity: 1});
@@ -104,7 +104,7 @@ const Avatar: React.ComponentType = () => {
             state.current = 2;
             video1Ref.current.currentTime = endTime;
             video1Ref.current.pause();
-            timeout.current = setTimeout(doEmote, 2000 + Math.random() * 1500);
+            timeout.current = setTimeout(doEmote, 1000 + Math.random() * 500);
         }
     };
 
@@ -125,19 +125,17 @@ const Avatar: React.ComponentType = () => {
     useEffect(() => {
         video1Ref.current!.setAttribute("style", "");
         video2Ref.current!.setAttribute("style", "");
-        if (state.current === 0) {
-            window.addEventListener("scroll", scrollHandler);
-        }
         return () => {
             if (animation.current) {
                 animation.current.kill();
             }
-            window.removeEventListener("scroll", scrollHandler);
             if (timeout.current) {
                 clearTimeout(timeout.current);
             }
         };
     }, []);
+
+    useScroll(scrollHandler);
 
     return (
         <a href={"#"} onMouseEnter={doEmote} onTouchEnd={doEmote} onClick={(evt) => {

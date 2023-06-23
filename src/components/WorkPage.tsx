@@ -1,6 +1,6 @@
 "use client";
 
-import React, {PropsWithChildren, useEffect, useState} from "react";
+import React, {PropsWithChildren, useState} from "react";
 import Footer from "@/components/Footer";
 import usePageTransition from "@/hooks/usePageTransition";
 import Header from "@/components/header/Header";
@@ -13,6 +13,7 @@ import {faFilePdf} from "@fortawesome/free-solid-svg-icons/faFilePdf";
 import Link from "next/link";
 import {faGlobe} from "@fortawesome/free-solid-svg-icons/faGlobe";
 import {faCode} from "@fortawesome/free-solid-svg-icons/faCode";
+import useScroll from "@/hooks/useScroll";
 
 const WorkPage: React.ComponentType<PropsWithChildren<{
     name: string;
@@ -32,12 +33,7 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
         }
     };
 
-    useEffect(() => {
-        window.addEventListener("scroll", scrollHandler);
-        return () => {
-            window.removeEventListener("scroll", scrollHandler);
-        };
-    }, []);
+    useScroll(scrollHandler);
 
     return (
         <main className={scrollDown ? " scroll-down" : ""}>
@@ -60,7 +56,7 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
                     </p></li> : ""}
                     {p.fieldGitHub ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faCode}/></span>
-                        <Link href={p.fieldGitHub}>GitHub repo</Link>
+                        <Link href={`https://github.com/${p.fieldGitHub}`}>GitHub repo</Link>
                     </p></li> : ""}
                     {p.fieldPdf ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faFilePdf}/></span>

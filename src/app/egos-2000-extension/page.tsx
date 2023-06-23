@@ -2,7 +2,6 @@
 
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import Head from "next/head";
 import {red} from "material-colors-ts";
 
 const WorkEGOS2000: React.ComponentType = () => (
@@ -12,9 +11,6 @@ const WorkEGOS2000: React.ComponentType = () => (
         fieldDate={"Jan 2023 - May 2023"}
         fieldPdf={"/EGOS-2000-Extension.pdf"}
         color={red}>
-        <Head>
-            <title>EGOS-2000 Extension - Leo Liang</title>
-        </Head>
         <p>
             In the context of my Master of Engineering thesis, I developed a sophisticated
             extension

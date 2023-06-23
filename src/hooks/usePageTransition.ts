@@ -8,6 +8,11 @@ export default function usePageTransition() {
         if (typeof document === "undefined") {
             return;
         }
+        const mains = document.body.querySelectorAll("main");
+        mains.forEach((i) => {
+            i.style.opacity = "0";
+        });
+        gsap.to(mains, .3, {opacity: 1});
         const containers = Array.from(document.body.querySelectorAll(".entry-transition-group"));
         const pageTransitions =
             Array.from(document.body.querySelectorAll(".entry-transition, .entry-transition-children > *"))
@@ -43,6 +48,7 @@ export default function usePageTransition() {
             }
         };
         window.addEventListener("scroll", scrollHandler);
+        setTimeout(scrollHandler, 500);
         return () => {
             window.removeEventListener("scroll", scrollHandler);
         };

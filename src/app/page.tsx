@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
@@ -11,6 +11,7 @@ import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
 import Head from "next/head";
 import {Color} from "@/components/Color";
+import useScroll from "@/hooks/useScroll";
 
 const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
     {
@@ -22,25 +23,25 @@ const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
     {
         name: "Xi Compiler",
         desc: "A fully functional compiler written from scratch.",
-        link: "/",
+        link: "/xi-compiler/",
         color: orange,
     },
     {
         name: "Panic Painter",
         desc: "A cross-platform mobile game written in C++.",
-        link: "/",
+        link: "/panic-painter/",
         color: green,
     },
     {
         name: "CMSX",
         desc: "Cornell's CS department course management website.",
-        link: "/",
+        link: "/cmsx/",
         color: blue,
     },
     {
         name: "Fallen Flame",
         desc: "A cross-platform desktop game written in Java.",
-        link: "/",
+        link: "/fallen-flame/",
         color: purple,
     },
 ];
@@ -55,12 +56,7 @@ const Home: React.ComponentType = () => {
         }
     };
 
-    useEffect(() => {
-        window.addEventListener("scroll", scrollHandler);
-        return () => {
-            window.removeEventListener("scroll", scrollHandler);
-        };
-    }, []);
+    useScroll(scrollHandler);
 
     return (
         <main>
