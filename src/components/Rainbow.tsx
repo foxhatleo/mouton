@@ -50,7 +50,7 @@ const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) =
 
             .root.footer .stretcher {
                 transform-origin: center bottom;
-                transform: scaleY(.6);
+                transform: scaleY(.8);
             }
 
             .bubble {
@@ -73,7 +73,7 @@ const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) =
             }
 
             .root.footer .bubble {
-                margin-top: -14vw;
+                margin-top: -6em;
                 top: 100%;
             }
 
