@@ -13,6 +13,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
                 <noscript>JavaScript is required for this website.</noscript>
                 {children}
                 <GlobalStyle/>
