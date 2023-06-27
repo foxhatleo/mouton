@@ -53,14 +53,11 @@ const WorkPanicPainter: React.ComponentType = () => (
             Ultimately, we delivered a product that we can genuinely take pride in.
             The final product (available
             {/* eslint-disable-next-line max-len */" "}
-            on <NewPageLink
-                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk"}>Android</NewPageLink>,
+            on <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk"}>Android</NewPageLink>,
             {/* eslint-disable-next-line max-len */" "}
-            <NewPageLink
-                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip"}>Windows</NewPageLink>,
+            <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip"}>Windows</NewPageLink>,
             {/* eslint-disable-next-line max-len */" "}
-            and <NewPageLink
-                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip"}>macOS</NewPageLink>)
+            and <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip"}>macOS</NewPageLink>)
             and the corresponding codebase are accessible
             on <NewPageLink href={"https://github.com/foxhatleo/panic-painter"}>GitHub</NewPageLink>.
             Due to Apple’s restrictions on sideloading,
