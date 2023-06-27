@@ -1,15 +1,13 @@
-"use client";
-
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {orange} from "material-colors-ts";
+import {yellow} from "material-colors-ts";
 
 const WorkXiCompiler: React.ComponentType = () => (
     <WorkPage
         name={"Xi Compiler"}
         desc={"A fully functional compiler written from scratch."}
         fieldDate={"Jan 2020 - May 2020"}
-        color={orange}>
+        color={yellow}>
         <p>
             In the context of a practical application project for my Advanced Compiler
             Construction course, I collaborated within a team comprising four members, where
@@ -66,7 +64,7 @@ const WorkXiCompiler: React.ComponentType = () => (
             advanced compiler construction.
         </p>
         <p>
-            The source code is unfortunately not available to the public per Cornell’s guidelines
+            Unfortunately, the source code is not available to the public per Cornell’s guidelines
             for academic integrity.
         </p>
     </WorkPage>

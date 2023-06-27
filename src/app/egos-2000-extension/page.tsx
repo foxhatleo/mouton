@@ -2,7 +2,7 @@
 
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {red} from "material-colors-ts";
+import {orange} from "material-colors-ts";
 
 const WorkEGOS2000: React.ComponentType = () => (
     <WorkPage
@@ -10,7 +10,7 @@ const WorkEGOS2000: React.ComponentType = () => (
         desc={"Extension to incorporate C standard library in a minimal OS."}
         fieldDate={"Jan 2023 - May 2023"}
         fieldPdf={"/EGOS-2000-Extension.pdf"}
-        color={red}>
+        color={orange}>
         <p>
             In the context of my Master of Engineering thesis, I developed a sophisticated
             extension

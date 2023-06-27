@@ -52,15 +52,18 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
                     </p></li> : ""}
                     {p.fieldWebsite ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faGlobe}/></span>
-                        <Link href={p.fieldWebsite}>Website</Link>
+                        <Link target={"_blank"} rel={"noopener noreferrer"} href={p.fieldWebsite}>Website</Link>
                     </p></li> : ""}
                     {p.fieldGitHub ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faCode}/></span>
-                        <Link href={`https://github.com/${p.fieldGitHub}`}>GitHub repo</Link>
+                        <Link target={"_blank"} rel={"noopener noreferrer"}
+                            href={`https://github.com/${p.fieldGitHub}`}>
+                            GitHub repo
+                        </Link>
                     </p></li> : ""}
                     {p.fieldPdf ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faFilePdf}/></span>
-                        <Link href={p.fieldPdf}>Report</Link>
+                        <Link target={"_blank"} rel={"noopener noreferrer"} href={p.fieldPdf}>Report</Link>
                     </p></li> : ""}
                 </ul>
             </div>

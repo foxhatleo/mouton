@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import {blue} from "material-colors-ts";
