@@ -86,7 +86,7 @@ const Nav: React.ComponentType = () => {
                 <NavItem label={"✕"} href={"/"} onclick={mobileToggleHandler}/>
                 <NavItem label={"About"} href={"/#about"}/>
                 <NavItem label={"Works"} href={"/#works"}/>
-                <NavItem label={"Résumé"} href={"/resume.pdf"}/>
+                <NavItem label={"Résumé"} href={"/resources/Resume-Wenhao-Leo-Liang.pdf"}/>
                 <NavItem label={"LinkedIn"} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}/>
                 <NavItem label={"Instagram"} href={"https://www.instagram.com/foxhatleo"}/>
             </nav>

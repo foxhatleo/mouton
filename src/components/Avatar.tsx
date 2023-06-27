@@ -149,17 +149,17 @@ const Avatar: React.ComponentType = () => {
                     <video preload="all" className={"v1"}
                         muted={true} autoPlay={false} playsInline={true} controls={false}
                         ref={video1Ref} onTimeUpdate={timeUpdateHandler}>
-                        <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
-                        <source src={"/memoji.webm"} type={"video/webm"}/>
+                        <source src={"/assets/memoji/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                        <source src={"/assets/memoji/memoji.webm"} type={"video/webm"}/>
                     </video>
                     <video preload="all" className={"v2"}
                         muted={true} autoPlay={false} playsInline={true} controls={false}
                         ref={video2Ref} onTimeUpdate={timeUpdateHandler}>
-                        <source src={"/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
-                        <source src={"/memoji.webm"} type={"video/webm"}/>
+                        <source src={"/assets/memoji/memoji.mov"} type={"video/mp4; codecs=hvc1"}/>
+                        <source src={"/assets/memoji/memoji.webm"} type={"video/webm"}/>
                     </video>
                 </div>
-                <img src={"/memoji.png"}/>
+                <img src={"/assets/memoji/memoji.png"}/>
             </div>
             <div className={"low-power-prompt"}>
                 Click or tap to play.

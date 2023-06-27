@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import {orange} from "material-colors-ts";
@@ -10,7 +8,7 @@ const WorkEGOS2000: React.ComponentType = () => (
         name={"EGOS-2000 Extension"}
         desc={"Extension to incorporate C standard library in a minimal OS."}
         fieldDate={"Jan 2023 - May 2023"}
-        fieldPdf={"/EGOS-2000-Extension.pdf"}
+        fieldPdf={"/resources/EGOS-2000-Extension.pdf"}
         color={orange}>
         <p>
             In the context of my Master of Engineering thesis, I developed a sophisticated
@@ -73,3 +71,8 @@ const WorkEGOS2000: React.ComponentType = () => (
 );
 
 export default WorkEGOS2000;
+
+export const metadata = {
+    title: "EGOS-2000 Extension — Leo Liang",
+    description: "Extension to incorporate C standard library in a minimal OS.",
+};

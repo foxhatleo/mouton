@@ -47,3 +47,8 @@ const WorkCMSX: React.ComponentType = () => (
 );
 
 export default WorkCMSX;
+
+export const metadata = {
+    title: "CMSX — Leo Liang",
+    description: "Cornell's CS department course management website.",
+};

@@ -51,7 +51,16 @@ const WorkPanicPainter: React.ComponentType = () => (
         </p>
         <p>
             Ultimately, we delivered a product that we can genuinely take pride in.
-            The final product (available on Android, Windows, and macOS)
+            The final product (available
+            {/* eslint-disable-next-line max-len */" "}
+            on <NewPageLink
+                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk"}>Android</NewPageLink>,
+            {/* eslint-disable-next-line max-len */" "}
+            <NewPageLink
+                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip"}>Windows</NewPageLink>,
+            {/* eslint-disable-next-line max-len */" "}
+            and <NewPageLink
+                href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip"}>macOS</NewPageLink>)
             and the corresponding codebase are accessible
             on <NewPageLink href={"https://github.com/foxhatleo/panic-painter"}>GitHub</NewPageLink>.
             Due to Apple’s restrictions on sideloading,
@@ -63,3 +72,8 @@ const WorkPanicPainter: React.ComponentType = () => (
 );
 
 export default WorkPanicPainter;
+
+export const metadata = {
+    title: "Panic Painter — Leo Liang",
+    description: "A cross-platform mobile game written in C++.",
+};

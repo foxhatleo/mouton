@@ -6,8 +6,8 @@ import Images from "@/components/Images";
 
 const WorkFallenFlame: React.ComponentType = () => (
     <WorkPage
-        name={"Panic Painter"}
-        desc={"A cross-platform mobile game written in C++."}
+        name={"Fallen Flame"}
+        desc={"A cross-platform desktop game written in Java."}
         fieldDate={"Jan 2020 - May 2020"}
         fieldGitHub={"foxhatleo/fallen-flame"}
         fieldWindows={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip"}
@@ -48,7 +48,14 @@ const WorkFallenFlame: React.ComponentType = () => (
         </p>
         <p>
             In conclusion, we created a product that is a testament to our dedication and
-            hard work. The final output and associated codebase are publicly accessible
+            hard work. The final output (available
+            {/* eslint-disable-next-line max-len */" "}
+            on <NewPageLink
+                href={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip"}>Windows</NewPageLink>{" "}
+            {/* eslint-disable-next-line max-len */" "}
+            and <NewPageLink
+                href={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Mac.zip"}>macOS</NewPageLink>)
+            and associated codebase are publicly accessible
             on <NewPageLink href={"https://github.com/foxhatleo/fallen-flame"}>GitHub</NewPageLink>.
             This initiative was undertaken as a component of my minor degree in Game Design.
         </p>
@@ -56,3 +63,8 @@ const WorkFallenFlame: React.ComponentType = () => (
 );
 
 export default WorkFallenFlame;
+
+export const metadata = {
+    title: "Fallen Flame — Leo Liang",
+    description: "A cross-platform desktop game written in Java.",
+};

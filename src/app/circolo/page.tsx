@@ -53,3 +53,8 @@ const WorkCircolo: React.ComponentType = () => (
 );
 
 export default WorkCircolo;
+
+export const metadata = {
+    title: "Circolo.us — Leo Liang",
+    description: "Complete website overhaul using React with e-commerce functionalities.",
+};

@@ -15,7 +15,7 @@ const WorkXiCompiler: React.ComponentType = () => (
             our primary endeavor was to architect and build a bespoke compiler utilizing the
             Java programming language. The compiler we developed was purposefully designed to
             take as input the source code written
-            in <NewPageLink href={"/Xi-language-specification.pdf"}>Xi</NewPageLink>,
+            in <NewPageLink href={"/resources/Xi-language-specification.pdf"}>Xi</NewPageLink>,
             a programming language that bears
             resemblance to C in its imperative, statically typed, and procedural paradigm.
             The final output our compiler produced was an executable following the x86
@@ -72,3 +72,8 @@ const WorkXiCompiler: React.ComponentType = () => (
 );
 
 export default WorkXiCompiler;
+
+export const metadata = {
+    title: "Xi Compiler — Leo Liang",
+    description: "A fully functional compiler written from scratch.",
+};
