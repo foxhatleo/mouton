@@ -3,6 +3,7 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import {orange} from "material-colors-ts";
+import NewPageLink from "@/components/NewPageLink";
 
 const WorkEGOS2000: React.ComponentType = () => (
     <WorkPage
@@ -14,10 +15,10 @@ const WorkEGOS2000: React.ComponentType = () => (
         <p>
             In the context of my Master of Engineering thesis, I developed a sophisticated
             extension
-            to <a href={"https://github.com/yhzhang0128/egos-2000"}>EGOS-2000</a>,
+            to <NewPageLink href={"https://github.com/yhzhang0128/egos-2000"}>EGOS-2000</NewPageLink>,
             a minimalistic operating system crafted by Cornell
             University’s Ph.D.
-            candidate, <a href={"https://dolobyte.net"}>Yunhao Zhang</a>.
+            candidate, <NewPageLink href={"https://dolobyte.net"}>Yunhao Zhang</NewPageLink>.
             This operating system, constructed
             from only 2000 lines of code, is designed specifically for deployment on FPGA
             development boards. Despite its minimalistic approach, EGOS-2000 is an entirely
@@ -63,7 +64,7 @@ const WorkEGOS2000: React.ComponentType = () => (
         </p>
         <p>
             This project was conducted under the esteemed supervision
-            of <a href={"https://www.cs.cornell.edu/home/rvr/"}>Dr. Robert van Renesse</a>,
+            of <NewPageLink href={"https://www.cs.cornell.edu/home/rvr/"}>Dr. Robert van Renesse</NewPageLink>,
             Professor and Director of Graduate Studies at
             Cornell’s Computer Science department, and received high commendation, being
             awarded an A+ grade.

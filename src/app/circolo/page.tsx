@@ -1,7 +1,7 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import {red} from "material-colors-ts";
-import Link from "next/link";
+import NewPageLink from "@/components/NewPageLink";
 
 const WorkCircolo: React.ComponentType = () => (
     <WorkPage
@@ -47,7 +47,7 @@ const WorkCircolo: React.ComponentType = () => (
             Please note that the source code is not publicly accessible,
             given the commercial nature of the project.
             The live site can be accessed
-            at <Link href={"https://circolo.us"} target={"_blank"} rel={"noopener noreferrer"}>circolo.us</Link>.
+            at <NewPageLink href={"https://circolo.us"}>circolo.us</NewPageLink>.
         </p>
     </WorkPage>
 );

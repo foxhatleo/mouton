@@ -1,6 +1,7 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import {yellow} from "material-colors-ts";
+import NewPageLink from "@/components/NewPageLink";
 
 const WorkXiCompiler: React.ComponentType = () => (
     <WorkPage
@@ -14,7 +15,7 @@ const WorkXiCompiler: React.ComponentType = () => (
             our primary endeavor was to architect and build a bespoke compiler utilizing the
             Java programming language. The compiler we developed was purposefully designed to
             take as input the source code written
-            in <a href={"/Xi-language-specification.pdf"}>Xi</a>,
+            in <NewPageLink href={"/Xi-language-specification.pdf"}>Xi</NewPageLink>,
             a programming language that bears
             resemblance to C in its imperative, statically typed, and procedural paradigm.
             The final output our compiler produced was an executable following the x86
@@ -64,8 +65,8 @@ const WorkXiCompiler: React.ComponentType = () => (
             advanced compiler construction.
         </p>
         <p>
-            Unfortunately, the source code is not available to the public per Cornell’s guidelines
-            for academic integrity.
+            Regrettably, due to Cornell’s rules on academic integrity, the source code
+            isn’t accessible to the general public.
         </p>
     </WorkPage>
 );

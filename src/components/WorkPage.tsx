@@ -10,10 +10,13 @@ import Head from "next/head";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarDays} from "@fortawesome/free-solid-svg-icons/faCalendarDays";
 import {faFilePdf} from "@fortawesome/free-solid-svg-icons/faFilePdf";
-import Link from "next/link";
 import {faGlobe} from "@fortawesome/free-solid-svg-icons/faGlobe";
 import {faCode} from "@fortawesome/free-solid-svg-icons/faCode";
 import useScroll from "@/hooks/useScroll";
+import NewPageLink from "@/components/NewPageLink";
+import {faAndroid} from "@fortawesome/free-brands-svg-icons/faAndroid";
+import {faApple} from "@fortawesome/free-brands-svg-icons/faApple";
+import {faMicrosoft} from "@fortawesome/free-brands-svg-icons/faMicrosoft";
 
 const WorkPage: React.ComponentType<PropsWithChildren<{
     name: string;
@@ -21,7 +24,11 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
     fieldDate?: string;
     fieldWebsite?: string;
     fieldGitHub?: string;
+    fieldWindows?: string;
+    fieldMacOS?: string;
+    fieldAndroid?: string;
     fieldPdf?: string;
+    fieldPdfName?: string;
     color: Color;
 }>> = (p) => {
     usePageTransition();
@@ -52,18 +59,29 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
                     </p></li> : ""}
                     {p.fieldWebsite ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faGlobe}/></span>
-                        <Link target={"_blank"} rel={"noopener noreferrer"} href={p.fieldWebsite}>Website</Link>
+                        <NewPageLink href={p.fieldWebsite}>Website</NewPageLink>
                     </p></li> : ""}
                     {p.fieldGitHub ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faCode}/></span>
-                        <Link target={"_blank"} rel={"noopener noreferrer"}
-                            href={`https://github.com/${p.fieldGitHub}`}>
+                        <NewPageLink href={`https://github.com/${p.fieldGitHub}`}>
                             GitHub repo
-                        </Link>
+                        </NewPageLink>
+                    </p></li> : ""}
+                    {p.fieldWindows ? <li><p>
+                        <span className={"icon"}><FontAwesomeIcon icon={faMicrosoft}/></span>
+                        <NewPageLink href={p.fieldWindows}>Windows build</NewPageLink>
+                    </p></li> : ""}
+                    {p.fieldMacOS ? <li><p>
+                        <span className={"icon"}><FontAwesomeIcon icon={faApple}/></span>
+                        <NewPageLink href={p.fieldMacOS}>macOS build</NewPageLink>
+                    </p></li> : ""}
+                    {p.fieldAndroid ? <li><p>
+                        <span className={"icon"}><FontAwesomeIcon icon={faAndroid}/></span>
+                        <NewPageLink href={p.fieldAndroid}>Android build</NewPageLink>
                     </p></li> : ""}
                     {p.fieldPdf ? <li><p>
                         <span className={"icon"}><FontAwesomeIcon icon={faFilePdf}/></span>
-                        <Link target={"_blank"} rel={"noopener noreferrer"} href={p.fieldPdf}>Report</Link>
+                        <NewPageLink href={p.fieldPdf}>{p.fieldPdfName ?? "Report"}</NewPageLink>
                     </p></li> : ""}
                 </ul>
             </div>
@@ -84,8 +102,10 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
 
                 main .icon {
                     width: 1.5em;
+                    margin-right: .5em;
                     display: inline-block;
                     opacity: .5;
+                    text-align: center;
                 }
 
                 main .scroll-down {
