@@ -1,5 +1,7 @@
 import GlobalStyle from "@/components/GlobalStyle";
 import Head from "next/head";
+import React from "react";
+import Script from "next/script";
 
 export const metadata = {
     title: "Create Next App",
@@ -13,17 +15,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <Head>
-                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-                <link rel="manifest" href="/site.webmanifest" />
-                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-                <meta name="apple-mobile-web-app-title" content="Leo Liang" />
-                <meta name="application-name" content="Leo Liang" />
-                <meta name="msapplication-TileColor" content="#2d89ef" />
-                <meta name="theme-color" content="#ffffff" />
-            </Head>
+            <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE" />
+            {/* eslint-disable-next-line max-len */}
+            <Script id={"google-analytics"}>{"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}</Script>
             <body>
                 <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
                 <noscript>JavaScript is required for this website.</noscript>
