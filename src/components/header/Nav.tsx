@@ -10,7 +10,7 @@ const Nav: React.ComponentType = () => {
     const desktopNav = useRef<HTMLDivElement>(null);
 
     const show = () => {
-        document.body.style.overflowY = "hidden";
+        document.body.style.overflow = "hidden";
         desktopNav.current!.style.opacity = "0";
         desktopNav.current!.style.display = "flex";
         gsap.to(desktopNav.current!, {opacity: 1, duration: .15});
@@ -23,7 +23,7 @@ const Nav: React.ComponentType = () => {
     };
 
     const hide = (immediate: boolean) => {
-        document.body.style.overflowY = "scroll";
+        document.body.style.overflow = "";
         if (immediate) {
             gsap.killTweensOf(desktopNav.current!);
             desktopNav.current!.removeAttribute("style");
@@ -85,11 +85,12 @@ const Nav: React.ComponentType = () => {
             </nav>
             <nav className={"desktop nav"} ref={desktopNav}>
                 <NavItem label={"✕"} href={"/"} onclick={mobileToggleHandler}/>
-                <NavItem label={"About"} href={"/#about"}/>
-                <NavItem label={"Works"} href={"/#works"}/>
-                <NavItem label={"Résumé"} href={"/resources/Resume-Wenhao-Leo-Liang.pdf"}/>
-                <NavItem label={"LinkedIn"} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}/>
-                <NavItem label={"Instagram"} href={"https://www.instagram.com/foxhatleo"}/>
+                <NavItem label={"About"} href={"/#about"} onclick={() => hide(true)}/>
+                <NavItem label={"Works"} href={"/#works"} onclick={() => hide(true)}/>
+                <NavItem label={"Résumé"} href={"/resources/Resume-Wenhao-Leo-Liang.pdf"} onclick={() => hide(true)}/>
+                <NavItem label={"LinkedIn"} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}
+                    onclick={() => hide(true)}/>
+                <NavItem label={"Instagram"} href={"https://www.instagram.com/foxhatleo"} onclick={() => hide(true)}/>
             </nav>
             <style jsx>{`
                 nav {
