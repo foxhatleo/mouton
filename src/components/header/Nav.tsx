@@ -75,6 +75,7 @@ const Nav: React.ComponentType = () => {
     return (
         <>
             <nav className={"mobile nav"}>
+                <span className={"glow"}/>
                 <a href={"#"} className={"mobile-button"} onClick={mobileToggleHandler}>
                     <div className={"line"}/>
                     <div className={"line"}/>
@@ -96,6 +97,16 @@ const Nav: React.ComponentType = () => {
                     flex-direction: row;
                     align-items: center;
                     gap: 1.5em;
+                }
+
+                .glow {
+                    display: block;
+                    position: absolute;
+                    width: 20px;
+                    height: 25px;
+                    filter: blur(1.5em);
+                    border-radius: 1.5em;
+                    background: white;
                 }
 
                 .mobile.nav {

@@ -18,7 +18,7 @@ const Logo: React.ComponentType = () => (
                 display: block;
                 width: 2em;
                 height: 2em;
-                filter: blur(2em);
+                filter: blur(1.5em);
                 border-radius: 1.5em;
                 background: white;
             }

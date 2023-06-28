@@ -1,7 +1,6 @@
 import GlobalStyle from "@/components/GlobalStyle";
 import React from "react";
 import Script from "next/script";
-import ReactDOM from "react-dom";
 
 export default function RootLayout({
     children,
@@ -13,7 +12,7 @@ export default function RootLayout({
             <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE"/>
             <Script id={"google-analytics"}>
                 {"window.dataLayer=window.dataLayer||[];" +
-                    "function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}
+                "function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}
             </Script>
             <body>
                 <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
@@ -26,10 +25,10 @@ export default function RootLayout({
 }
 
 export const metadata = {
-    authors: { name: "Leo Liang" },
+    authors: {name: "Leo Liang"},
     manifest: "/site.webmanifest",
     themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "white" },
-        { media: "(prefers-color-scheme: dark)", color: "black" },
+        {media: "(prefers-color-scheme: light)", color: "white"},
+        {media: "(prefers-color-scheme: dark)", color: "black"},
     ],
 };
