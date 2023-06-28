@@ -4,21 +4,25 @@ import {green} from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import Images from "@/components/Images";
 
+const androidLink = "https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk";
+const macLink = "https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip";
+const winLink = "https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip";
+
 const WorkPanicPainter: React.ComponentType = () => (
     <WorkPage
         name={"Panic Painter"}
         desc={"A cross-platform mobile game written in C++."}
         fieldDate={"Jan 2020 - May 2020"}
         fieldGitHub={"foxhatleo/panic-painter"}
-        fieldMacOS={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip"}
-        fieldWindows={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip"}
-        fieldAndroid={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk"}
+        fieldMacOS={macLink}
+        fieldWindows={winLink}
+        fieldAndroid={androidLink}
         color={green}>
         <Images urlPrefix={"/assets/panic-painter/"} urls={[
-            "pp1.jpg",
-            "pp2.jpg",
-            "pp3.jpg",
-            "pp4.jpg",
+            "pp1",
+            "pp2",
+            "pp3",
+            "pp4",
         ]} aspectRatio={1200 / 670}/>
         <p>
             As an integral component of the advanced coursework provided by the Game Design
@@ -52,12 +56,9 @@ const WorkPanicPainter: React.ComponentType = () => (
         <p>
             Ultimately, we delivered a product that we can genuinely take pride in.
             The final product (available
-            {/* eslint-disable-next-line max-len */" "}
-            on <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk"}>Android</NewPageLink>,
-            {/* eslint-disable-next-line max-len */" "}
-            <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-win-64bit.zip"}>Windows</NewPageLink>,
-            {/* eslint-disable-next-line max-len */" "}
-            and <NewPageLink href={"https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip"}>macOS</NewPageLink>)
+            on <NewPageLink href={androidLink}>Android</NewPageLink>,
+            <NewPageLink href={winLink}>Windows</NewPageLink>,
+            and <NewPageLink href={macLink}>macOS</NewPageLink>)
             and the corresponding codebase are accessible
             on <NewPageLink href={"https://github.com/foxhatleo/panic-painter"}>GitHub</NewPageLink>.
             Due to Apple’s restrictions on sideloading,

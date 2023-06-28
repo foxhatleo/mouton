@@ -159,7 +159,11 @@ const Avatar: React.ComponentType = () => {
                         <source src={"/assets/memoji/memoji.webm"} type={"video/webm"}/>
                     </video>
                 </div>
-                <img src={"/assets/memoji/memoji.png"}/>
+                <picture>
+                    <source type="image/webp" srcSet="/assets/memoji/memoji.webp"/>
+                    <source type="image/jpeg" srcSet="/assets/memoji/memoji.png"/>
+                    <img alt={"A cartoon picture of Leo Liang"} loading={"lazy"}/>
+                </picture>
             </div>
             <div className={"low-power-prompt"}>
                 Click or tap to play.

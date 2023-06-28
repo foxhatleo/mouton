@@ -1,5 +1,4 @@
 import GlobalStyle from "@/components/GlobalStyle";
-import Head from "next/head";
 import React from "react";
 import Script from "next/script";
 
@@ -15,9 +14,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE" />
+            <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE"/>
             {/* eslint-disable-next-line max-len */}
-            <Script id={"google-analytics"}>{"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}</Script>
+            <Script
+                id={"google-analytics"}>{"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}</Script>
             <body>
                 <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
                 <noscript>JavaScript is required for this website.</noscript>

@@ -18,6 +18,14 @@ import {faAndroid} from "@fortawesome/free-brands-svg-icons/faAndroid";
 import {faApple} from "@fortawesome/free-brands-svg-icons/faApple";
 import {faMicrosoft} from "@fortawesome/free-brands-svg-icons/faMicrosoft";
 
+function canUseWebP() {
+    const elem = document.createElement("canvas");
+    if (!!(elem.getContext && elem.getContext("2d"))) {
+        return elem.toDataURL("image/webp").indexOf("data:image/webp") == 0;
+    }
+    return false;
+}
+
 const WorkPage: React.ComponentType<PropsWithChildren<{
     name: string;
     desc: string;
@@ -42,8 +50,16 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
 
     useScroll(scrollHandler);
 
+    const mainClassNames = [];
+    if (canUseWebP()) {
+        mainClassNames.push("webp");
+    }
+    if (scrollDown) {
+        mainClassNames.push("scroll-down");
+    }
+
     return (
-        <main className={scrollDown ? " scroll-down" : ""}>
+        <main className={mainClassNames.join(" ")}>
             <Head>
                 <title>{p.name} - Leo Liang</title>
             </Head>

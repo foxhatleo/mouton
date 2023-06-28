@@ -1,8 +1,11 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {green} from "material-colors-ts";
+import {purple} from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import Images from "@/components/Images";
+
+const winLink = "https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip";
+const macLink = "https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Mac.zip";
 
 const WorkFallenFlame: React.ComponentType = () => (
     <WorkPage
@@ -10,16 +13,17 @@ const WorkFallenFlame: React.ComponentType = () => (
         desc={"A cross-platform desktop game written in Java."}
         fieldDate={"Jan 2020 - May 2020"}
         fieldGitHub={"foxhatleo/fallen-flame"}
-        fieldWindows={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip"}
-        fieldAndroid={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Mac.zip"}
+        fieldWindows={winLink}
+        fieldAndroid={macLink}
         fieldPdf={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Guide.pdf"}
         fieldPdfName={"Game instructions"}
-        color={green}>
+        color={purple}>
         <Images urlPrefix={"/assets/fallen-flame/"} urls={[
-            "ff1.jpg",
-            "ff2.jpg",
-            "ff3.jpg",
-            "ff4.jpg",
+            "ff1",
+            "ff2",
+            "ff3",
+            "ff4",
+            "ff5",
         ]} aspectRatio={1200 / 682}/>
         <p>
             As a critical element of the curriculum established by the Game Design Initiative
@@ -49,12 +53,9 @@ const WorkFallenFlame: React.ComponentType = () => (
         <p>
             In conclusion, we created a product that is a testament to our dedication and
             hard work. The final output (available
+            on <NewPageLink href={winLink}>Windows</NewPageLink>{" "}
             {/* eslint-disable-next-line max-len */" "}
-            on <NewPageLink
-                href={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip"}>Windows</NewPageLink>{" "}
-            {/* eslint-disable-next-line max-len */" "}
-            and <NewPageLink
-                href={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Mac.zip"}>macOS</NewPageLink>)
+            and <NewPageLink href={macLink}>macOS</NewPageLink>)
             and associated codebase are publicly accessible
             on <NewPageLink href={"https://github.com/foxhatleo/fallen-flame"}>GitHub</NewPageLink>.
             This initiative was undertaken as a component of my minor degree in Game Design.

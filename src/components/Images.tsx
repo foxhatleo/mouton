@@ -20,6 +20,8 @@ const Images: React.ComponentType<ImagesType> = (p) => {
         swipe.current!.next();
     };
 
+    const rnd = Math.floor(Math.random() * 100000);
+
     return (
         <div className={"images"}>
             <ReactSwipe
@@ -27,8 +29,16 @@ const Images: React.ComponentType<ImagesType> = (p) => {
                 swipeOptions={{auto: 2500}}
                 ref={swipe}>
                 {p.urls.map((url, ind) => (
-                    <div className={"image"} key={ind}
-                        style={{backgroundImage: `url(${(p.urlPrefix ?? "") + url})`}}/>
+                    <div className={"image i-" + (rnd + ind)} key={ind}>
+                        <style>{`
+                            .i-${rnd + ind} { 
+                                background-image: url(${(p.urlPrefix ?? "") + url}.jpg);
+                            }
+                            .webp .i-${rnd + ind} { 
+                                background-image: url(${(p.urlPrefix ?? "") + url}.webp);
+                            }
+                        `}</style>
+                    </div>
                 ))}
             </ReactSwipe>
             <a href={"#"} onClick={prev} className={"nav-button left"}>&#9664;</a>
