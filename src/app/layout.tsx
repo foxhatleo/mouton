@@ -1,6 +1,7 @@
 import GlobalStyle from "@/components/GlobalStyle";
 import React from "react";
 import Script from "next/script";
+import {Analytics} from "@vercel/analytics/react";
 
 export default function RootLayout({
     children,
@@ -19,6 +20,7 @@ export default function RootLayout({
                 <noscript>JavaScript is required for this website.</noscript>
                 {children}
                 <GlobalStyle/>
+                <Analytics/>
             </body>
         </html>
     );
