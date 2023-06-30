@@ -19,9 +19,9 @@ const NavItem: React.ComponentType<NavItemProps> = (p) => (
             {p.label}
         </Link>
         <style jsx>{`
-            .link :global(a) {
+            .link :global(a), .link :global(a):hover, .link :global(a):active {
                 text-decoration: none;
-                color: inherit;
+                color: black;
             }
 
             .link :global(a)::before {
