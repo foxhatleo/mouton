@@ -131,9 +131,10 @@ const GlobalStyle: React.ComponentType = () => <>
         a {
             color: ${blue["500"]};
             transition: .1s ease-in-out color;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
-        a:hover {
+        body.has-hover a:hover {
             color: ${orange["500"]};
         }
 

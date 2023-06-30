@@ -6,9 +6,11 @@ import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
 import Footer from "@/components/Footer";
 import {blueGrey} from "material-colors-ts";
+import useHover from "@/hooks/useHover";
 
 const ErrorPage: React.ComponentType = () => {
     usePageTransition();
+    useHover();
 
     return (
         <main>

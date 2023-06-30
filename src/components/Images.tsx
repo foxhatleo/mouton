@@ -67,7 +67,7 @@ const Images: React.ComponentType<ImagesType> = (p) => {
                     z-index: -2;
                 }
 
-                .images:hover .nav-button {
+                :global(body.has-hover) .images:hover .nav-button {
                     opacity: 1;
                 }
 
@@ -117,7 +117,7 @@ const Images: React.ComponentType<ImagesType> = (p) => {
                     hsla(0, 0%, 0%, 0) 100%);
                 }
 
-                .nav-button:hover::before, .nav-button:active::before {
+                :global(body.has-hover) .nav-button:hover::before, .nav-button:active::before {
                     opacity: 1;
                 }
 

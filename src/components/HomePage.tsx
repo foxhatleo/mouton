@@ -11,6 +11,7 @@ import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
 import {Color} from "@/components/Color";
 import useScroll from "@/hooks/useScroll";
+import useHover from "@/hooks/useHover";
 
 const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
     {
@@ -53,6 +54,7 @@ const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
 
 const HomePage: React.ComponentType = () => {
     usePageTransition();
+    useHover();
     const [ scrollDown, setScrollDown ] = useState(true);
 
     const scrollHandler = () => {
@@ -262,17 +264,17 @@ const HomePage: React.ComponentType = () => {
                     color: var(--item-color-900);
                 }
 
-                .section3 ul li :global(a):hover .ind-container .ind,
+                :global(body.has-hover) .section3 ul li :global(a):hover .ind-container .ind,
                 .section3 ul li :global(a):active .ind-container .ind {
                     opacity: .4;
                 }
 
-                .section3 ul li :global(a):hover .portfolio-link,
+                :global(body.has-hover) .section3 ul li :global(a):hover .portfolio-link,
                 .section3 ul li :global(a):active .portfolio-link {
                     transform: scale(1);
                 }
 
-                .section3 ul li :global(a):hover .portfolio-link h3,
+                :global(body.has-hover) .section3 ul li :global(a):hover .portfolio-link h3,
                 .section3 ul li :global(a):active .portfolio-link h3 {
                     color: var(--item-color-700);
                 }
@@ -282,7 +284,7 @@ const HomePage: React.ComponentType = () => {
                         color: var(--item-color-500);
                     }
 
-                    .section3 ul li :global(a):hover .portfolio-link h3,
+                    :global(body.has-hover) .section3 ul li :global(a):hover .portfolio-link h3,
                     .section3 ul li :global(a):active .portfolio-link h3 {
                         color: var(--item-color-200);
                     }

@@ -39,7 +39,7 @@ const NavItem: React.ComponentType<NavItemProps> = (p) => (
                 //will-change: opacity;
             }
 
-            .link :global(a):hover::before, .link :global(a):active::before {
+            :global(body.has-hover) .link :global(a):hover::before, .link :global(a):active::before {
                 bottom: -.1em;
                 opacity: 1;
             }

@@ -17,6 +17,7 @@ import NewPageLink from "@/components/NewPageLink";
 import {faAndroid} from "@fortawesome/free-brands-svg-icons/faAndroid";
 import {faApple} from "@fortawesome/free-brands-svg-icons/faApple";
 import {faMicrosoft} from "@fortawesome/free-brands-svg-icons/faMicrosoft";
+import useHover from "@/hooks/useHover";
 
 function canUseWebP() {
     if (typeof document === "undefined") {
@@ -43,6 +44,7 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
     color: Color;
 }>> = (p) => {
     usePageTransition();
+    useHover();
     const [ scrollDown, setScrollDown ] = useState(true);
 
     const scrollHandler = () => {
