@@ -18,6 +18,7 @@ import {faAndroid} from "@fortawesome/free-brands-svg-icons/faAndroid";
 import {faApple} from "@fortawesome/free-brands-svg-icons/faApple";
 import {faMicrosoft} from "@fortawesome/free-brands-svg-icons/faMicrosoft";
 import useHover from "@/hooks/useHover";
+import useConsole from "@/hooks/useConsole";
 
 function canUseWebP() {
     if (typeof document === "undefined") {
@@ -45,6 +46,7 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
 }>> = (p) => {
     usePageTransition();
     useHover();
+    useConsole();
     const [ scrollDown, setScrollDown ] = useState(true);
 
     const scrollHandler = () => {

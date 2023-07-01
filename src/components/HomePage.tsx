@@ -12,6 +12,7 @@ import Responsive from "@/components/Responsive";
 import {Color} from "@/components/Color";
 import useScroll from "@/hooks/useScroll";
 import useHover from "@/hooks/useHover";
+import useConsole from "@/hooks/useConsole";
 
 const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
     {
@@ -55,6 +56,7 @@ const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
 const HomePage: React.ComponentType = () => {
     usePageTransition();
     useHover();
+    useConsole();
     const [ scrollDown, setScrollDown ] = useState(true);
 
     const scrollHandler = () => {

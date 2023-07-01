@@ -7,10 +7,12 @@ import usePageTransition from "@/hooks/usePageTransition";
 import Footer from "@/components/Footer";
 import {blueGrey} from "material-colors-ts";
 import useHover from "@/hooks/useHover";
+import useConsole from "@/hooks/useConsole";
 
 const ErrorPage: React.ComponentType = () => {
     usePageTransition();
     useHover();
+    useConsole();
 
     return (
         <main>
