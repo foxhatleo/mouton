@@ -21,6 +21,7 @@ an exciting journey learning Japanese and Swedish, further extending my linguist
 When I’m not immersed in coding or languages, I find solace in playing the piano and exploring the world. Thank you
 for visiting my website — enjoy discovering more about my passions and pursuits.
 `,
+        "play-prompt": "Click or tap to play.",
         "works": "Works",
         "circolo": {
             "title": "Circolo.us",

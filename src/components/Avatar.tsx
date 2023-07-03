@@ -4,6 +4,7 @@ import {blue} from "material-colors-ts";
 import useScroll from "@/hooks/useScroll";
 // @ts-ignore
 import Timeline = gsap.core.Timeline;
+import {useTranslations} from "use-intl";
 
 const TIMESTAMPS = [
     [ 0, 2 ],
@@ -137,6 +138,8 @@ const Avatar: React.ComponentType = () => {
 
     useScroll(scrollHandler);
 
+    const t = useTranslations("Home");
+
     return (
         <a href={"#"} onMouseEnter={doEmote} onTouchEnd={doEmote} onClick={(evt) => {
             evt.preventDefault();
@@ -166,7 +169,7 @@ const Avatar: React.ComponentType = () => {
                 </picture>
             </div>
             <div className={"low-power-prompt"}>
-                Click or tap to play.
+                {t("play-prompt")}
             </div>
             <style jsx>{`
                 .avatar-container {
