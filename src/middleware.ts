@@ -13,7 +13,7 @@ export default createMiddleware({
             defaultLocale: "zh-CN",
         },
     ],
-    localeDetection: true,
+    localeDetection: false,
 });
 
 export const config = {
