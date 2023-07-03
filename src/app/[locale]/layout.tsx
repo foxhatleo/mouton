@@ -23,7 +23,7 @@ export default async function RootLayout({
     } catch (error) {
         notFound();
     }
-    const messages = deepmerge(localeMessages, defaultMessages);
+    const messages = deepmerge(defaultMessages, localeMessages);
 
     return (
         <html lang="en">
