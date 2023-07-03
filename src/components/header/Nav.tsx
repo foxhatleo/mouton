@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState} from "react";
 import NavItem from "@/components/header/NavItem";
 import Responsive from "@/components/Responsive";
 import gsap from "gsap";
+import {useTranslations} from "use-intl";
 
 const Nav: React.ComponentType = () => {
     const [ showing, setShowing ] = useState(false);
@@ -72,6 +73,8 @@ const Nav: React.ComponentType = () => {
         };
     }, []);
 
+    const t = useTranslations("Header");
+
     return (
         <>
             <nav className={"mobile nav"}>
@@ -85,12 +88,14 @@ const Nav: React.ComponentType = () => {
             </nav>
             <nav className={"desktop nav"} ref={desktopNav}>
                 <NavItem label={"✕"} href={"/"} onclick={mobileToggleHandler}/>
-                <NavItem label={"About"} href={"/#about"} onclick={() => hide(true)}/>
-                <NavItem label={"Works"} href={"/#works"} onclick={() => hide(true)}/>
-                <NavItem label={"Résumé"} href={"/resources/Resume-Wenhao-Leo-Liang.pdf"} onclick={() => hide(true)}/>
-                <NavItem label={"LinkedIn"} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}
+                <NavItem label={t("about")} href={"/#about"} onclick={() => hide(true)}/>
+                <NavItem label={t("works")} href={"/#works"} onclick={() => hide(true)}/>
+                <NavItem label={t("resume")} href={"/resources/Resume-Wenhao-Leo-Liang.pdf"}
                     onclick={() => hide(true)}/>
-                <NavItem label={"Instagram"} href={"https://www.instagram.com/foxhatleo"} onclick={() => hide(true)}/>
+                <NavItem label={t("linkedin")} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}
+                    onclick={() => hide(true)}/>
+                <NavItem label={t("instagram")} href={"https://www.instagram.com/foxhatleo"}
+                    onclick={() => hide(true)}/>
             </nav>
             <style jsx>{`
                 nav {

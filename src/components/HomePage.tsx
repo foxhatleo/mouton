@@ -13,45 +13,8 @@ import {Color} from "@/components/Color";
 import useScroll from "@/hooks/useScroll";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
-
-const WORKS: { name: string; desc: string; link: string; color: Color; }[] = [
-    {
-        name: "Circolo.us",
-        desc: "Complete website overhaul using React with e-commerce functionalities.",
-        link: "/circolo/",
-        color: red,
-    },
-    {
-        name: "EGOS-2000 Extension",
-        desc: "Extension to incorporate C standard library in a minimal OS.",
-        link: "/egos-2000-extension/",
-        color: orange,
-    },
-    {
-        name: "Xi Compiler",
-        desc: "A fully functional compiler written from scratch.",
-        link: "/xi-compiler/",
-        color: yellow,
-    },
-    {
-        name: "Panic Painter",
-        desc: "A cross-platform mobile game written in C++.",
-        link: "/panic-painter/",
-        color: green,
-    },
-    {
-        name: "CMSX",
-        desc: "Cornell's CS department course management website.",
-        link: "/cmsx/",
-        color: blue,
-    },
-    {
-        name: "Fallen Flame",
-        desc: "A cross-platform desktop game written in Java.",
-        link: "/fallen-flame/",
-        color: purple,
-    },
-];
+import {useTranslations} from "use-intl";
+import {newLineAsBr, paragraph} from "@/utils/Format";
 
 const HomePage: React.ComponentType = () => {
     usePageTransition();
@@ -64,8 +27,41 @@ const HomePage: React.ComponentType = () => {
             setScrollDown(false);
         }
     };
-
     useScroll(scrollHandler);
+
+    const t = useTranslations("Home");
+    const WORKS: { t: string; link: string; color: Color; }[] = [
+        {
+            t: "circolo",
+            link: "/circolo/",
+            color: red,
+        },
+        {
+            t: "egos-2000",
+            link: "/egos-2000-extension/",
+            color: orange,
+        },
+        {
+            t: "xic",
+            link: "/xi-compiler/",
+            color: yellow,
+        },
+        {
+            t: "panic-painter",
+            link: "/panic-painter/",
+            color: green,
+        },
+        {
+            t: "cmsx",
+            link: "/cmsx/",
+            color: blue,
+        },
+        {
+            t: "fallen-flame",
+            link: "/fallen-flame/",
+            color: purple,
+        },
+    ];
 
     return (
         <main>
@@ -74,38 +70,19 @@ const HomePage: React.ComponentType = () => {
                 <Header absolute={true}/>
                 <div className={"content container v-layout"}>
                     <h1 className={"entry-transition"}>
-                        My passion is to<br/>
-                        create useful &<br/>
-                        delightful experience<br/>
-                        with the power of<br/>
-                        technology.
+                        {newLineAsBr(t("hero"))}
                     </h1>
                 </div>
                 <div className={"scroll-down"}>
-                    Scroll down to learn more
+                    {t("scroll-down")}
                 </div>
             </section>
             <section id={"about"} className={"section2 container entry-transition-group"}>
                 <div className={"v-layout"}>
                     <h2 className={"entry-transition center"}>About Me</h2>
                     <div className={"content"}>
-                        <article className={"text-container container alt"}>
-                            <p className={"entry-transition"}>
-                                Welcome! I’m Leo, an ambitious software engineer and recent Master’s graduate in
-                                Computer Science from Cornell University. I’m eager to contribute my skills and
-                                expertise to a dynamic team, with a firm belief in using technology to improve and
-                                enrich lives.
-                            </p>
-                            <p className={"entry-transition"}>
-                                Born in China and fluent in Mandarin, Cantonese, and English, I revel in embracing
-                                diverse cultures. I’m currently on an exciting journey learning Japanese and Swedish,
-                                further extending my linguistic capabilities.
-                            </p>
-                            <p className={"entry-transition"}>
-                                When I’m not immersed in coding or languages, I find solace in playing the piano and
-                                exploring the world. Thank you for visiting my website — enjoy discovering more about my
-                                passions and pursuits.
-                            </p>
+                        <article className={"text-container entry-transition-children container alt"}>
+                            {paragraph(t("about-me-text"))}
                         </article>
                         <div className={"avatar-container"}>
                             <Avatar/>
@@ -130,8 +107,8 @@ const HomePage: React.ComponentType = () => {
                                         <div className={"ind"}>{`0${ind + 1}`.slice(-2)}</div>
                                     </div>
                                     <div className={"portfolio-link"}>
-                                        <h3>{data.name}</h3>
-                                        <div className={"desc"}>{data.desc}</div>
+                                        <h3>{t(`${data.t}.title`)}</h3>
+                                        <div className={"desc"}>{t(`${data.t}.tagline`)}</div>
                                     </div>
                                 </Link>
                             </li>

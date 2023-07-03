@@ -2,12 +2,29 @@ import GlobalStyle from "@/components/GlobalStyle";
 import React from "react";
 import Script from "next/script";
 import {Analytics} from "@vercel/analytics/react";
+import {NextIntlClientProvider} from "next-intl";
+import {notFound} from "next/navigation";
+import deepmerge from "deepmerge";
 
-export default function RootLayout({
-    children,
+export function generateStaticParams() {
+    return [ {locale: "en"}, {locale: "zh-CN"} ];
+}
+
+export default async function RootLayout({
+    children, params: {locale},
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    params: { locale: string },
 }) {
+    let localeMessages, defaultMessages;
+    try {
+        localeMessages = (await import(`../../messages/${locale}.js`)).default;
+        defaultMessages = (await import("../../messages/en.js")).default;
+    } catch (error) {
+        notFound();
+    }
+    const messages = deepmerge(localeMessages, defaultMessages);
+
     return (
         <html lang="en">
             <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE"/>
@@ -18,7 +35,9 @@ export default function RootLayout({
             <body>
                 <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
                 <noscript>JavaScript is required for this website.</noscript>
-                {children}
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                    {children}
+                </NextIntlClientProvider>
                 <GlobalStyle/>
                 <Analytics/>
             </body>
