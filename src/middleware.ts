@@ -7,10 +7,12 @@ export default createMiddleware({
         {
             domain: "leoliang.com",
             defaultLocale: "en",
+            locales: [ "en" ],
         },
         {
             domain: "leoliang.cn",
             defaultLocale: "zh-CN",
+            locales: [ "zh-CN" ],
         },
     ],
     localeDetection: false,
