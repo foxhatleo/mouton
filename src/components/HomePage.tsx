@@ -79,7 +79,7 @@ const HomePage: React.ComponentType = () => {
             </section>
             <section id={"about"} className={"section2 container entry-transition-group"}>
                 <div className={"v-layout"}>
-                    <h2 className={"entry-transition center"}>About Me</h2>
+                    <h2 className={"entry-transition center"}>{paragraph(t("about-me"))}</h2>
                     <div className={"content"}>
                         <article className={"text-container entry-transition-children container alt"}>
                             {paragraph(t("about-me-text"))}
@@ -92,7 +92,7 @@ const HomePage: React.ComponentType = () => {
             </section>
             <section id={"works"} className={"section3 container entry-transition-group"}>
                 <div className={"v-layout center"}>
-                    <h2 className={"entry-transition"}>Works</h2>
+                    <h2 className={"entry-transition"}>{paragraph(t("works"))}</h2>
                     <ul className={"v-layout"}>
                         {WORKS.map((data, ind) => (
                             <li key={ind} className={"entry-transition"}
