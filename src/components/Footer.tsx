@@ -3,6 +3,7 @@
 import React from "react";
 import Rainbow from "@/components/Rainbow";
 import {useTranslations} from "use-intl";
+import NewPageLink from "@/components/NewPageLink";
 
 const Footer: React.ComponentType = () => {
     const t = useTranslations("Footer");
@@ -14,7 +15,7 @@ const Footer: React.ComponentType = () => {
             </div>
             <footer className={"container glow"}>
                 {t("l1")}<br/>
-                {t("l21")}<a href={"https://github.com/foxhatleo/mouton"}>GitHub</a>{t("l22")}
+                {t("l21")}<NewPageLink href={"https://github.com/foxhatleo/mouton"}>GitHub</NewPageLink>{t("l22")}
             </footer>
             <style jsx>{`
                 .rainbow {
@@ -32,6 +33,10 @@ const Footer: React.ComponentType = () => {
                     color: black;
                     margin-top: 3em;
                 }
+                
+                footer :global(a) {
+                    color: black;
+                } 
             `}</style>
         </>
     );
