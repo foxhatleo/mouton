@@ -7,7 +7,7 @@ const ZH_CN = {
         "instagram": "Instagram",
     },
     "Home": {
-        "hero": "我热衷于利用科技的力量\n创造有用且令人愉快的体验。",
+        "hero": "我热衷于\n利用科技的力量\n创造有用\n且令人愉快的体验。",
         "scroll-down": "向下滑动了解更多",
         "about-me": "关于我",
         "about-me-text": `

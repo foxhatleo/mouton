@@ -19,8 +19,6 @@ const GlobalStyle: React.ComponentType = () => <>
             padding: 0;
             border: 0;
             font-size: 100%;
-            font-family: Oxygen, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial,
-            "PingFang SC", STHeiti, "华文黑体", "黑体", "微软雅黑", sans-serif;
             vertical-align: baseline;
             box-sizing: border-box;
             position: relative;
@@ -34,6 +32,8 @@ const GlobalStyle: React.ComponentType = () => <>
             line-height: 1.5;
             overflow-x: hidden;
             opacity: 0;
+            font-family: Oxygen, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial,
+            "PingFang SC", STHeiti, "华文黑体", "黑体", "微软雅黑", sans-serif;
         }
 
         ol, ul {
@@ -57,8 +57,7 @@ const GlobalStyle: React.ComponentType = () => <>
 
         h1, h2, h3, h4, h5, h6 {
             font-family: Vollkorn, "Times New Roman", Times,
-            Kai, "Kaiti SC", "楷体", "华文楷体", Simkai, "PingFang SC", STHeiti, "华文黑体", "黑体",
-            serif;
+            "Songti SC", STSong, "华文宋体", "宋体", serif;
             font-weight: 600;
         }
 
