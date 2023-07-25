@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import deepmerge from "deepmerge";
 import getReleaseIdentifier from "@/utils/getReleaseIdentifier";
-import { Oxygen, Vollkorn } from "next/dist/compiled/@next/font/dist/google";
+import { Oxygen, Vollkorn } from "next/font/google";
 
 export function generateStaticParams() {
     return [ { locale: "en" }, { locale: "zh-CN" } ];
