@@ -3,6 +3,19 @@
 import React from "react";
 import Responsive from "@/components/Responsive";
 import { blue, orange, purple } from "material-colors-ts";
+import { Oxygen, Vollkorn } from "next/font/google";
+
+const oxygen = Oxygen({
+    subsets: [ "latin" ],
+    weight: [ "400", "700" ],
+    display: "swap",
+});
+
+const vollkorn = Vollkorn({
+    subsets: [ "latin" ],
+    weight: [ "600" ],
+    display: "swap",
+});
 
 const GlobalStyle: React.ComponentType = () => <>
     <style jsx global>{`
@@ -28,7 +41,7 @@ const GlobalStyle: React.ComponentType = () => <>
             line-height: 1.5;
             overflow-x: hidden;
             opacity: 0;
-            font-family: Oxygen, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial,
+            font-family: ${oxygen.style.fontFamily}, "SF Pro Text", Roboto, "Helvetica Neue", Helvetica, Arial,
             "PingFang SC", STHeiti, "华文黑体", "黑体", "微软雅黑", sans-serif;
         }
 
@@ -52,7 +65,7 @@ const GlobalStyle: React.ComponentType = () => <>
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: Vollkorn, "Times New Roman", Times,
+            font-family: ${vollkorn.style.fontFamily}, "Times New Roman", Times,
             "Songti SC", STSong, "华文宋体", "宋体", serif;
             font-weight: 600;
         }
