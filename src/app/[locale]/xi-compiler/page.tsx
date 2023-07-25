@@ -1,6 +1,6 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {yellow} from "material-colors-ts";
+import { yellow } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 
 const WorkXiCompiler: React.ComponentType = () => (

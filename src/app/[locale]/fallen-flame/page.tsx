@@ -1,6 +1,6 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {purple} from "material-colors-ts";
+import { purple } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import Images from "@/components/Images";
 

@@ -1,22 +1,22 @@
 "use client";
 
-import React, {PropsWithChildren, useState} from "react";
+import React, { PropsWithChildren, useState } from "react";
 import Footer from "@/components/Footer";
 import usePageTransition from "@/hooks/usePageTransition";
 import Header from "@/components/header/Header";
-import {Color} from "@/components/Color";
+import { Color } from "@/components/Color";
 import Rainbow from "@/components/Rainbow";
 import Head from "next/head";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCalendarDays} from "@fortawesome/free-solid-svg-icons/faCalendarDays";
-import {faFilePdf} from "@fortawesome/free-solid-svg-icons/faFilePdf";
-import {faGlobe} from "@fortawesome/free-solid-svg-icons/faGlobe";
-import {faCode} from "@fortawesome/free-solid-svg-icons/faCode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons/faCalendarDays";
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons/faFilePdf";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons/faGlobe";
+import { faCode } from "@fortawesome/free-solid-svg-icons/faCode";
 import useScroll from "@/hooks/useScroll";
 import NewPageLink from "@/components/NewPageLink";
-import {faAndroid} from "@fortawesome/free-brands-svg-icons/faAndroid";
-import {faApple} from "@fortawesome/free-brands-svg-icons/faApple";
-import {faMicrosoft} from "@fortawesome/free-brands-svg-icons/faMicrosoft";
+import { faAndroid } from "@fortawesome/free-brands-svg-icons/faAndroid";
+import { faApple } from "@fortawesome/free-brands-svg-icons/faApple";
+import { faMicrosoft } from "@fortawesome/free-brands-svg-icons/faMicrosoft";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
 
@@ -25,7 +25,7 @@ function canUseWebP() {
         return true;
     }
     const elem = document.createElement("canvas");
-    if (!!(elem.getContext && elem.getContext("2d"))) {
+    if (elem.getContext && elem.getContext("2d")) {
         return elem.toDataURL("image/webp").indexOf("data:image/webp") == 0;
     }
     return false;

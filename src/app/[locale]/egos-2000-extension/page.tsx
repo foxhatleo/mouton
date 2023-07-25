@@ -1,6 +1,6 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {orange} from "material-colors-ts";
+import { orange } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 
 const WorkEGOS2000: React.ComponentType = () => (

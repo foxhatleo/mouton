@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import {blue, green, orange, purple, red, yellow} from "material-colors-ts";
-import {Color} from "@/components/Color";
+import { blue, green, orange, purple, red, yellow } from "material-colors-ts";
+import { Color } from "@/components/Color";
 
 const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) => (
     <div className={"root" + (p.footer ? " footer" : "")}>

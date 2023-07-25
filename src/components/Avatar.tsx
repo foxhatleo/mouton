@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import {blue} from "material-colors-ts";
+import { blue } from "material-colors-ts";
 import useScroll from "@/hooks/useScroll";
+import { useTranslations } from "use-intl";
 // @ts-ignore
 import Timeline = gsap.core.Timeline;
-import {useTranslations} from "use-intl";
 
 const TIMESTAMPS = [
     [ 0, 2 ],
@@ -59,13 +59,13 @@ const Avatar: React.ComponentType = () => {
                     });
                 },
             });
-            tl.fromTo(video2Ref.current, {opacity: 0}, {
+            tl.fromTo(video2Ref.current, { opacity: 0 }, {
                 opacity: 1, duration: 1, onComplete: () => {
                     video1Ref.current!.currentTime = TIMESTAMPS[nextEmote + 1][0];
                     video1Ref.current!.pause();
                 },
             });
-            tl.fromTo(video1Ref.current, {opacity: .99}, {opacity: 0, duration: 1}, ">-.1");
+            tl.fromTo(video1Ref.current, { opacity: .99 }, { opacity: 0, duration: 1 }, ">-.1");
             tl.play();
             animation.current = tl;
         }
@@ -81,9 +81,9 @@ const Avatar: React.ComponentType = () => {
         video1Ref.current!.currentTime = .3;
         video1Ref.current!.play().then(() => {
             const tl = gsap.timeline();
-            tl.fromTo(video1Ref.current, {opacity: 0}, {duration: .3, opacity: 1});
+            tl.fromTo(video1Ref.current, { opacity: 0 }, { duration: .3, opacity: 1 });
             tl.fromTo(video1Ref.current,
-                {scale: .01}, {scale: 1, duration: 3.5, ease: "elastic.out(1.2, 0.75)"});
+                { scale: .01 }, { scale: 1, duration: 3.5, ease: "elastic.out(1.2, 0.75)" });
             tl.play();
             animation.current = tl;
             setLowPower(false);

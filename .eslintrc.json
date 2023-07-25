@@ -1,11 +1,29 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/stylistic"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports"
+  ],
+  "root": true,
   "rules": {
     "block-scoped-var": [
       "warn"
     ],
     "curly": [
-      "error"
+      "error",
+      "multi-line",
+      "consistent"
     ],
     "default-case-last": [
       "error"
@@ -91,7 +109,7 @@
       }
     ],
     "no-this-before-super": [
-      "off"
+      "error"
     ],
     "no-useless-computed-key": [
       "error",
@@ -128,8 +146,8 @@
       "error",
       {
         "ignoreDestructuring": false,
-        "ignoreImports": false,
-        "ignoreGlobals": false
+        "ignoreImports": true,
+        "ignoreGlobals": true
       }
     ],
     "comma-dangle": [
@@ -178,9 +196,89 @@
     ],
     "react-hooks/exhaustive-deps": [
       "off"
+    ],
+    "object-curly-spacing": [
+      "off"
+    ],
+    "consistent-return": [
+      "error",
+      {
+        "treatUndefinedAsUnspecified": false
+      }
+    ],
+    "default-case": [
+      "error"
+    ],
+    "no-alert": [
+      "warn"
+    ],
+    "no-empty-function": [
+      "off",
+      {
+        "allow": null
+      }
+    ],
+    "no-fallthrough": [
+      "warn",
+      {
+        "commentPattern": ""
+      }
+    ],
+    "no-script-url": [
+      "warn"
+    ],
+    "no-with": [
+      "error"
+    ],
+    "wrap-iife": [
+      "off",
+      null,
+      {
+        "functionPrototypeMethods": false
+      }
+    ],
+    "template-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "rest-spread-spacing": [
+      "error",
+      "never"
+    ],
+    "no-unused-vars": [
+      "off"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "off"
+    ],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "func-call-spacing": [
+      "off"
+    ],
+    "@typescript-eslint/func-call-spacing": [
+      "error"
+    ],
+    "@typescript-eslint/prefer-nullish-coalescing": [
+      "off"
+    ],
+    "@typescript-eslint/ban-ts-comment": [
+      "off"
+    ],
+    "@typescript-eslint/no-explicit-any": [
+      "off"
     ]
-  },
-  "parserOptions": {
-    "ecmaFeatures": {}
   }
 }

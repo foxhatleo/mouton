@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 export default function useHover() {
     useEffect(() => {
@@ -34,4 +34,4 @@ export default function useHover() {
             document.removeEventListener("mousemove", enableHover, true);
         };
     });
-};
+}

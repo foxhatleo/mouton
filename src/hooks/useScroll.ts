@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 const useScroll: ((handler: (scrollY: number) => void) => void) = (handler) => {
     const actualHandler = () => {

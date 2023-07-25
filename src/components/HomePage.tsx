@@ -1,20 +1,20 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import {blue, green, orange, purple, red, yellow} from "material-colors-ts";
+import { blue, green, orange, purple, red, yellow } from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
-import {Color} from "@/components/Color";
+import { Color } from "@/components/Color";
 import useScroll from "@/hooks/useScroll";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
-import {useTranslations} from "use-intl";
-import {newLineAsBr, paragraph} from "@/utils/Format";
+import { useTranslations } from "use-intl";
+import { newLineAsBr, paragraph } from "@/utils/Format";
 
 const HomePage: React.ComponentType = () => {
     usePageTransition();

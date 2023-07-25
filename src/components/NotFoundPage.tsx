@@ -5,7 +5,7 @@ import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
 import Footer from "@/components/Footer";
-import {blueGrey} from "material-colors-ts";
+import { blueGrey } from "material-colors-ts";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
 

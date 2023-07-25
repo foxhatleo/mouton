@@ -2,7 +2,7 @@
 
 import React from "react";
 import Responsive from "@/components/Responsive";
-import {blue, orange, purple} from "material-colors-ts";
+import { blue, orange, purple } from "material-colors-ts";
 
 const GlobalStyle: React.ComponentType = () => <>
     <link rel={"preconnect"} href={"https://fonts.googleapis.com"}/>

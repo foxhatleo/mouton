@@ -5,9 +5,9 @@ import Logo from "@/components/header/Logo";
 import Nav from "@/components/header/Nav";
 import Link from "next/link";
 
-export type HeaderProps = {
+export interface HeaderProps {
     absolute?: boolean;
-};
+}
 
 const Header: React.ComponentType<HeaderProps> = (p) => (
     <header className={"entry-transition container alt"}>

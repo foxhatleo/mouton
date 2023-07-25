@@ -1,4 +1,4 @@
-export type Color = {
+export interface Color {
     "50": string;
     "100": string;
     "200": string;
@@ -9,4 +9,4 @@ export type Color = {
     "700": string;
     "800": string;
     "900": string;
-};
+}

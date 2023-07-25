@@ -1,9 +1,9 @@
 "use client";
 
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import ReactSwipe from "react-swipe";
 
-export type ImagesType = {
+export interface ImagesType {
     urls: string[];
     aspectRatio?: number;
     urlPrefix?: string;
@@ -36,7 +36,7 @@ const Images: React.ComponentType<ImagesType> = (p) => {
         <div className={"images"}>
             <ReactSwipe
                 className="carousel"
-                swipeOptions={{auto: 2500}}
+                swipeOptions={{ auto: 2500 }}
                 ref={swipe}>
                 {p.urls.map((url, ind) => (
                     <div className={"image i-" + (rnd + ind)} key={ind}>

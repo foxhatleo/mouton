@@ -1,10 +1,10 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NavItem from "@/components/header/NavItem";
 import Responsive from "@/components/Responsive";
 import gsap from "gsap";
-import {useTranslations} from "use-intl";
+import { useTranslations } from "use-intl";
 
 const Nav: React.ComponentType = () => {
     const [ showing, setShowing ] = useState(false);
@@ -14,12 +14,12 @@ const Nav: React.ComponentType = () => {
         document.body.style.overflow = "hidden";
         desktopNav.current!.style.opacity = "0";
         desktopNav.current!.style.display = "flex";
-        gsap.to(desktopNav.current!, {opacity: 1, duration: .15});
+        gsap.to(desktopNav.current!, { opacity: 1, duration: .15 });
         desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
             gsap.killTweensOf(item);
             gsap.fromTo(item,
-                {opacity: 0, translateY: -20},
-                {opacity: 1, translateY: 0, delay: i * .05, duration: .15});
+                { opacity: 0, translateY: -20 },
+                { opacity: 1, translateY: 0, delay: i * .05, duration: .15 });
         });
     };
 
@@ -36,7 +36,7 @@ const Nav: React.ComponentType = () => {
         }
         desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
             gsap.killTweensOf(item);
-            gsap.to(item, {opacity: 0, translateY: -20, delay: i * .05, duration: .15});
+            gsap.to(item, { opacity: 0, translateY: -20, delay: i * .05, duration: .15 });
         });
         gsap.to(desktopNav.current!, {
             opacity: 0, duration: .15, delay: .2, onComplete: () => {

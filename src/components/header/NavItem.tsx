@@ -4,12 +4,12 @@ import React from "react";
 import Link from "next/link";
 import Responsive from "@/components/Responsive";
 
-export type NavItemProps = {
+export interface NavItemProps {
     label: string;
     onclick?: (evt?: React.MouseEvent<HTMLAnchorElement>) => void;
     href: string;
     newWindow?: boolean;
-};
+}
 
 const NavItem: React.ComponentType<NavItemProps> = (p) => (
     <span className={"link glow"}>

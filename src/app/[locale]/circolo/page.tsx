@@ -1,6 +1,6 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import {red} from "material-colors-ts";
+import { red } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 
 const WorkCircolo: React.ComponentType = () => (

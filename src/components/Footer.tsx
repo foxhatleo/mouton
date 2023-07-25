@@ -2,7 +2,7 @@
 
 import React from "react";
 import Rainbow from "@/components/Rainbow";
-import {useTranslations} from "use-intl";
+import { useTranslations } from "use-intl";
 import NewPageLink from "@/components/NewPageLink";
 
 const Footer: React.ComponentType = () => {
