@@ -5,10 +5,6 @@ import Responsive from "@/components/Responsive";
 import { blue, orange, purple } from "material-colors-ts";
 
 const GlobalStyle: React.ComponentType = () => <>
-    <link rel={"preconnect"} href={"https://fonts.googleapis.com"}/>
-    <link rel={"preconnect"} href={"https://fonts.gstatic.com"} crossOrigin={"anonymous"}/>
-    <link href={"https://fonts.googleapis.com/css2?family=Oxygen&family=Vollkorn:wght@600&display=swap"}
-        rel={"stylesheet"}/>
     <style jsx global>{`
         html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym,
         address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,

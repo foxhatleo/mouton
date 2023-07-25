@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { useTranslations } from "use-intl";
 
 const Nav: React.ComponentType = () => {
-    const [ showing, setShowing ] = useState(false);
+    const [ _showing, setShowing ] = useState(false);
     const desktopNav = useRef<HTMLDivElement>(null);
 
     const show = () => {

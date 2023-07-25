@@ -6,7 +6,7 @@ module.exports = nextConfig;
 
 // Injected content via Sentry wizard below
 
-const {withSentryConfig} = require("@sentry/nextjs");
+const { withSentryConfig } = require("@sentry/nextjs");
 const getReleaseIdentifier = require("./src/utils/getReleaseIdentifier");
 
 module.exports = withSentryConfig(

@@ -6,7 +6,7 @@ import gsap from "gsap";
 export default function usePageTransition() {
     React.useEffect(() => {
         if (typeof document === "undefined") {
-            return;
+            return undefined;
         }
         const mains = document.body.querySelectorAll("main");
         mains.forEach((i) => {
