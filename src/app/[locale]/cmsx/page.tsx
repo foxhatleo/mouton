@@ -5,10 +5,11 @@ import { Viewport } from "next";
 
 const WorkCMSX: React.ComponentType = () => (
     <WorkPage
-        name={"CMSX"}
+        name="CMSX"
         desc={"Cornell's CS department course management website."}
-        fieldDate={"Jan 2020 - Dec 2020"}
-        color={blue}>
+        fieldDate="Jan 2020 - Dec 2020"
+        color={blue}
+    >
         <p>
             Throughout the course of 2020, I served as a volunteer within the project team
             dedicated to the enhancement of Cornell University’s Course Management System X (CMSX).

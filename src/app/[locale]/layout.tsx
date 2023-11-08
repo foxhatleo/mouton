@@ -6,19 +6,21 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import deepmerge from "deepmerge";
 import getReleaseIdentifier from "@/utils/getReleaseIdentifier";
-import  { Viewport } from "next";
+import { Viewport } from "next";
 
 export function generateStaticParams() {
-    return [ { locale: "en" }, { locale: "zh-CN" } ];
+    return [{ locale: "en" }, { locale: "zh-CN" }];
 }
 
 export default async function RootLayout({
     children, params: { locale },
 }: {
-    children: React.ReactNode,
-    params: { locale: string },
+    children: React.ReactNode;
+    params: { locale: string };
 }) {
-    let localeMessages, defaultMessages;
+    let localeMessages;
+    let
+        defaultMessages;
     try {
         localeMessages = (await import(`../../messages/${locale}.js`)).default;
         defaultMessages = (await import("../../messages/en.js")).default;
@@ -29,19 +31,19 @@ export default async function RootLayout({
 
     return (
         <html lang="en" data-release-identifier={getReleaseIdentifier()}>
-            <Script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE"/>
-            <Script id={"google-analytics"}>
-                {"window.dataLayer=window.dataLayer||[];" +
-                "function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-X3FWFTFPGE" />
+            <Script id="google-analytics">
+                {"window.dataLayer=window.dataLayer||[];"
+                + "function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X3FWFTFPGE');"}
             </Script>
             <body>
-                <style>{"main {opacity:0;}@media (prefers-color-scheme:dark) {body {background:black;}}"}</style>
+                <style>{"main {opacity:0;}@media (prefers-color-scheme:dark){body{background:black;}}"}</style>
                 <noscript>JavaScript is required for this website.</noscript>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     {children}
                 </NextIntlClientProvider>
-                <GlobalStyle/>
-                <Analytics/>
+                <GlobalStyle />
+                <Analytics />
             </body>
         </html>
     );

@@ -1,20 +1,32 @@
 "use client";
 
 import React from "react";
-import { blue, green, orange, purple, red, yellow } from "material-colors-ts";
+import {
+    blue, green, orange, purple, red, yellow,
+} from "material-colors-ts";
 import { Color } from "@/components/Color";
 
-const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) => (
-    <div className={"root" + (p.footer ? " footer" : "")}>
-        <div className={"stretcher"}>
-            <div className={"bubble b2"}/>
-            <div className={"bubble b4"}/>
-            <div className={"bubble b6"}/>
-            <div className={"bubble b1"}/>
-            <div className={"bubble b3"}/>
-            <div className={"bubble b5"}/>
-        </div>
-        <style jsx>{`
+const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color }> = ({ footer, color }) =>
+    // const avgFps = Number(useFps(20).avgFps) || 0;
+    // const [showAnimation, setShowAnimation] = useState<boolean>(true);
+    // useEffect(() => {
+    //     if (avgFps > 1 && avgFps < 20 && showAnimation) {
+    //         setShowAnimation(false);
+    //     }
+    // }, [avgFps, showAnimation]);
+    // eslint-disable-next-line implicit-arrow-linebreak
+    (
+        <div className={`root${footer ? " footer" : ""}`}>
+            <div className="stretcher">
+                <div className="bubble b2" />
+                <div className="bubble b4" />
+                <div className="bubble b6" />
+                <div className="bubble b1" />
+                <div className="bubble b3" />
+                <div className="bubble b5" />
+            </div>
+            <style jsx>
+                {`
             .root {
                 position: absolute;
                 z-index: -10;
@@ -66,8 +78,8 @@ const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) =
                 left: 0;
                 -webkit-backface-visibility: hidden;
                 -moz-backface-visibility: hidden;
-                -webkit-transform: translate3d(0, 0, 0);
-                -moz-transform: translate3d(0, 0, 0);
+                -webkit-transform: translate3d(0, 0, 0.001);
+                -moz-transform: translate3d(0, 0, 0.001);
                 animation-name: rainbow-circle;
                 animation-iteration-count: infinite;
             }
@@ -87,47 +99,47 @@ const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color; }> = (p) =
             }
 
             .b1 {
-                background: ${p.color ? p.color["500"] : red["500"]};
+                background: ${color ? color["500"] : red["500"]};
                 animation-duration: 15s;
                 animation-direction: normal;
             }
 
             .b2 {
-                background: ${p.color ? p.color["400"] : orange["500"]};
+                background: ${color ? color["400"] : orange["500"]};
                 animation-duration: 9s;
                 animation-direction: reverse;
                 left: 20%;
             }
 
             .b3 {
-                background: ${p.color ? p.color["700"] : yellow["500"]};
+                background: ${color ? color["700"] : yellow["500"]};
                 animation-duration: 7s;
                 animation-direction: normal;
                 left: 40%;
             }
 
             .b4 {
-                background: ${p.color ? p.color["500"] : green["500"]};
+                background: ${color ? color["500"] : green["500"]};
                 animation-duration: 11s;
                 animation-direction: reverse;
                 left: 60%;
             }
 
             .b5 {
-                background: ${p.color ? p.color["300"] : blue["500"]};
+                background: ${color ? color["300"] : blue["500"]};
                 animation-duration: 8s;
                 animation-direction: normal;
                 left: 80%;
             }
 
             .b6 {
-                background: ${p.color ? p.color["800"] : purple["500"]};
+                background: ${color ? color["800"] : purple["500"]};
                 animation-duration: 10s;
                 animation-direction: reverse;
                 left: 100%;
             }
-        `}</style>
-    </div>
-);
-
+        `}
+            </style>
+        </div>
+    );
 export default Rainbow;

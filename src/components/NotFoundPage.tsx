@@ -16,18 +16,19 @@ const ErrorPage: React.ComponentType = () => {
 
     return (
         <main>
-            <Rainbow color={blueGrey}/>
-            <section className={"section1"}>
-                <Header absolute={true}/>
-                <div className={"content container v-layout entry-transition-children"}>
+            <Rainbow color={blueGrey} />
+            <section className="section1">
+                <Header absolute />
+                <div className="content container v-layout entry-transition-children">
                     <h1>
                         404.
                     </h1>
                     <p>This page cannot be found. Verify the address and try again.</p>
                 </div>
             </section>
-            <Footer/>
-            <style jsx>{`
+            <Footer />
+            <style jsx>
+                {`
                 .section1 .content {
                     width: 100vw;
                     height: 100vh;
@@ -41,7 +42,8 @@ const ErrorPage: React.ComponentType = () => {
                         font-size: 2.5em;
                     }
                 }
-            `}</style>
+            `}
+            </style>
         </main>
     );
 };

@@ -10,22 +10,27 @@ const macLink = "https://github.com/foxhatleo/fallen-flame/releases/download/4.0
 
 const WorkFallenFlame: React.ComponentType = () => (
     <WorkPage
-        name={"Fallen Flame"}
-        desc={"A cross-platform desktop game written in Java."}
-        fieldDate={"Jan 2020 - May 2020"}
-        fieldGitHub={"foxhatleo/fallen-flame"}
+        name="Fallen Flame"
+        desc="A cross-platform desktop game written in Java."
+        fieldDate="Jan 2020 - May 2020"
+        fieldGitHub="foxhatleo/fallen-flame"
         fieldWindows={winLink}
         fieldAndroid={macLink}
-        fieldPdf={"https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Guide.pdf"}
-        fieldPdfName={"Game instructions"}
-        color={purple}>
-        <Images urlPrefix={"/assets/fallen-flame/"} urls={[
-            "ff1",
-            "ff2",
-            "ff3",
-            "ff4",
-            "ff5",
-        ]} aspectRatio={1200 / 682}/>
+        fieldPdf="https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Guide.pdf"
+        fieldPdfName="Game instructions"
+        color={purple}
+    >
+        <Images
+            urlPrefix="/assets/fallen-flame/"
+            urls={[
+                "ff1",
+                "ff2",
+                "ff3",
+                "ff4",
+                "ff5",
+            ]}
+            aspectRatio={1200 / 682}
+        />
         <p>
             As a critical element of the curriculum established by the Game Design Initiative
             at Cornell University (GDIAC), I was part of an eight-member team that developed a
@@ -54,11 +59,20 @@ const WorkFallenFlame: React.ComponentType = () => (
         <p>
             In conclusion, we created a product that is a testament to our dedication and
             hard work. The final output (available
-            on <NewPageLink href={winLink}>Windows</NewPageLink>{" "}
+            on
+            {" "}
+            <NewPageLink href={winLink}>Windows</NewPageLink>
+            {" "}
             {/* eslint-disable-next-line max-len */" "}
-            and <NewPageLink href={macLink}>macOS</NewPageLink>)
+            and
+            {" "}
+            <NewPageLink href={macLink}>macOS</NewPageLink>
+            )
             and associated codebase are publicly accessible
-            on <NewPageLink href={"https://github.com/foxhatleo/fallen-flame"}>GitHub</NewPageLink>.
+            on
+            {" "}
+            <NewPageLink href="https://github.com/foxhatleo/fallen-flame">GitHub</NewPageLink>
+            .
             This initiative was undertaken as a component of my minor degree in Game Design.
         </p>
     </WorkPage>

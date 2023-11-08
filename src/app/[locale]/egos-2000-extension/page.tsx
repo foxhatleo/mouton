@@ -6,18 +6,25 @@ import { Viewport } from "next";
 
 const WorkEGOS2000: React.ComponentType = () => (
     <WorkPage
-        name={"EGOS-2000 Extension"}
-        desc={"Extension to incorporate C standard library in a minimal OS."}
-        fieldDate={"Jan 2023 - May 2023"}
-        fieldPdf={"/resources/EGOS-2000-Extension.pdf"}
-        color={orange}>
+        name="EGOS-2000 Extension"
+        desc="Extension to incorporate C standard library in a minimal OS."
+        fieldDate="Jan 2023 - May 2023"
+        fieldPdf="/resources/EGOS-2000-Extension.pdf"
+        color={orange}
+    >
         <p>
             In the context of my Master of Engineering thesis, I developed a sophisticated
             extension
-            to <NewPageLink href={"https://github.com/yhzhang0128/egos-2000"}>EGOS-2000</NewPageLink>,
+            to
+            {" "}
+            <NewPageLink href="https://github.com/yhzhang0128/egos-2000">EGOS-2000</NewPageLink>
+            ,
             a minimalistic operating system crafted by Cornell
             University’s Ph.D.
-            candidate, <NewPageLink href={"https://dolobyte.net"}>Yunhao Zhang</NewPageLink>.
+            candidate,
+            {" "}
+            <NewPageLink href="https://dolobyte.net">Yunhao Zhang</NewPageLink>
+            .
             This operating system, constructed
             from only 2000 lines of code, is designed specifically for deployment on FPGA
             development boards. Despite its minimalistic approach, EGOS-2000 is an entirely
@@ -33,11 +40,23 @@ const WorkEGOS2000: React.ComponentType = () => (
             narrowing the scope of the project and imposing challenges in writing or porting
             applications to the OS. My thesis aimed to mitigate this issue by integrating
             select C standard libraries into the OS,
-            namely <code>math.h</code>
-            , <code>stdlib.h</code>
-            , <code>stdio.h</code>
-            , <code>ctype.h</code>,
-            and <code>string.h</code>.
+            namely
+            {" "}
+            <code>math.h</code>
+            ,
+            {" "}
+            <code>stdlib.h</code>
+            ,
+            {" "}
+            <code>stdio.h</code>
+            ,
+            {" "}
+            <code>ctype.h</code>
+            ,
+            and
+            {" "}
+            <code>string.h</code>
+            .
             This incorporation allowed the operating system to support these fundamental
             library functions, thereby simplifying the process for developers to design
             applications for EGOS-2000.
@@ -63,7 +82,10 @@ const WorkEGOS2000: React.ComponentType = () => (
         </p>
         <p>
             This project was conducted under the esteemed supervision
-            of <NewPageLink href={"https://www.cs.cornell.edu/home/rvr/"}>Dr. Robert van Renesse</NewPageLink>,
+            of
+            {" "}
+            <NewPageLink href="https://www.cs.cornell.edu/home/rvr/">Dr. Robert van Renesse</NewPageLink>
+            ,
             Professor and Director of Graduate Studies at
             Cornell’s Computer Science department, and received high commendation, being
             awarded an A+ grade.

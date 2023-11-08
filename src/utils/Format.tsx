@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 
-export function interleave<A = any, T = any>(arr: A[], thing: T): (A | T)[] {
+export function interleave<A = any, T = any>(arr: A[], thing: T): (A | (T extends () => any ? ReturnType<T> : T))[] {
     // @ts-ignore
-    return [].concat(...arr.map((n) => [ n, thing ])).slice(0, -1);
+    return [].concat(...arr.map((n) => [n, typeof thing === "function" ? thing() : thing])).slice(0, -1);
 }
 
 export function newLineAsBr(s: string): (string | ReactElement)[] {
-    return interleave(s.split("\n"), <br/>);
+    return interleave(s.split("\n"), () => <br key={Math.random()} />);
 }
 
 export function newLineAsP(s: string): (string | ReactElement)[] {

@@ -6,17 +6,21 @@ import { Viewport } from "next";
 
 const WorkXiCompiler: React.ComponentType = () => (
     <WorkPage
-        name={"Xi Compiler"}
-        desc={"A fully functional compiler written from scratch."}
-        fieldDate={"Jan 2020 - May 2020"}
-        color={yellow}>
+        name="Xi Compiler"
+        desc="A fully functional compiler written from scratch."
+        fieldDate="Jan 2020 - May 2020"
+        color={yellow}
+    >
         <p>
             In the context of a practical application project for my Advanced Compiler
             Construction course, I collaborated within a team comprising four members, where
             our primary endeavor was to architect and build a bespoke compiler utilizing the
             Java programming language. The compiler we developed was purposefully designed to
             take as input the source code written
-            in <NewPageLink href={"/resources/Xi-language-specification.pdf"}>Xi</NewPageLink>,
+            in
+            {" "}
+            <NewPageLink href="/resources/Xi-language-specification.pdf">Xi</NewPageLink>
+            ,
             a programming language that bears
             resemblance to C in its imperative, statically typed, and procedural paradigm.
             The final output our compiler produced was an executable following the x86

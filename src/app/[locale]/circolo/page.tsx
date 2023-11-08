@@ -6,11 +6,12 @@ import { Viewport } from "next";
 
 const WorkCircolo: React.ComponentType = () => (
     <WorkPage
-        name={"Circolo.us"}
-        desc={"Complete website overhaul using React with e-commerce functionalities."}
-        fieldDate={"Jun 2022 - Aug 2022"}
-        fieldWebsite={"https://circolo.us"}
-        color={red}>
+        name="Circolo.us"
+        desc="Complete website overhaul using React with e-commerce functionalities."
+        fieldDate="Jun 2022 - Aug 2022"
+        fieldWebsite="https://circolo.us"
+        color={red}
+    >
         <p>
             During my summer internship in 2022, I had the privilege to join Circolo, an innovative
             San Francisco-based startup specializing in the production of smart fitness mirrors.
@@ -48,7 +49,10 @@ const WorkCircolo: React.ComponentType = () => (
             Please note that the source code is not publicly accessible,
             given the commercial nature of the project.
             The live site can be accessed
-            at <NewPageLink href={"https://circolo.us"}>circolo.us</NewPageLink>.
+            at
+            {" "}
+            <NewPageLink href="https://circolo.us">circolo.us</NewPageLink>
+            .
         </p>
     </WorkPage>
 );

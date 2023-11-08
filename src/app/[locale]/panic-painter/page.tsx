@@ -11,20 +11,25 @@ const winLink = "https://github.com/foxhatleo/panic-painter/releases/download/sh
 
 const WorkPanicPainter: React.ComponentType = () => (
     <WorkPage
-        name={"Panic Painter"}
-        desc={"A cross-platform mobile game written in C++."}
-        fieldDate={"Jan 2020 - May 2020"}
-        fieldGitHub={"foxhatleo/panic-painter"}
+        name="Panic Painter"
+        desc="A cross-platform mobile game written in C++."
+        fieldDate="Jan 2020 - May 2020"
+        fieldGitHub="foxhatleo/panic-painter"
         fieldMacOS={macLink}
         fieldWindows={winLink}
         fieldAndroid={androidLink}
-        color={green}>
-        <Images urlPrefix={"/assets/panic-painter/"} urls={[
-            "pp1",
-            "pp2",
-            "pp3",
-            "pp4",
-        ]} aspectRatio={1200 / 670}/>
+        color={green}
+    >
+        <Images
+            urlPrefix="/assets/panic-painter/"
+            urls={[
+                "pp1",
+                "pp2",
+                "pp3",
+                "pp4",
+            ]}
+            aspectRatio={1200 / 670}
+        />
         <p>
             As an integral component of the advanced coursework provided by the Game Design
             Initiative at Cornell University (GDIAC), I collaborated within a team of eight
@@ -57,11 +62,19 @@ const WorkPanicPainter: React.ComponentType = () => (
         <p>
             Ultimately, we delivered a product that we can genuinely take pride in.
             The final product (available
-            on <NewPageLink href={androidLink}>Android</NewPageLink>,
-            <NewPageLink href={winLink}>Windows</NewPageLink>,
-            and <NewPageLink href={macLink}>macOS</NewPageLink>)
+            on
+            {" "}
+            <NewPageLink href={androidLink}>Android</NewPageLink>
+            ,
+            <NewPageLink href={winLink}>Windows</NewPageLink>
+            ,
+            and
+            <NewPageLink href={macLink}>macOS</NewPageLink>
+            )
             and the corresponding codebase are accessible
-            on <NewPageLink href={"https://github.com/foxhatleo/panic-painter"}>GitHub</NewPageLink>.
+            on
+            <NewPageLink href="https://github.com/foxhatleo/panic-painter">GitHub</NewPageLink>
+            .
             Due to Apple’s restrictions on sideloading,
             the iOS version is not currently available.
             This endeavor was conducted as part of

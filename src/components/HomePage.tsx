@@ -6,7 +6,9 @@ import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { blue, green, orange, purple, red, yellow } from "material-colors-ts";
+import {
+    blue, green, orange, purple, red, yellow,
+} from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
 import { Color } from "@/components/Color";
@@ -20,7 +22,7 @@ const HomePage: React.ComponentType = () => {
     usePageTransition();
     useHover();
     useConsole();
-    const [ scrollDown, setScrollDown ] = useState(true);
+    const [scrollDown, setScrollDown] = useState(true);
 
     const scrollHandler = () => {
         if (window.scrollY >= 120) {
@@ -30,7 +32,7 @@ const HomePage: React.ComponentType = () => {
     useScroll(scrollHandler);
 
     const t = useTranslations("Home");
-    const WORKS: { t: string; link: string; color: Color; }[] = [
+    const WORKS: { t: string; link: string; color: Color }[] = [
         {
             t: "circolo",
             link: "/circolo/",
@@ -65,50 +67,53 @@ const HomePage: React.ComponentType = () => {
 
     return (
         <main>
-            <Rainbow/>
-            <section className={"section1" + (scrollDown ? " scroll-down" : "")}>
-                <Header absolute={true}/>
-                <div className={"content container v-layout"}>
-                    <h1 className={"entry-transition"}>
+            <Rainbow />
+            <section className={`section1${scrollDown ? " scroll-down" : ""}`}>
+                <Header absolute />
+                <div className="content container v-layout">
+                    <h1 className="entry-transition">
                         {newLineAsBr(t("hero"))}
                     </h1>
                 </div>
-                <div className={"scroll-down"}>
+                <div className="scroll-down">
                     {t("scroll-down")}
                 </div>
             </section>
-            <section id={"about"} className={"section2 container entry-transition-group"}>
-                <div className={"v-layout"}>
-                    <h2 className={"entry-transition center"}>{paragraph(t("about-me"))}</h2>
-                    <div className={"content"}>
-                        <article className={"text-container entry-transition-children container alt"}>
+            <section id="about" className="section2 container entry-transition-group">
+                <div className="v-layout">
+                    <h2 className="entry-transition center">{paragraph(t("about-me"))}</h2>
+                    <div className="content">
+                        <article className="text-container entry-transition-children container alt">
                             {paragraph(t("about-me-text"))}
                         </article>
-                        <div className={"avatar-container"}>
-                            <Avatar/>
+                        <div className="avatar-container">
+                            <Avatar />
                         </div>
                     </div>
                 </div>
             </section>
-            <section id={"works"} className={"section3 container entry-transition-group"}>
-                <div className={"v-layout center"}>
-                    <h2 className={"entry-transition"}>{paragraph(t("works"))}</h2>
-                    <ul className={"v-layout"}>
+            <section id="works" className="section3 container entry-transition-group">
+                <div className="v-layout center">
+                    <h2 className="entry-transition">{paragraph(t("works"))}</h2>
+                    <ul className="v-layout">
                         {WORKS.map((data, ind) => (
-                            <li key={ind} className={"entry-transition"}
+                            <li
+                                key={ind}
+                                className="entry-transition"
                                 style={{
                                     "--item-color-200": data.color["200"],
                                     "--item-color-500": data.color["500"],
                                     "--item-color-700": data.color["700"],
                                     "--item-color-900": data.color["900"],
-                                } as React.CSSProperties}>
+                                } as React.CSSProperties}
+                            >
                                 <Link href={data.link}>
-                                    <div className={"ind-container"}>
-                                        <div className={"ind"}>{`0${ind + 1}`.slice(-2)}</div>
+                                    <div className="ind-container">
+                                        <div className="ind">{`0${ind + 1}`.slice(-2)}</div>
                                     </div>
-                                    <div className={"portfolio-link"}>
+                                    <div className="portfolio-link">
                                         <h3>{t(`${data.t}.title`)}</h3>
-                                        <div className={"desc"}>{t(`${data.t}.tagline`)}</div>
+                                        <div className="desc">{t(`${data.t}.tagline`)}</div>
                                     </div>
                                 </Link>
                             </li>
@@ -116,8 +121,9 @@ const HomePage: React.ComponentType = () => {
                     </ul>
                 </div>
             </section>
-            <Footer/>
-            <style jsx>{`
+            <Footer />
+            <style jsx>
+                {`
                 .section1 .content {
                     width: 100vw;
                     height: 100vh;
@@ -268,7 +274,8 @@ const HomePage: React.ComponentType = () => {
                         color: var(--item-color-200);
                     }
                 }
-            `}</style>
+            `}
+            </style>
         </main>
     );
 };

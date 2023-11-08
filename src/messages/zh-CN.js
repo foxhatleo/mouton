@@ -1,12 +1,12 @@
 const ZH_CN = {
-    "Header": {
-        "about": "关于",
-        "works": "作品集",
-        "resume": "英文简历",
-        "linkedin": "领英",
-        "instagram": "Instagram",
+    Header: {
+        about: "关于",
+        works: "作品集",
+        resume: "英文简历",
+        linkedin: "领英",
+        instagram: "Instagram",
     },
-    "Home": {
+    Home: {
         "hero": "我热衷于\n利用科技的力量\n创造有用\n且令人愉快的体验。",
         "scroll-down": "向下滑动了解更多",
         "about-me": "关于我",
@@ -23,34 +23,34 @@ const ZH_CN = {
         "play-prompt": "点击或轻触头像即可播放",
         "works": "作品集（仅限英文）",
         "circolo": {
-            "title": "Circolo.us",
-            "tagline": "使用 React 完成带有电子商务功能的网站改造。",
+            title: "Circolo.us",
+            tagline: "使用 React 完成带有电子商务功能的网站改造。",
         },
         "egos-2000": {
-            "title": "EGOS-2000 扩展",
-            "tagline": "将 C 标准库融入进一个基本的操作系统。",
+            title: "EGOS-2000 扩展",
+            tagline: "将 C 标准库融入进一个基本的操作系统。",
         },
         "xic": {
-            "title": "Xi 编译器",
-            "tagline": "一个完全从头编写的编译器。",
+            title: "Xi 编译器",
+            tagline: "一个完全从头编写的编译器。",
         },
         "panic-painter": {
-            "title": "Panic Painter",
-            "tagline": "用 C++ 写成的多平台手机游戏。",
+            title: "Panic Painter",
+            tagline: "用 C++ 写成的多平台手机游戏。",
         },
         "cmsx": {
-            "title": "CMSX",
-            "tagline": "康奈尔大学计算机科学系所使用的课程管理网站。",
+            title: "CMSX",
+            tagline: "康奈尔大学计算机科学系所使用的课程管理网站。",
         },
         "fallen-flame": {
-            "title": "Fallen Flame",
-            "tagline": "用 Java 写成的多平台桌面端游戏。",
+            title: "Fallen Flame",
+            tagline: "用 Java 写成的多平台桌面端游戏。",
         },
     },
-    "Footer": {
-        "l1": "基于 React，由 Leo 梁文皓设计建造。",
-        "l21": "源代码可在 ",
-        "l22": " 查阅。",
+    Footer: {
+        l1: "基于 React，由 Leo 梁文皓设计建造。",
+        l21: "源代码可在 ",
+        l22: " 查阅。",
     },
 };
 

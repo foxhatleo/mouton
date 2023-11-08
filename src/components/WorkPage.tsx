@@ -26,7 +26,7 @@ function canUseWebP() {
     }
     const elem = document.createElement("canvas");
     if (elem.getContext && elem.getContext("2d")) {
-        return elem.toDataURL("image/webp").indexOf("data:image/webp") == 0;
+        return elem.toDataURL("image/webp").indexOf("data:image/webp") === 0;
     }
     return false;
 }
@@ -43,11 +43,24 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
     fieldPdf?: string;
     fieldPdfName?: string;
     color: Color;
-}>> = (p) => {
+}>> = ({
+    name,
+    desc,
+    fieldDate,
+    fieldWebsite,
+    fieldGitHub,
+    fieldWindows,
+    fieldMacOS,
+    fieldAndroid,
+    fieldPdf,
+    fieldPdfName,
+    color,
+    children,
+}) => {
     usePageTransition();
     useHover();
     useConsole();
-    const [ scrollDown, setScrollDown ] = useState(true);
+    const [scrollDown, setScrollDown] = useState(true);
 
     const scrollHandler = () => {
         if (window.scrollY >= 120) {
@@ -68,82 +81,116 @@ const WorkPage: React.ComponentType<PropsWithChildren<{
     return (
         <main className={mainClassNames.join(" ")}>
             <Head>
-                <title>{p.name} - Leo Liang</title>
+                <title>
+                    {name}
+                    {" "}
+                    - Leo Liang
+                </title>
             </Head>
-            <Rainbow color={p.color}/>
-            <Header absolute={true}/>
-            <div className={"content container v-layout"}>
-                <h1 className={"entry-transition"}>{p.name}</h1>
-                <p className={"entry-transition"}>{p.desc}</p>
-                <ul className={"entry-transition-children"}>
-                    {p.fieldDate ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faCalendarDays}/></span>
-                        {p.fieldDate}
-                    </p></li> : ""}
-                    {p.fieldWebsite ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faGlobe}/></span>
-                        <NewPageLink href={p.fieldWebsite}>Website</NewPageLink>
-                    </p></li> : ""}
-                    {p.fieldGitHub ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faCode}/></span>
-                        <NewPageLink href={`https://github.com/${p.fieldGitHub}`}>
-                            GitHub repo
-                        </NewPageLink>
-                    </p></li> : ""}
-                    {p.fieldWindows ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faMicrosoft}/></span>
-                        <NewPageLink href={p.fieldWindows}>Windows build</NewPageLink>
-                    </p></li> : ""}
-                    {p.fieldMacOS ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faApple}/></span>
-                        <NewPageLink href={p.fieldMacOS}>macOS build</NewPageLink>
-                    </p></li> : ""}
-                    {p.fieldAndroid ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faAndroid}/></span>
-                        <NewPageLink href={p.fieldAndroid}>Android build</NewPageLink>
-                    </p></li> : ""}
-                    {p.fieldPdf ? <li><p>
-                        <span className={"icon"}><FontAwesomeIcon icon={faFilePdf}/></span>
-                        <NewPageLink href={p.fieldPdf}>{p.fieldPdfName ?? "Report"}</NewPageLink>
-                    </p></li> : ""}
+            <Rainbow color={color} />
+            <Header absolute />
+            <div className="content container v-layout">
+                <h1 className="entry-transition">{name}</h1>
+                <p className="entry-transition">{desc}</p>
+                <ul className="entry-transition-children">
+                    {fieldDate ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faCalendarDays} /></span>
+                                {fieldDate}
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldWebsite ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faGlobe} /></span>
+                                <NewPageLink href={fieldWebsite}>Website</NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldGitHub ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faCode} /></span>
+                                <NewPageLink href={`https://github.com/${fieldGitHub}`}>
+                                    GitHub repo
+                                </NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldWindows ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faMicrosoft} /></span>
+                                <NewPageLink href={fieldWindows}>Windows build</NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldMacOS ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faApple} /></span>
+                                <NewPageLink href={fieldMacOS}>macOS build</NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldAndroid ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faAndroid} /></span>
+                                <NewPageLink href={fieldAndroid}>Android build</NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
+                    {fieldPdf ? (
+                        <li>
+                            <p>
+                                <span className="icon"><FontAwesomeIcon icon={faFilePdf} /></span>
+                                <NewPageLink href={fieldPdf}>{fieldPdfName ?? "Report"}</NewPageLink>
+                            </p>
+                        </li>
+                    ) : ""}
                 </ul>
             </div>
-            <div className={"scroll-down"}>
+            <div className="scroll-down">
                 Scroll down to learn more
             </div>
-            <article className={"container entry-transition-group entry-transition-children"}>
-                {p.children}
+            <article className="container entry-transition-group entry-transition-children">
+                {children}
             </article>
-            <Footer/>
-            <style jsx>{`
-                main .content {
-                    width: 100vw;
-                    height: 80vh;
-                    min-height: 30em;
-                    justify-content: center;
-                }
+            <Footer />
+            <style jsx>
+                {`
+                    main .content {
+                        width: 100vw;
+                        height: 80vh;
+                        min-height: 30em;
+                        justify-content: center;
+                    }
 
-                main .icon {
-                    width: 1.5em;
-                    margin-right: .5em;
-                    display: inline-block;
-                    opacity: .5;
-                    text-align: center;
-                }
+                    main .icon {
+                        width: 1.5em;
+                        margin-right: .5em;
+                        display: inline-block;
+                        opacity: .5;
+                        text-align: center;
+                    }
 
-                main .scroll-down {
-                    position: relative;
-                    width: 100%;
-                    text-align: center;
-                    opacity: .5;
-                    transition: .3s ease-in-out opacity, .3s ease-in-out margin-top;
-                }
+                    main .scroll-down {
+                        position: relative;
+                        width: 100%;
+                        text-align: center;
+                        opacity: .5;
+                        transition: .3s ease-in-out opacity, .3s ease-in-out margin-top;
+                    }
 
-                main:not(.scroll-down) .scroll-down {
-                    opacity: 0;
-                    margin-top: -1em;
-                }
-            `}</style>
+                    main:not(.scroll-down) .scroll-down {
+                        opacity: 0;
+                        margin-top: -1em;
+                    }
+                `}
+            </style>
         </main>
     );
 };

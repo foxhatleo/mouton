@@ -3,11 +3,12 @@
 import React from "react";
 
 const Logo: React.ComponentType = () => (
-    <div className={"root"}>
-        <span className={"glow"}/>
-        <span className={"b1"}/>
-        <span className={"b2"}/>
-        <style jsx>{`
+    <div className="root">
+        <span className="glow" />
+        <span className="b1" />
+        <span className="b2" />
+        <style jsx>
+            {`
             .root {
                 width: 2em;
                 height: 2em;
@@ -42,7 +43,8 @@ const Logo: React.ComponentType = () => (
                 top: 0;
                 right: 0;
             }
-        `}</style>
+        `}
+        </style>
     </div>
 );
 
