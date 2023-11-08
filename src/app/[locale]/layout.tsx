@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import deepmerge from "deepmerge";
 import getReleaseIdentifier from "@/utils/getReleaseIdentifier";
+import  { Viewport } from "next";
 
 export function generateStaticParams() {
     return [ { locale: "en" }, { locale: "zh-CN" } ];
@@ -49,6 +50,9 @@ export default async function RootLayout({
 export const metadata = {
     authors: { name: "Leo Liang" },
     manifest: "/site.webmanifest",
+};
+
+export const viewport: Viewport = {
     themeColor: [
         { media: "(prefers-color-scheme: light)", color: "white" },
         { media: "(prefers-color-scheme: dark)", color: "black" },

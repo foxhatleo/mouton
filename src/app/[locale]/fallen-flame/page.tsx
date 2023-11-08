@@ -3,6 +3,7 @@ import WorkPage from "@/components/WorkPage";
 import { purple } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import Images from "@/components/Images";
+import { Viewport } from "next";
 
 const winLink = "https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Windows.zip";
 const macLink = "https://github.com/foxhatleo/fallen-flame/releases/download/4.0/FallenFlame-Mac.zip";
@@ -68,4 +69,11 @@ export default WorkFallenFlame;
 export const metadata = {
     title: "Fallen Flame — Leo Liang",
     description: "A cross-platform desktop game written in Java.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: purple[500] },
+        { media: "(prefers-color-scheme: dark)", color: purple[700] },
+    ],
 };

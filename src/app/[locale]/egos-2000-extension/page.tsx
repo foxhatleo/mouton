@@ -2,6 +2,7 @@ import React from "react";
 import WorkPage from "@/components/WorkPage";
 import { orange } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
+import { Viewport } from "next";
 
 const WorkEGOS2000: React.ComponentType = () => (
     <WorkPage
@@ -75,4 +76,11 @@ export default WorkEGOS2000;
 export const metadata = {
     title: "EGOS-2000 Extension — Leo Liang",
     description: "Extension to incorporate C standard library in a minimal OS.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: orange[500] },
+        { media: "(prefers-color-scheme: dark)", color: orange[700] },
+    ],
 };

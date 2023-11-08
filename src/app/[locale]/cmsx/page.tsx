@@ -1,6 +1,7 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
 import { blue } from "material-colors-ts";
+import { Viewport } from "next";
 
 const WorkCMSX: React.ComponentType = () => (
     <WorkPage
@@ -51,4 +52,11 @@ export default WorkCMSX;
 export const metadata = {
     title: "CMSX — Leo Liang",
     description: "Cornell's CS department course management website.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: blue[500] },
+        { media: "(prefers-color-scheme: dark)", color: blue[700] },
+    ],
 };

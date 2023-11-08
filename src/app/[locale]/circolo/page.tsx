@@ -2,6 +2,7 @@ import React from "react";
 import WorkPage from "@/components/WorkPage";
 import { red } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
+import { Viewport } from "next";
 
 const WorkCircolo: React.ComponentType = () => (
     <WorkPage
@@ -57,4 +58,11 @@ export default WorkCircolo;
 export const metadata = {
     title: "Circolo.us — Leo Liang",
     description: "Complete website overhaul using React with e-commerce functionalities.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: red[500] },
+        { media: "(prefers-color-scheme: dark)", color: red[700] },
+    ],
 };

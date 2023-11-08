@@ -2,6 +2,7 @@ import React from "react";
 import WorkPage from "@/components/WorkPage";
 import { yellow } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
+import { Viewport } from "next";
 
 const WorkXiCompiler: React.ComponentType = () => (
     <WorkPage
@@ -76,4 +77,11 @@ export default WorkXiCompiler;
 export const metadata = {
     title: "Xi Compiler — Leo Liang",
     description: "A fully functional compiler written from scratch.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: yellow[500] },
+        { media: "(prefers-color-scheme: dark)", color: yellow[700] },
+    ],
 };

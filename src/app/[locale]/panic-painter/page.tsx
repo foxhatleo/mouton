@@ -3,6 +3,7 @@ import WorkPage from "@/components/WorkPage";
 import { green } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import Images from "@/components/Images";
+import { Viewport } from "next";
 
 const androidLink = "https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-android.apk";
 const macLink = "https://github.com/foxhatleo/panic-painter/releases/download/showcase/10524-mac.zip";
@@ -74,4 +75,11 @@ export default WorkPanicPainter;
 export const metadata = {
     title: "Panic Painter — Leo Liang",
     description: "A cross-platform mobile game written in C++.",
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: green[500] },
+        { media: "(prefers-color-scheme: dark)", color: green[700] },
+    ],
 };

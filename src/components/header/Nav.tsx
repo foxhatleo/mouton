@@ -94,8 +94,6 @@ const Nav: React.ComponentType = () => {
                     onclick={() => hide(true)}/>
                 <NavItem label={t("linkedin")} href={"https://www.linkedin.com/in/wenhao-leo-liang/"}
                     onclick={() => hide(true)}/>
-                <NavItem label={t("instagram")} href={"https://www.instagram.com/foxhatleo"}
-                    onclick={() => hide(true)}/>
             </nav>
             <style jsx>{`
                 nav {
