@@ -8,10 +8,6 @@ import deepmerge from "deepmerge";
 import getReleaseIdentifier from "@/utils/getReleaseIdentifier";
 import { Viewport } from "next";
 
-export function generateStaticParams() {
-    return [{ locale: "en" }, { locale: "zh-CN" }];
-}
-
 export default async function RootLayout({
     children, params: { locale },
 }: {
@@ -47,6 +43,12 @@ export default async function RootLayout({
             </body>
         </html>
     );
+}
+
+const locales = ["en", "zh-CN"];
+
+export function generateStaticParams() {
+    return locales.map((locale) => ({ locale }));
 }
 
 export const metadata = {

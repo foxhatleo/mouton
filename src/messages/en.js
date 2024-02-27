@@ -16,7 +16,7 @@ University. I’m eager to contribute my skills and expertise to a dynamic team,
 to improve and enrich lives.
 
 Born in China and fluent in Mandarin, Cantonese, and English, I revel in embracing diverse cultures. I’m currently on
-an exciting journey learning Japanese and Swedish, further extending my linguistic capabilities.
+an exciting journey learning Japanese and French, further extending my linguistic capabilities.
 
 When I’m not immersed in coding or languages, I find solace in playing the piano and exploring the world. Thank you
 for visiting my website — enjoy discovering more about my passions and pursuits.
@@ -46,6 +46,10 @@ for visiting my website — enjoy discovering more about my passions and pursuit
         "fallen-flame": {
             title: "Fallen Flame",
             tagline: "A cross-platform desktop game written in Java.",
+        },
+        "remy": {
+            title: "Remy Hospitality Platform",
+            tagline: "An AI-powered platform bringing interactive experience to hospitality industries.",
         },
     },
     Footer: {

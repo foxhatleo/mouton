@@ -1,6 +1,6 @@
 import React from "react";
 import WorkPage from "@/components/WorkPage";
-import { red } from "material-colors-ts";
+import { pink } from "material-colors-ts";
 import NewPageLink from "@/components/NewPageLink";
 import { Viewport } from "next";
 
@@ -10,7 +10,7 @@ const WorkCircolo: React.ComponentType = () => (
         desc="Complete website overhaul using React with e-commerce functionalities."
         fieldDate="Jun 2022 - Aug 2022"
         fieldWebsite="https://circolo.us"
-        color={red}
+        color={pink}
     >
         <p>
             During my summer internship in 2022, I had the privilege to join Circolo, an innovative
@@ -66,7 +66,7 @@ export const metadata = {
 
 export const viewport: Viewport = {
     themeColor: [
-        { media: "(prefers-color-scheme: light)", color: red[500] },
-        { media: "(prefers-color-scheme: dark)", color: red[700] },
+        { media: "(prefers-color-scheme: light)", color: pink[500] },
+        { media: "(prefers-color-scheme: dark)", color: pink[700] },
     ],
 };

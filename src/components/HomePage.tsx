@@ -7,7 +7,7 @@ import usePageTransition from "@/hooks/usePageTransition";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import {
-    blue, green, orange, purple, red, yellow,
+    blue, green, orange, purple, red, yellow, pink,
 } from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
@@ -34,9 +34,14 @@ const HomePage: React.ComponentType = () => {
     const t = useTranslations("Home");
     const WORKS: { t: string; link: string; color: Color }[] = [
         {
+            t: "remy",
+            link: "/remy/",
+            color: red,
+        },
+        {
             t: "circolo",
             link: "/circolo/",
-            color: red,
+            color: pink,
         },
         {
             t: "egos-2000",
