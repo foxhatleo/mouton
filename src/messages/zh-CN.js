@@ -46,6 +46,10 @@ const ZH_CN = {
             title: "Fallen Flame",
             tagline: "用 Java 写成的多平台桌面端游戏。",
         },
+        "remy": {
+            title: "Remy 餐饮/酒店平台",
+            tagline: "由人工智能驱动，一款为餐饮业和酒店业带来互动体验的平台。",
+        },
     },
     Footer: {
         l1: "基于 React，由 Leo 梁文皓设计建造。",
