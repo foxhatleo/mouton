@@ -76,6 +76,7 @@ for visiting my website — enjoy discovering more about my passions and pursuit
 		windows: "Windows build",
 		android: "Android build",
 		pdf: "Report",
+		scroll: "Scroll down to learn more",
 	},
 	Circolo: circolo,
 	CMSX: cmsx,

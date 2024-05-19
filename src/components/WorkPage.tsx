@@ -185,7 +185,7 @@ const WorkPage: React.ComponentType<{ color: Color; part: string }> = ({
 					)}
 				</ul>
 			</div>
-			<div className="scroll-down">Scroll down to learn more</div>
+			<div className="scroll-down">{t2("scroll")}</div>
 			<article className="container entry-transition-group entry-transition-children">
 				{image[0] && (
 					<Images

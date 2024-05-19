@@ -52,6 +52,7 @@ const ZH_CN = {
 		windows: "Windows 版",
 		android: "安卓版",
 		pdf: "报告",
+		scroll: "向下滑动了解更多",
 	},
 	Circolo: circolo,
 	CMSX: cmsx,
