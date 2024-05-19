@@ -15,6 +15,7 @@ const EN = {
 		instagram: "Instagram",
 	},
 	Home: {
+		title: "Leo Liang",
 		desc: "Personal website of Leo Liang, an aspiring software engineer whose passion is to create useful & delightful experience with the power of technology.",
 		hero: "My passion is to\ncreate useful &\ndelightful experience\nwith the power of\ntechnology.",
 		"scroll-down": "Scroll down to learn more",

@@ -15,6 +15,7 @@ const ZH_CN = {
 		instagram: "Instagram",
 	},
 	Home: {
+		title: "Leo 梁文皓",
 		desc: "Leo Liang 的个人网站，一位有抱负的软件工程师，他的热情是通过技术的力量创造有用且愉快的体验。",
 		hero: "我热衷于\n利用科技的力量\n创造有用\n且令人愉快的体验。",
 		"scroll-down": "向下滑动了解更多",
@@ -30,7 +31,7 @@ const ZH_CN = {
 感谢您访问我的网站，更多了解我的热情和兴趣。
 `,
 		"play-prompt": "点击或轻触头像即可播放",
-		works: "作品集（仅限英文）",
+		works: "作品集",
 		circolo: circolo,
 		"egos-2000": egos2000,
 		xic: xic,

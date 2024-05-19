@@ -14,9 +14,10 @@ export default WorkCMSX;
 export async function generateMetadata(ctx: any) {
 	const locale = ctx.params.locale as string;
 	const t = await getTranslations({ locale, namespace: "CMSX" });
+	const t2 = await getTranslations({ locale, namespace: "Home" });
 
 	return {
-		title: `${t("title")} - Leo Liang`,
+		title: `${t("title")} - ${t2("title")}`,
 		description: t("tagline"),
 	};
 }

@@ -12,7 +12,7 @@ export async function generateMetadata(ctx: any) {
 	const t = await getTranslations({ locale, namespace: "Home" });
 
 	return {
-		title: "Leo Liang",
+		title: t("title"),
 		description: t("desc"),
 	};
 }
