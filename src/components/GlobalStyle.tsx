@@ -1,25 +1,25 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import Responsive from "@/components/Responsive";
 import { blue, orange, purple } from "material-colors-ts";
 import { Oxygen, Vollkorn } from "next/font/google";
 
 const oxygen = Oxygen({
-    subsets: ["latin"],
-    weight: ["400", "700"],
-    display: "swap",
+	subsets: ["latin"],
+	weight: ["400", "700"],
+	display: "swap",
 });
 
 const vollkorn = Vollkorn({
-    subsets: ["latin"],
-    weight: ["600"],
-    display: "swap",
+	subsets: ["latin"],
+	weight: ["600"],
+	display: "swap",
 });
 
 const GlobalStyle: React.ComponentType = () => (
-    <style jsx global>
-        {`
+	<style jsx={true} global={true}>
+		{`
             html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym,
             address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
             b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead,
@@ -154,7 +154,9 @@ const GlobalStyle: React.ComponentType = () => (
                 color: ${purple["500"]};
             }
 
-            @media (min-width: ${Responsive.SIZE_L}px) and (max-width: ${Responsive.SIZE_XL - 1}px) {
+            @media (min-width: ${Responsive.SIZE_L}px) and (max-width: ${
+							Responsive.SIZE_XL - 1
+						}px) {
                 .container {
                     padding: 3.2em 2.2em;
                 }
@@ -168,7 +170,9 @@ const GlobalStyle: React.ComponentType = () => (
                 }
             }
 
-            @media (min-width: ${Responsive.SIZE_M}px) and (max-width: ${Responsive.SIZE_L - 1}px) {
+            @media (min-width: ${Responsive.SIZE_M}px) and (max-width: ${
+							Responsive.SIZE_L - 1
+						}px) {
                 .container {
                     padding: 3em 1.8em;
                 }
@@ -182,7 +186,9 @@ const GlobalStyle: React.ComponentType = () => (
                 }
             }
 
-            @media (min-width: ${Responsive.SIZE_S}px) and (max-width: ${Responsive.SIZE_M - 1}px) {
+            @media (min-width: ${Responsive.SIZE_S}px) and (max-width: ${
+							Responsive.SIZE_M - 1
+						}px) {
                 .container {
                     padding: 2.8em 1.6em;
                 }
@@ -221,7 +227,7 @@ const GlobalStyle: React.ComponentType = () => (
                 }
             }
         `}
-    </style>
+	</style>
 );
 
 export default GlobalStyle;

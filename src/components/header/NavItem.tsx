@@ -1,30 +1,33 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import Link from "next/link";
 import Responsive from "@/components/Responsive";
 
 export interface NavItemProps {
-    label: string;
-    onclick?: (evt?: React.MouseEvent<HTMLAnchorElement>) => void;
-    href: string;
-    newWindow?: boolean;
+	label: string;
+	onclick?: (evt?: React.MouseEvent<HTMLAnchorElement>) => void;
+	href: string;
+	newWindow?: boolean;
 }
 
 const NavItem: React.ComponentType<NavItemProps> = ({
-    label, onclick, href, newWindow,
+	label,
+	onclick,
+	href,
+	newWindow,
 }) => (
-    <span className="link glow">
-        <Link
-            href={href}
-            target={newWindow ? "_blank" : ""}
-            rel={newWindow ? "noopener noreferrer" : ""}
-            onClick={onclick}
-        >
-            {label}
-        </Link>
-        <style jsx>
-            {`
+	<span className="link glow">
+		<Link
+			href={href}
+			target={newWindow ? "_blank" : ""}
+			rel={newWindow ? "noopener noreferrer" : ""}
+			onClick={onclick}
+		>
+			{label}
+		</Link>
+		<style jsx={true}>
+			{`
                 .link :global(a), .link :global(a):hover, .link :global(a):active {
                     text-decoration: none;
                     color: black;
@@ -66,8 +69,8 @@ const NavItem: React.ComponentType<NavItemProps> = ({
                     }
                 }
             `}
-        </style>
-    </span>
+		</style>
+	</span>
 );
 
 export default NavItem;

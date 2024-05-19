@@ -1,14 +1,14 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 
 const Logo: React.ComponentType = () => (
-    <div className="root">
-        <span className="glow" />
-        <span className="b1" />
-        <span className="b2" />
-        <style jsx>
-            {`
+	<div className="root">
+		<span className="glow" />
+		<span className="b1" />
+		<span className="b2" />
+		<style jsx={true}>
+			{`
             .root {
                 width: 2em;
                 height: 2em;
@@ -44,8 +44,8 @@ const Logo: React.ComponentType = () => (
                 right: 0;
             }
         `}
-        </style>
-    </div>
+		</style>
+	</div>
 );
 
 export default Logo;

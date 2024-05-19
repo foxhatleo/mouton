@@ -3,35 +3,35 @@
 import { useEffect } from "react";
 
 export default function useHover() {
-    useEffect(() => {
-        // lastTouchTime is used for ignoring emulated mousemove events
-        let lastTouchTime = 0;
+	useEffect(() => {
+		// lastTouchTime is used for ignoring emulated mousemove events
+		let lastTouchTime = 0;
 
-        function enableHover() {
-            if (new Date().getTime() - lastTouchTime < 500) {
-                return;
-            }
-            document.body.classList.add("has-hover");
-        }
+		function enableHover() {
+			if (new Date().getTime() - lastTouchTime < 500) {
+				return;
+			}
+			document.body.classList.add("has-hover");
+		}
 
-        function disableHover() {
-            document.body.classList.remove("has-hover");
-        }
+		function disableHover() {
+			document.body.classList.remove("has-hover");
+		}
 
-        function updateLastTouchTime() {
-            lastTouchTime = new Date().getTime();
-        }
+		function updateLastTouchTime() {
+			lastTouchTime = new Date().getTime();
+		}
 
-        document.addEventListener("touchstart", updateLastTouchTime, true);
-        document.addEventListener("touchstart", disableHover, true);
-        document.addEventListener("mousemove", enableHover, true);
+		document.addEventListener("touchstart", updateLastTouchTime, true);
+		document.addEventListener("touchstart", disableHover, true);
+		document.addEventListener("mousemove", enableHover, true);
 
-        enableHover();
+		enableHover();
 
-        return () => {
-            document.removeEventListener("touchstart", updateLastTouchTime, true);
-            document.removeEventListener("touchstart", disableHover, true);
-            document.removeEventListener("mousemove", enableHover, true);
-        };
-    });
+		return () => {
+			document.removeEventListener("touchstart", updateLastTouchTime, true);
+			document.removeEventListener("touchstart", disableHover, true);
+			document.removeEventListener("mousemove", enableHover, true);
+		};
+	});
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
@@ -9,26 +9,24 @@ import { blueGrey } from "material-colors-ts";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
 
-const ErrorPage: React.ComponentType = () => {
-    usePageTransition();
-    useHover();
-    useConsole();
+const NotFoundPage: React.ComponentType = () => {
+	usePageTransition();
+	useHover();
+	useConsole();
 
-    return (
-        <main>
-            <Rainbow color={blueGrey} />
-            <section className="section1">
-                <Header absolute />
-                <div className="content container v-layout entry-transition-children">
-                    <h1>
-                        404.
-                    </h1>
-                    <p>This page cannot be found. Verify the address and try again.</p>
-                </div>
-            </section>
-            <Footer />
-            <style jsx>
-                {`
+	return (
+		<main>
+			<Rainbow color={blueGrey} />
+			<section className="section1">
+				<Header absolute={true} />
+				<div className="content container v-layout entry-transition-children">
+					<h1>404.</h1>
+					<p>This page cannot be found. Verify the address and try again.</p>
+				</div>
+			</section>
+			<Footer />
+			<style jsx={true}>
+				{`
                 .section1 .content {
                     width: 100vw;
                     height: 100vh;
@@ -43,9 +41,9 @@ const ErrorPage: React.ComponentType = () => {
                     }
                 }
             `}
-            </style>
-        </main>
-    );
+			</style>
+		</main>
+	);
 };
 
-export default ErrorPage;
+export default NotFoundPage;

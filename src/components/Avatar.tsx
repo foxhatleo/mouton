@@ -1,201 +1,231 @@
-import React, { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { blue } from "material-colors-ts";
 import useScroll from "@/hooks/useScroll";
 import { useTranslations } from "use-intl";
 
 const TIMESTAMPS = [
-    [0, 2],
-    [2, 3.5],
-    [4, 7],
-    [8, 13],
-    [13, 19],
-    [20, 24],
-    [24, 29],
+	[0, 2],
+	[2, 3.5],
+	[4, 7],
+	[8, 13],
+	[13, 19],
+	[20, 24],
+	[24, 29],
 ];
 
 const Avatar: React.ComponentType = () => {
-    const video1Ref: React.Ref<HTMLVideoElement> = useRef(null);
-    const video2Ref: React.Ref<HTMLVideoElement> = useRef(null);
-    // 0: not started
-    // 1: to entering
-    // 2: idle
-    // 3-8: emotes
-    const state = useRef<number>(0);
-    const timeout = useRef<any>(null);
-    const animation = useRef<gsap.core.Timeline | null>(null);
-    const [lowPower, setLowPower] = useState<boolean>(false);
+	const video1Ref: React.Ref<HTMLVideoElement> = useRef(null);
+	const video2Ref: React.Ref<HTMLVideoElement> = useRef(null);
+	// 0: not started
+	// 1: to entering
+	// 2: idle
+	// 3-8: emotes
+	const state = useRef<number>(0);
+	const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const animation = useRef<gsap.core.Timeline | null>(null);
+	const [lowPower, setLowPower] = useState<boolean>(false);
 
-    const doEmote = (evt?: any) => {
-        if (!video1Ref.current || !video2Ref.current || state.current !== 2) {
-            return;
-        }
-        clearTimeout(timeout.current);
-        timeout.current = null;
-        let nextEmote = -1;
-        while (nextEmote < 0 || (evt && nextEmote === 0)) {
-            nextEmote = Math.max(0, Math.floor(Math.random() * (TIMESTAMPS.length + 15)) - 16);
-        }
-        state.current = nextEmote + 3;
-        video1Ref.current.pause();
-        if (nextEmote === 0) {
-            video1Ref.current.currentTime = TIMESTAMPS[1][0];
-            video1Ref.current.style.opacity = "1";
-            video1Ref.current!.play().catch(() => {
-                setLowPower(true);
-            });
-        } else {
-            video2Ref.current.currentTime = TIMESTAMPS[nextEmote + 1][0];
-            video2Ref.current.pause();
-            video1Ref.current.style.opacity = "0.99";
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    video1Ref.current!.style.opacity = "1";
-                    video2Ref.current!.style.opacity = "0";
-                    video1Ref.current!.play().catch(() => {
-                        setLowPower(true);
-                    });
-                },
-            });
-            tl.fromTo(video2Ref.current, { opacity: 0 }, {
-                opacity: 1,
-                duration: 1,
-                onComplete: () => {
-                    video1Ref.current!.currentTime = TIMESTAMPS[nextEmote + 1][0];
-                    video1Ref.current!.pause();
-                },
-            });
-            tl.fromTo(video1Ref.current, { opacity: 0.99 }, { opacity: 0, duration: 1 }, ">-.1");
-            tl.play();
-            animation.current = tl;
-        }
-    };
+	const doEmote = (evt?: React.MouseEvent | React.TouchEvent) => {
+		if (!(video1Ref.current && video2Ref.current) || state.current !== 2) {
+			return;
+		}
+		clearTimeout(timeout.current!);
+		timeout.current = null;
+		let nextEmote = -1;
+		while (nextEmote < 0 || (evt && nextEmote === 0)) {
+			nextEmote = Math.max(
+				0,
+				Math.floor(Math.random() * (TIMESTAMPS.length + 15)) - 16,
+			);
+		}
+		state.current = nextEmote + 3;
+		video1Ref.current.pause();
+		if (nextEmote === 0) {
+			video1Ref.current.currentTime = TIMESTAMPS[1][0];
+			video1Ref.current.style.opacity = "1";
+			video1Ref.current!.play().catch(() => {
+				setLowPower(true);
+			});
+		} else {
+			video2Ref.current.currentTime = TIMESTAMPS[nextEmote + 1][0];
+			video2Ref.current.pause();
+			video1Ref.current.style.opacity = "0.99";
+			const tl = gsap.timeline({
+				onComplete: () => {
+					video1Ref.current!.style.opacity = "1";
+					video2Ref.current!.style.opacity = "0";
+					video1Ref.current!.play().catch(() => {
+						setLowPower(true);
+					});
+				},
+			});
+			tl.fromTo(
+				video2Ref.current,
+				{ opacity: 0 },
+				{
+					opacity: 1,
+					duration: 1,
+					onComplete: () => {
+						video1Ref.current!.currentTime = TIMESTAMPS[nextEmote + 1][0];
+						video1Ref.current!.pause();
+					},
+				},
+			);
+			tl.fromTo(
+				video1Ref.current,
+				{ opacity: 0.99 },
+				{ opacity: 0, duration: 1 },
+				">-.1",
+			);
+			tl.play();
+			animation.current = tl;
+		}
+	};
 
-    const startVideo = () => {
-        if (video1Ref.current!.currentTime >= 0.5) {
-            return;
-        }
-        state.current = 1;
-        video1Ref.current!.style.opacity = "0";
-        video2Ref.current!.style.opacity = "0";
-        video1Ref.current!.currentTime = 0.3;
-        video1Ref.current!.play().then(() => {
-            const tl = gsap.timeline();
-            tl.fromTo(video1Ref.current, { opacity: 0 }, { duration: 0.3, opacity: 1 });
-            tl.fromTo(
-                video1Ref.current,
-                { scale: 0.01 },
-                { scale: 1, duration: 3.5, ease: "elastic.out(1.2, 0.75)" },
-            );
-            tl.play();
-            animation.current = tl;
-            setLowPower(false);
-        }).catch(() => {
-            state.current = 0;
-            setLowPower(true);
-        });
-        video2Ref.current!.play().catch(() => {
-            setLowPower(true);
-        });
-    };
+	const startVideo = () => {
+		if (video1Ref.current!.currentTime >= 0.5) {
+			return;
+		}
+		state.current = 1;
+		video1Ref.current!.style.opacity = "0";
+		video2Ref.current!.style.opacity = "0";
+		video1Ref.current!.currentTime = 0.3;
+		video1Ref
+			.current!.play()
+			.then(() => {
+				const tl = gsap.timeline();
+				tl.fromTo(
+					video1Ref.current,
+					{ opacity: 0 },
+					{ duration: 0.3, opacity: 1 },
+				);
+				tl.fromTo(
+					video1Ref.current,
+					{ scale: 0.01 },
+					{ scale: 1, duration: 3.5, ease: "elastic.out(1.2, 0.75)" },
+				);
+				tl.play();
+				animation.current = tl;
+				setLowPower(false);
+			})
+			.catch(() => {
+				state.current = 0;
+				setLowPower(true);
+			});
+		video2Ref.current!.play().catch(() => {
+			setLowPower(true);
+		});
+	};
 
-    const timeUpdateHandler = () => {
-        if (!video1Ref.current || state.current === 0 || state.current === 2) {
-            return;
-        }
-        const endTime = TIMESTAMPS[state.current < 3 ? 0 : (state.current - 2)][1];
-        if (video1Ref.current.currentTime >= endTime && video1Ref.current!.style.opacity === "1") {
-            state.current = 2;
-            video1Ref.current.currentTime = endTime;
-            video1Ref.current.pause();
-            timeout.current = setTimeout(doEmote, 1000 + Math.random() * 500);
-        }
-    };
+	const timeUpdateHandler = () => {
+		if (!video1Ref.current || state.current === 0 || state.current === 2) {
+			return;
+		}
+		const endTime = TIMESTAMPS[state.current < 3 ? 0 : state.current - 2][1];
+		if (
+			video1Ref.current.currentTime >= endTime &&
+			video1Ref.current!.style.opacity === "1"
+		) {
+			state.current = 2;
+			video1Ref.current.currentTime = endTime;
+			video1Ref.current.pause();
+			timeout.current = setTimeout(doEmote, 1000 + Math.random() * 500);
+		}
+	};
 
-    const scrollHandler = () => {
-        if (!video1Ref.current || state.current > 0) {
-            return;
-        }
-        const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-        const videoTop = video1Ref.current.getBoundingClientRect().top;
+	const scrollHandler = () => {
+		if (!video1Ref.current || state.current > 0) {
+			return;
+		}
+		const viewportHeight = Math.max(
+			document.documentElement.clientHeight || 0,
+			window.innerHeight || 0,
+		);
+		const videoTop = video1Ref.current.getBoundingClientRect().top;
 
-        if (videoTop < viewportHeight * 0.6) {
-            state.current = 1;
-            window.removeEventListener("scroll", scrollHandler);
-            startVideo();
-        }
-    };
+		if (videoTop < viewportHeight * 0.6) {
+			state.current = 1;
+			window.removeEventListener("scroll", scrollHandler);
+			startVideo();
+		}
+	};
 
-    useEffect(() => {
-        video1Ref.current!.setAttribute("style", "");
-        video2Ref.current!.setAttribute("style", "");
-        return () => {
-            if (animation.current) {
-                animation.current.kill();
-            }
-            if (timeout.current) {
-                clearTimeout(timeout.current);
-            }
-        };
-    }, []);
+	useEffect(() => {
+		video1Ref.current!.setAttribute("style", "");
+		video2Ref.current!.setAttribute("style", "");
+		return () => {
+			if (animation.current) {
+				animation.current.kill();
+			}
+			if (timeout.current) {
+				clearTimeout(timeout.current);
+			}
+		};
+	}, []);
 
-    useScroll(scrollHandler);
+	useScroll(scrollHandler);
 
-    const t = useTranslations("Home");
+	const t = useTranslations("Home");
 
-    return (
-        <a
-            href="#"
-            onMouseEnter={doEmote}
-            onTouchEnd={doEmote}
-            onClick={(evt) => {
-                evt.preventDefault();
-                startVideo();
-                doEmote();
-            }}
-            className={`avatar-container${lowPower ? " low-power" : ""}`}
-        >
-            <div className="background" />
-            <div className="video-container">
-                <div className="videos">
-                    <video
-                        preload="all"
-                        className="v1"
-                        muted
-                        autoPlay={false}
-                        playsInline
-                        controls={false}
-                        ref={video1Ref}
-                        onTimeUpdate={timeUpdateHandler}
-                    >
-                        <source src="/assets/memoji/memoji.mov" type="video/mp4; codecs=hvc1" />
-                        <source src="/assets/memoji/memoji.webm" type="video/webm" />
-                    </video>
-                    <video
-                        preload="all"
-                        className="v2"
-                        muted
-                        autoPlay={false}
-                        playsInline
-                        controls={false}
-                        ref={video2Ref}
-                        onTimeUpdate={timeUpdateHandler}
-                    >
-                        <source src="/assets/memoji/memoji.mov" type="video/mp4; codecs=hvc1" />
-                        <source src="/assets/memoji/memoji.webm" type="video/webm" />
-                    </video>
-                </div>
-                <picture>
-                    <source type="image/webp" srcSet="/assets/memoji/memoji.webp" />
-                    <source type="image/jpeg" srcSet="/assets/memoji/memoji.png" />
-                    <img alt="Leo Liang Animoji" loading="lazy" />
-                </picture>
-            </div>
-            <div className="low-power-prompt">
-                {t("play-prompt")}
-            </div>
-            <style jsx>
-                {`
+	return (
+		<a
+			href="#"
+			onMouseEnter={doEmote}
+			onTouchEnd={doEmote}
+			onClick={(evt) => {
+				evt.preventDefault();
+				startVideo();
+				doEmote();
+			}}
+			className={`avatar-container${lowPower ? " low-power" : ""}`}
+		>
+			<div className="background" />
+			<div className="video-container">
+				<div className="videos">
+					<video
+						preload="all"
+						className="v1"
+						muted={true}
+						autoPlay={false}
+						playsInline={true}
+						controls={false}
+						ref={video1Ref}
+						onTimeUpdate={timeUpdateHandler}
+					>
+						<source
+							src="/assets/memoji/memoji.mov"
+							type="video/mp4; codecs=hvc1"
+						/>
+						<source src="/assets/memoji/memoji.webm" type="video/webm" />
+					</video>
+					<video
+						preload="all"
+						className="v2"
+						muted={true}
+						autoPlay={false}
+						playsInline={true}
+						controls={false}
+						ref={video2Ref}
+						onTimeUpdate={timeUpdateHandler}
+					>
+						<source
+							src="/assets/memoji/memoji.mov"
+							type="video/mp4; codecs=hvc1"
+						/>
+						<source src="/assets/memoji/memoji.webm" type="video/webm" />
+					</video>
+				</div>
+				<picture>
+					<source type="image/webp" srcSet="/assets/memoji/memoji.webp" />
+					<source type="image/jpeg" srcSet="/assets/memoji/memoji.png" />
+					<img alt="Leo Liang Animoji" loading="lazy" />
+				</picture>
+			</div>
+			<div className="low-power-prompt">{t("play-prompt")}</div>
+			<style jsx={true}>
+				{`
                     .avatar-container {
                         display: flex;
                         width: 300px;
@@ -292,9 +322,9 @@ const Avatar: React.ComponentType = () => {
                         opacity: 0 !important;
                     }
                 `}
-            </style>
-        </a>
-    );
+			</style>
+		</a>
+	);
 };
 
 export default Avatar;

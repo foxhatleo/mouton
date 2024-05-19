@@ -1,14 +1,18 @@
-import React from "react";
+import type React from "react";
 import HomePage from "@/components/HomePage";
+import { getTranslations } from "next-intl/server";
 
-const Home: React.ComponentType = () => (
-    <HomePage />
-);
+const Home: React.ComponentType = () => <HomePage />;
 
 export default Home;
 
-export const metadata = {
-    title: "Leo Liang",
-    description: "Personal website of Leo Liang, an aspiring software engineer whose passion is to create useful & "
-        + "delightful experience with the power of technology.",
-};
+// biome-ignore lint/suspicious/noExplicitAny:
+export async function generateMetadata(ctx: any) {
+	const locale = ctx.params.locale as string;
+	const t = await getTranslations({ locale, namespace: "Home" });
+
+	return {
+		title: "Leo Liang",
+		description: t("desc"),
+	};
+}

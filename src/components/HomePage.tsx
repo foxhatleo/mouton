@@ -1,134 +1,141 @@
 "use client";
 
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import {
-    blue, green, orange, purple, red, yellow, pink,
+	blue,
+	green,
+	orange,
+	purple,
+	red,
+	yellow,
+	pink,
 } from "material-colors-ts";
 import Avatar from "@/components/Avatar";
 import Responsive from "@/components/Responsive";
-import { Color } from "@/components/Color";
+import type { Color } from "@/components/Color";
 import useScroll from "@/hooks/useScroll";
 import useHover from "@/hooks/useHover";
 import useConsole from "@/hooks/useConsole";
 import { useTranslations } from "use-intl";
-import { newLineAsBr, paragraph } from "@/utils/Format";
+import { newLineAsBr, paragraph } from "@/utils/format";
 
 const HomePage: React.ComponentType = () => {
-    usePageTransition();
-    useHover();
-    useConsole();
-    const [scrollDown, setScrollDown] = useState(true);
+	usePageTransition();
+	useHover();
+	useConsole();
+	const [scrollDown, setScrollDown] = useState(true);
 
-    const scrollHandler = () => {
-        if (window.scrollY >= 120) {
-            setScrollDown(false);
-        }
-    };
-    useScroll(scrollHandler);
+	const scrollHandler = () => {
+		if (window.scrollY >= 120) {
+			setScrollDown(false);
+		}
+	};
+	useScroll(scrollHandler);
 
-    const t = useTranslations("Home");
-    const WORKS: { t: string; link: string; color: Color }[] = [
-        {
-            t: "remy",
-            link: "/remy/",
-            color: red,
-        },
-        {
-            t: "circolo",
-            link: "/circolo/",
-            color: pink,
-        },
-        {
-            t: "egos-2000",
-            link: "/egos-2000-extension/",
-            color: orange,
-        },
-        {
-            t: "xic",
-            link: "/xi-compiler/",
-            color: yellow,
-        },
-        {
-            t: "panic-painter",
-            link: "/panic-painter/",
-            color: green,
-        },
-        {
-            t: "cmsx",
-            link: "/cmsx/",
-            color: blue,
-        },
-        {
-            t: "fallen-flame",
-            link: "/fallen-flame/",
-            color: purple,
-        },
-    ];
+	const t = useTranslations("Home");
+	const WORKS: { t: string; link: string; color: Color }[] = [
+		{
+			t: "remy",
+			link: "/remy/",
+			color: red,
+		},
+		{
+			t: "circolo",
+			link: "/circolo/",
+			color: pink,
+		},
+		{
+			t: "egos-2000",
+			link: "/egos-2000-extension/",
+			color: orange,
+		},
+		{
+			t: "xic",
+			link: "/xi-compiler/",
+			color: yellow,
+		},
+		{
+			t: "panic-painter",
+			link: "/panic-painter/",
+			color: green,
+		},
+		{
+			t: "cmsx",
+			link: "/cmsx/",
+			color: blue,
+		},
+		{
+			t: "fallen-flame",
+			link: "/fallen-flame/",
+			color: purple,
+		},
+	];
 
-    return (
-        <main>
-            <Rainbow />
-            <section className={`section1${scrollDown ? " scroll-down" : ""}`}>
-                <Header absolute />
-                <div className="content container v-layout">
-                    <h1 className="entry-transition">
-                        {newLineAsBr(t("hero"))}
-                    </h1>
-                </div>
-                <div className="scroll-down">
-                    {t("scroll-down")}
-                </div>
-            </section>
-            <section id="about" className="section2 container entry-transition-group">
-                <div className="v-layout">
-                    <h2 className="entry-transition center">{paragraph(t("about-me"))}</h2>
-                    <div className="content">
-                        <article className="text-container entry-transition-children container alt">
-                            {paragraph(t("about-me-text"))}
-                        </article>
-                        <div className="avatar-container">
-                            <Avatar />
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="works" className="section3 container entry-transition-group">
-                <div className="v-layout center">
-                    <h2 className="entry-transition">{paragraph(t("works"))}</h2>
-                    <ul className="v-layout">
-                        {WORKS.map((data, ind) => (
-                            <li
-                                key={ind}
-                                className="entry-transition"
-                                style={{
-                                    "--item-color-200": data.color["200"],
-                                    "--item-color-500": data.color["500"],
-                                    "--item-color-700": data.color["700"],
-                                    "--item-color-900": data.color["900"],
-                                } as React.CSSProperties}
-                            >
-                                <Link href={data.link}>
-                                    <div className="ind-container">
-                                        <div className="ind">{`0${ind + 1}`.slice(-2)}</div>
-                                    </div>
-                                    <div className="portfolio-link">
-                                        <h3>{t(`${data.t}.title`)}</h3>
-                                        <div className="desc">{t(`${data.t}.tagline`)}</div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </section>
-            <Footer />
-            <style jsx>
-                {`
+	return (
+		<main>
+			<Rainbow />
+			<section className={`section1${scrollDown ? " scroll-down" : ""}`}>
+				<Header absolute={true} />
+				<div className="content container v-layout">
+					<h1 className="entry-transition">{newLineAsBr(t("hero"))}</h1>
+				</div>
+				<div className="scroll-down">{t("scroll-down")}</div>
+			</section>
+			<section id="about" className="section2 container entry-transition-group">
+				<div className="v-layout">
+					<h2 className="entry-transition center">
+						{paragraph(t("about-me"))}
+					</h2>
+					<div className="content">
+						<article className="text-container entry-transition-children container alt">
+							{paragraph(t("about-me-text"))}
+						</article>
+						<div className="avatar-container">
+							<Avatar />
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="works" className="section3 container entry-transition-group">
+				<div className="v-layout center">
+					<h2 className="entry-transition">{paragraph(t("works"))}</h2>
+					<ul className="v-layout">
+						{WORKS.map((data, ind) => (
+							<li
+								key={ind}
+								className="entry-transition"
+								style={
+									{
+										"--item-color-200": data.color["200"],
+										"--item-color-500": data.color["500"],
+										"--item-color-700": data.color["700"],
+										"--item-color-900": data.color["900"],
+									} as React.CSSProperties
+								}
+							>
+								<Link href={data.link}>
+									<div className="ind-container">
+										<div className="ind">{`0${ind + 1}`.slice(-2)}</div>
+									</div>
+									<div className="portfolio-link">
+										<h3>{t(`${data.t}.title`)}</h3>
+										<div className="desc">{t(`${data.t}.tagline`)}</div>
+									</div>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+			<Footer />
+			<style jsx={true}>
+				{`
                 .section1 .content {
                     width: 100vw;
                     height: 100vh;
@@ -280,9 +287,9 @@ const HomePage: React.ComponentType = () => {
                     }
                 }
             `}
-            </style>
-        </main>
-    );
+			</style>
+		</main>
+	);
 };
 
 export default HomePage;

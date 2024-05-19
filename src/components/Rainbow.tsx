@@ -1,32 +1,32 @@
 "use client";
 
-import React from "react";
-import {
-    blue, green, orange, purple, red, yellow,
-} from "material-colors-ts";
-import { Color } from "@/components/Color";
+import type React from "react";
+import { blue, green, orange, purple, red, yellow } from "material-colors-ts";
+import type { Color } from "@/components/Color";
 
-const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color }> = ({ footer, color }) =>
-    // const avgFps = Number(useFps(20).avgFps) || 0;
-    // const [showAnimation, setShowAnimation] = useState<boolean>(true);
-    // useEffect(() => {
-    //     if (avgFps > 1 && avgFps < 20 && showAnimation) {
-    //         setShowAnimation(false);
-    //     }
-    // }, [avgFps, showAnimation]);
-    // eslint-disable-next-line implicit-arrow-linebreak
-    (
-        <div className={`root${footer ? " footer" : ""}`}>
-            <div className="stretcher">
-                <div className="bubble b2" />
-                <div className="bubble b4" />
-                <div className="bubble b6" />
-                <div className="bubble b1" />
-                <div className="bubble b3" />
-                <div className="bubble b5" />
-            </div>
-            <style jsx>
-                {`
+const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color }> = ({
+	footer,
+	color,
+}) => (
+	// const avgFps = Number(useFps(20).avgFps) || 0;
+	// const [showAnimation, setShowAnimation] = useState<boolean>(true);
+	// useEffect(() => {
+	//     if (avgFps > 1 && avgFps < 20 && showAnimation) {
+	//         setShowAnimation(false);
+	//     }
+	// }, [avgFps, showAnimation]);
+	// eslint-disable-next-line implicit-arrow-linebreak
+	<div className={`root${footer ? " footer" : ""}`}>
+		<div className="stretcher">
+			<div className="bubble b2" />
+			<div className="bubble b4" />
+			<div className="bubble b6" />
+			<div className="bubble b1" />
+			<div className="bubble b3" />
+			<div className="bubble b5" />
+		</div>
+		<style jsx={true}>
+			{`
             .root {
                 position: absolute;
                 z-index: -10;
@@ -139,7 +139,7 @@ const Rainbow: React.ComponentType<{ footer?: boolean; color?: Color }> = ({ foo
                 left: 100%;
             }
         `}
-            </style>
-        </div>
-    );
+		</style>
+	</div>
+);
 export default Rainbow;

@@ -1,117 +1,132 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import NavItem from "@/components/header/NavItem";
 import Responsive from "@/components/Responsive";
 import gsap from "gsap";
 import { useTranslations } from "use-intl";
 
 const Nav: React.ComponentType = () => {
-    const [_showing, setShowing] = useState(false);
-    const desktopNav = useRef<HTMLDivElement>(null);
+	const [_showing, setShowing] = useState(false);
+	const desktopNav = useRef<HTMLDivElement>(null);
 
-    const show = () => {
-        document.body.style.overflow = "hidden";
-        desktopNav.current!.style.opacity = "0";
-        desktopNav.current!.style.display = "flex";
-        gsap.to(desktopNav.current!, { opacity: 1, duration: 0.15 });
-        desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
-            gsap.killTweensOf(item);
-            gsap.fromTo(
-                item,
-                { opacity: 0, translateY: -20 },
-                {
-                    opacity: 1, translateY: 0, delay: i * 0.05, duration: 0.15,
-                },
-            );
-        });
-    };
+	const show = () => {
+		document.body.style.overflow = "hidden";
+		desktopNav.current!.style.opacity = "0";
+		desktopNav.current!.style.display = "flex";
+		gsap.to(desktopNav.current!, { opacity: 1, duration: 0.15 });
+		desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
+			gsap.killTweensOf(item);
+			gsap.fromTo(
+				item,
+				{ opacity: 0, translateY: -20 },
+				{
+					opacity: 1,
+					translateY: 0,
+					delay: i * 0.05,
+					duration: 0.15,
+				},
+			);
+		});
+	};
 
-    const hide = (immediate: boolean) => {
-        document.body.style.overflow = "";
-        if (immediate) {
-            gsap.killTweensOf(desktopNav.current!);
-            desktopNav.current!.removeAttribute("style");
-            desktopNav.current!.querySelectorAll("span").forEach((item) => {
-                gsap.killTweensOf(item);
-                item.removeAttribute("style");
-            });
-            return;
-        }
-        desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
-            gsap.killTweensOf(item);
-            gsap.to(item, {
-                opacity: 0, translateY: -20, delay: i * 0.05, duration: 0.15,
-            });
-        });
-        gsap.to(desktopNav.current!, {
-            opacity: 0,
-            duration: 0.15,
-            delay: 0.2,
-            onComplete: () => {
-                desktopNav.current!.style.display = "none";
-            },
-        });
-    };
+	const hide = (immediate: boolean) => {
+		document.body.style.overflow = "";
+		if (immediate) {
+			gsap.killTweensOf(desktopNav.current!);
+			desktopNav.current!.removeAttribute("style");
+			for (const item of desktopNav.current!.querySelectorAll("span")) {
+				gsap.killTweensOf(item);
+				item.removeAttribute("style");
+			}
+			return;
+		}
+		desktopNav.current!.querySelectorAll("span").forEach((item, i) => {
+			gsap.killTweensOf(item);
+			gsap.to(item, {
+				opacity: 0,
+				translateY: -20,
+				delay: i * 0.05,
+				duration: 0.15,
+			});
+		});
+		gsap.to(desktopNav.current!, {
+			opacity: 0,
+			duration: 0.15,
+			delay: 0.2,
+			onComplete: () => {
+				desktopNav.current!.style.display = "none";
+			},
+		});
+	};
 
-    const mobileToggleHandler = (evt?: { preventDefault: () => void }) => {
-        if (evt) {
-            evt.preventDefault();
-        }
-        setShowing((v) => {
-            if (v) {
-                hide(false);
-            } else {
-                show();
-            }
-            return !v;
-        });
-    };
+	const mobileToggleHandler = (evt?: { preventDefault: () => void }) => {
+		if (evt) {
+			evt.preventDefault();
+		}
+		setShowing((v) => {
+			if (v) {
+				hide(false);
+			} else {
+				show();
+			}
+			return !v;
+		});
+	};
 
-    const resizeHandler = () => {
-        const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-        if (viewportWidth > Responsive.SIZE_M) {
-            hide(true);
-        }
-    };
+	const resizeHandler = () => {
+		const viewportWidth = Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0,
+		);
+		if (viewportWidth > Responsive.SIZE_M) {
+			hide(true);
+		}
+	};
 
-    useEffect(() => {
-        window.addEventListener("resize", resizeHandler);
-        return () => {
-            window.removeEventListener("resize", resizeHandler);
-        };
-    }, []);
+	useEffect(() => {
+		window.addEventListener("resize", resizeHandler);
+		return () => {
+			window.removeEventListener("resize", resizeHandler);
+		};
+	}, []);
 
-    const t = useTranslations("Header");
+	const t = useTranslations("Header");
 
-    return (
-        <>
-            <nav className="mobile nav">
-                <span className="glow" />
-                <a aria-label="Toggle menu" href="#" className="mobile-button" onClick={mobileToggleHandler}>
-                    <div className="line" />
-                    <div className="line" />
-                    <div className="line" />
-                    <div className="line" />
-                </a>
-            </nav>
-            <nav className="desktop nav" ref={desktopNav}>
-                <NavItem label="✕" href="/" onclick={mobileToggleHandler} />
-                <NavItem label={t("about")} href="/#about" onclick={() => hide(true)} />
-                <NavItem label={t("works")} href="/#works" onclick={() => hide(true)} />
-                <NavItem
-                    label={t("resume")}
-                    href="/resources/Resume-Wenhao-Leo-Liang.pdf"
-                    onclick={() => hide(true)}
-                />
-                <NavItem
-                    label={t("linkedin")}
-                    href="https://www.linkedin.com/in/wenhao-leo-liang/"
-                    onclick={() => hide(true)}
-                />
-            </nav>
-            <style jsx>
-                {`
+	return (
+		<>
+			<nav className="mobile nav">
+				<span className="glow" />
+				<a
+					aria-label="Toggle menu"
+					href="#"
+					className="mobile-button"
+					onClick={mobileToggleHandler}
+				>
+					<div className="line" />
+					<div className="line" />
+					<div className="line" />
+					<div className="line" />
+				</a>
+			</nav>
+			<nav className="desktop nav" ref={desktopNav}>
+				<NavItem label="✕" href="/" onclick={mobileToggleHandler} />
+				<NavItem label={t("about")} href="/#about" onclick={() => hide(true)} />
+				<NavItem label={t("works")} href="/#works" onclick={() => hide(true)} />
+				<NavItem
+					label={t("resume")}
+					href="/resources/Resume-Wenhao-Leo-Liang.pdf"
+					onclick={() => hide(true)}
+				/>
+				<NavItem
+					label={t("linkedin")}
+					href="https://www.linkedin.com/in/wenhao-leo-liang/"
+					onclick={() => hide(true)}
+				/>
+			</nav>
+			<style jsx={true}>
+				{`
                     nav {
                         display: flex;
                         flex-direction: row;
@@ -183,21 +198,25 @@ const Nav: React.ComponentType = () => {
                         }
                     }
 
-                    @media (min-width: ${Responsive.SIZE_L}px) and (max-width: ${Responsive.SIZE_XL - 1}px) {
+                    @media (min-width: ${
+											Responsive.SIZE_L
+										}px) and (max-width: ${Responsive.SIZE_XL - 1}px) {
                         nav {
                             gap: 1.4em;
                         }
                     }
 
-                    @media (min-width: ${Responsive.SIZE_M}px) and (max-width: ${Responsive.SIZE_L - 1}px) {
+                    @media (min-width: ${
+											Responsive.SIZE_M
+										}px) and (max-width: ${Responsive.SIZE_L - 1}px) {
                         nav {
                             gap: 1.2em;
                         }
                     }
                 `}
-            </style>
-        </>
-    );
+			</style>
+		</>
+	);
 };
 
 export default Nav;

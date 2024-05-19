@@ -1,27 +1,29 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import Rainbow from "@/components/Rainbow";
 import { useTranslations } from "use-intl";
 import NewPageLink from "@/components/NewPageLink";
 
 const Footer: React.ComponentType = () => {
-    const t = useTranslations("Footer");
+	const t = useTranslations("Footer");
 
-    return (
-        <>
-            <div className="rainbow">
-                <Rainbow footer />
-            </div>
-            <footer className="container glow">
-                {t("l1")}
-                <br />
-                {t("l21")}
-                <NewPageLink href="https://github.com/foxhatleo/mouton">GitHub</NewPageLink>
-                {t("l22")}
-            </footer>
-            <style jsx>
-                {`
+	return (
+		<>
+			<div className="rainbow">
+				<Rainbow footer={true} />
+			</div>
+			<footer className="container glow">
+				{t("l1")}
+				<br />
+				{t("l21")}
+				<NewPageLink href="https://github.com/foxhatleo/mouton">
+					GitHub
+				</NewPageLink>
+				{t("l22")}
+			</footer>
+			<style jsx={true}>
+				{`
                     .rainbow {
                         position: absolute;
                         bottom: 0;
@@ -42,9 +44,9 @@ const Footer: React.ComponentType = () => {
                         color: black;
                     }
                 `}
-            </style>
-        </>
-    );
+			</style>
+		</>
+	);
 };
 
 export default Footer;

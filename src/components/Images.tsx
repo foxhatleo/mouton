@@ -4,44 +4,59 @@ import React, { useRef } from "react";
 import ReactSwipe from "react-swipe";
 
 export interface ImagesType {
-    urls: string[];
-    aspectRatio?: number;
-    urlPrefix?: string;
+	urls: string[];
+	aspectRatio?: number;
+	urlPrefix?: string;
 }
 
 const Arrow = () => (
-    <svg fill="#ffffff" version="1.1" width="30px" height="30px" viewBox="0 0 123.959 123.959">
-        <g>
-            <path
-                d={"M85.742,1.779l-56,56c-2.3,2.3-2.3,6.1,0,8.401l56,56c3.801,3.8,10.2,1.1,10.2-4.2v-112 "
-                    + "C95.942,0.679,89.543-2.021,85.742,1.779z"}
-            />
-        </g>
-    </svg>
+	<svg
+		fill="#ffffff"
+		version="1.1"
+		width="30px"
+		height="30px"
+		viewBox="0 0 123.959 123.959"
+	>
+		<g>
+			<path
+				d={
+					"M85.742,1.779l-56,56c-2.3,2.3-2.3,6.1,0,8.401l56,56c3.801,3.8,10.2,1.1,10.2-4.2v-112 " +
+					"C95.942,0.679,89.543-2.021,85.742,1.779z"
+				}
+			/>
+		</g>
+	</svg>
 );
 
-const Images: React.ComponentType<ImagesType> = ({ urls, aspectRatio, urlPrefix }) => {
-    const swipe = useRef<ReactSwipe>(null);
-    const prev = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-        evt.preventDefault();
-        swipe.current!.prev();
-    };
-    const next = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-        evt.preventDefault();
-        swipe.current!.next();
-    };
+const Images: React.ComponentType<ImagesType> = ({
+	urls,
+	aspectRatio,
+	urlPrefix,
+}) => {
+	const swipe = useRef<ReactSwipe>(null);
+	const prev = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+		evt.preventDefault();
+		swipe.current!.prev();
+	};
+	const next = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+		evt.preventDefault();
+		swipe.current!.next();
+	};
 
-    const rnd = Math.floor(Math.random() * 100000);
+	const rnd = Math.floor(Math.random() * 100000);
 
-    // @ts-ignore
-    const rs = React.createElement(ReactSwipe, {
-        className: "carousel",
-        swipeOptions: { auto: 2500 },
-        ref: swipe,
-    }, urls.map((url, ind) => (
-        <div className={`image i-${rnd + ind}`} key={ind}>
-            <style jsx global>
-                {`
+	const rs = React.createElement(
+		// biome-ignore lint/suspicious/noExplicitAny:
+		ReactSwipe as any,
+		{
+			className: "carousel",
+			swipeOptions: { auto: 2500 },
+			ref: swipe,
+		},
+		urls.map((url, ind) => (
+			<div className={`image i-${rnd + ind}`} key={ind}>
+				<style jsx={true} global={true}>
+					{`
                     .image.i-${rnd + ind} {
                         background-image: url(${(urlPrefix ?? "") + url}.jpg);
                     }
@@ -50,21 +65,32 @@ const Images: React.ComponentType<ImagesType> = ({ urls, aspectRatio, urlPrefix 
                         background-image: url(${(urlPrefix ?? "") + url}.webp);
                     }
                 `}
-            </style>
-        </div>
-    )));
+				</style>
+			</div>
+		)),
+	);
 
-    return (
-        <div className="images">
-            {rs}
-            <a href="#" onClick={prev} aria-label="Previous slide" className="nav-button left">
-                <Arrow />
-            </a>
-            <a href="#" onClick={next} aria-label="Next slide" className="nav-button right">
-                <Arrow />
-            </a>
-            <style jsx>
-                {`
+	return (
+		<div className="images">
+			{rs}
+			<a
+				href="#"
+				onClick={prev}
+				aria-label="Previous slide"
+				className="nav-button left"
+			>
+				<Arrow />
+			</a>
+			<a
+				href="#"
+				onClick={next}
+				aria-label="Next slide"
+				className="nav-button right"
+			>
+				<Arrow />
+			</a>
+			<style jsx={true} global={true}>
+				{`
                     .image {
                         aspect-ratio: ${aspectRatio ?? 1};
                         background-size: contain;
@@ -163,9 +189,9 @@ const Images: React.ComponentType<ImagesType> = ({ urls, aspectRatio, urlPrefix 
                         }
                     }
                 `}
-            </style>
-        </div>
-    );
+			</style>
+		</div>
+	);
 };
 
 export default Images;

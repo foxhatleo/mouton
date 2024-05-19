@@ -1,22 +1,22 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import Logo from "@/components/header/Logo";
 import Nav from "@/components/header/Nav";
 import Link from "next/link";
 
 export interface HeaderProps {
-    absolute?: boolean;
+	absolute?: boolean;
 }
 
 const Header: React.ComponentType<HeaderProps> = ({ absolute }) => (
-    <header className="entry-transition container alt">
-        <Link href="/">
-            <Logo />
-        </Link>
-        <Nav />
-        <style jsx>
-            {`
+	<header className="entry-transition container alt">
+		<Link href="/">
+			<Logo />
+		</Link>
+		<Nav />
+		<style jsx={true}>
+			{`
                 header {
                     position: ${absolute ? "absolute" : "relative"};
                     display: flex;
@@ -28,8 +28,8 @@ const Header: React.ComponentType<HeaderProps> = ({ absolute }) => (
                     z-index: 1;
                 }
             `}
-        </style>
-    </header>
+		</style>
+	</header>
 );
 
 export default Header;

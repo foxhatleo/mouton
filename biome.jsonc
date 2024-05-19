@@ -1,0 +1,35 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.2/schema.json",
+	"files": {
+		"ignore": [".next/", "public/", "**/.next/", ".heroku/", ".git/"]
+	},
+	"organizeImports": {
+		"enabled": false
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"all": true,
+			"a11y": {
+				"all": false
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"suspicious": {
+				"noArrayIndexKey": "off",
+				"useAwait": "off"
+			},
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "off"
+			},
+			"style": {
+				"noDefaultExport": "off",
+				"noNonNullAssertion": "off",
+				"useNamingConvention": "off",
+				"useNodejsImportProtocol": "off",
+				"useSingleCaseStatement": "off"
+			}
+		}
+	}
+}
