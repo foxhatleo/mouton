@@ -15,6 +15,7 @@ export default createMiddleware({
 			locales: ["zh-cn"],
 		},
 	],
+	localePrefix: "never",
 	localeDetection: false,
 });
 
