@@ -12,6 +12,7 @@ const EN = {
 		works: "Works",
 		resume: "Résumé",
 		linkedin: "LinkedIn",
+		github: "GitHub",
 		instagram: "Instagram",
 	},
 	Home: {

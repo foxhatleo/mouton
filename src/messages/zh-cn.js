@@ -12,6 +12,7 @@ const ZH_CN = {
 		works: "作品集",
 		resume: "英文简历",
 		linkedin: "领英",
+		github: "GitHub",
 		instagram: "Instagram",
 	},
 	Home: {

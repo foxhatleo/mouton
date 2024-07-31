@@ -116,7 +116,12 @@ const Nav: React.ComponentType = () => {
 				<NavItem label={t("works")} href="/#works" onclick={() => hide(true)} />
 				<NavItem
 					label={t("resume")}
-					href="/resources/Resume-Wenhao-Leo-Liang.pdf"
+					href="/resources/Resume-Leo-Liang.pdf"
+					onclick={() => hide(true)}
+				/>
+				<NavItem
+					label={t("github")}
+					href="https://www.github.com/foxhatleo/"
 					onclick={() => hide(true)}
 				/>
 				<NavItem
