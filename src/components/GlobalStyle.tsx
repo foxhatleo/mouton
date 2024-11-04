@@ -67,7 +67,7 @@ const GlobalStyle: React.ComponentType = () => (
 
             h1, h2, h3, h4, h5, h6 {
                 font-family: ${vollkorn.style.fontFamily}, "Times New Roman", Times,
-                "Songti SC", STSong, "华文宋体", "宋体", serif;
+                "Songti SC", "STSong", "华文宋体", "宋体", serif;
                 font-weight: 600;
             }
 
