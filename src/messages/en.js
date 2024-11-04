@@ -5,6 +5,7 @@ import xic from "./xi-compiler/en";
 import fallenFlame from "./fallen-flame/en";
 import panicPainter from "./panic-painter/en";
 import remy from "./remy/en";
+import aang from "./aang/en";
 
 const EN = {
 	Header: {
@@ -22,8 +23,13 @@ const EN = {
 		"scroll-down": "Scroll down to learn more",
 		"about-me": "About Me",
 		"about-me-text": `
-Welcome! I’m Leo, an ambitious software engineer and recent Master’s graduate in Computer Science from Cornell
-University. I’m eager to contribute my skills and expertise to a dynamic team, with a firm belief in using technology
+Welcome! I’m Leo, an ambitious software engineer currently at
+[Sigma Computing](https://sigmacomputing.com).
+I graduated from [Cornell](https://cornell.edu)
+with a Master’s in Computer Science in 2023, and have been working in the field
+of software engineering since then.
+I’m eager to contribute my skills and expertise to a dynamic team,
+with a firm belief in using technology
 to improve and enrich lives.
 
 Born in China and fluent in Mandarin, Cantonese, and English, I revel in embracing diverse cultures. I’m currently on
@@ -34,36 +40,14 @@ for visiting my website — enjoy discovering more about my passions and pursuit
 `,
 		"play-prompt": "Click or tap to play.",
 		works: "Works",
-		circolo: {
-			title: "Circolo.us",
-			tagline:
-				"Complete website overhaul using React with e-commerce functionalities.",
-		},
-		"egos-2000": {
-			title: "EGOS-2000 Extension",
-			tagline: "Extension to incorporate C standard library in a minimal OS.",
-		},
-		xic: {
-			title: "Xi Compiler",
-			tagline: "A fully functional compiler written from scratch.",
-		},
-		"panic-painter": {
-			title: "Panic Painter",
-			tagline: "A cross-platform mobile game written in C++.",
-		},
-		cmsx: {
-			title: "CMSX",
-			tagline: "Cornell's CS department course management website.",
-		},
-		"fallen-flame": {
-			title: "Fallen Flame",
-			tagline: "A cross-platform desktop game written in Java.",
-		},
-		remy: {
-			title: "Remy Hospitality Platform",
-			tagline:
-				"An AI-powered platform bringing interactive experience to hospitality industries.",
-		},
+		circolo: circolo,
+		"egos-2000": egos2000,
+		xic: xic,
+		"panic-painter": panicPainter,
+		cmsx: cmsx,
+		"fallen-flame": fallenFlame,
+		remy: remy,
+		aang: aang,
 	},
 	Footer: {
 		l1: "Built by Wenhao “Leo” Liang using React.",
@@ -86,6 +70,7 @@ for visiting my website — enjoy discovering more about my passions and pursuit
 	PanicPainter: panicPainter,
 	Remy: remy,
 	Xi: xic,
+	Aang: aang,
 };
 
 export default EN;

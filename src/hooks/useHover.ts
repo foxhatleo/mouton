@@ -8,7 +8,7 @@ export default function useHover() {
 		let lastTouchTime = 0;
 
 		function enableHover() {
-			if (new Date().getTime() - lastTouchTime < 500) {
+			if (Date.now() - lastTouchTime < 500) {
 				return;
 			}
 			document.body.classList.add("has-hover");
@@ -19,7 +19,7 @@ export default function useHover() {
 		}
 
 		function updateLastTouchTime() {
-			lastTouchTime = new Date().getTime();
+			lastTouchTime = Date.now();
 		}
 
 		document.addEventListener("touchstart", updateLastTouchTime, true);

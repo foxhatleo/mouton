@@ -14,6 +14,7 @@ import {
 	purple,
 	red,
 	yellow,
+	indigo,
 	pink,
 } from "material-colors-ts";
 import Avatar from "@/components/Avatar";
@@ -41,34 +42,39 @@ const HomePage: React.ComponentType = () => {
 	const t = useTranslations("Home");
 	const WORKS: { t: string; link: string; color: Color }[] = [
 		{
+			t: "aang",
+			link: "/aang/",
+			color: red,
+		},
+		{
 			t: "remy",
 			link: "/remy/",
-			color: red,
+			color: pink,
 		},
 		{
 			t: "circolo",
 			link: "/circolo/",
-			color: pink,
+			color: orange,
 		},
 		{
 			t: "egos-2000",
 			link: "/egos-2000-extension/",
-			color: orange,
+			color: yellow,
 		},
 		{
 			t: "xic",
 			link: "/xi-compiler/",
-			color: yellow,
+			color: green,
 		},
 		{
 			t: "panic-painter",
 			link: "/panic-painter/",
-			color: green,
+			color: blue,
 		},
 		{
 			t: "cmsx",
 			link: "/cmsx/",
-			color: blue,
+			color: indigo,
 		},
 		{
 			t: "fallen-flame",

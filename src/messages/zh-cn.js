@@ -5,6 +5,7 @@ import xic from "./xi-compiler/zh-cn";
 import fallenFlame from "./fallen-flame/zh-cn";
 import panicPainter from "./panic-painter/zh-cn";
 import remy from "./remy/zh-cn";
+import aang from "./aang/zh-cn";
 
 const ZH_CN = {
 	Header: {
@@ -22,8 +23,9 @@ const ZH_CN = {
 		"scroll-down": "向下滑动了解更多",
 		"about-me": "关于我",
 		"about-me-text": `
-欢迎！我是 Leo 梁文皓，一位雄心勃勃的软件工程师，最近刚从康奈尔大学计算机科学专业毕业。
-我渴望为一个充满活力的团队贡献我的技能和专业知识，并坚信利用技术来改善和丰富生活。
+欢迎！我是 Leo 梁文皓，一名有抱负的软件工程师，目前就职于 [Sigma Computing](https://sigmacomputing.com)。
+我于 2023 年从[康奈尔大学](https://cornell.edu) 获得计算机科学硕士学位，自那时起一直从事软件工程领域的工作。
+我渴望在一个充满活力的团队中贡献我的技能和专业知识，坚定地相信技术能够改善和丰富人们的生活。
 
 我出生在中国，能说流利的普通话、粤语和英语。我热衷于了解不同的文化。
 目前我也在学习日语和法语，以进一步扩展我的语言能力。
@@ -40,6 +42,7 @@ const ZH_CN = {
 		cmsx: cmsx,
 		"fallen-flame": fallenFlame,
 		remy: remy,
+		aang: aang,
 	},
 	Footer: {
 		l1: "基于 React，由 Leo 梁文皓设计建造。",
@@ -62,6 +65,7 @@ const ZH_CN = {
 	PanicPainter: panicPainter,
 	Remy: remy,
 	Xi: xic,
+	Aang: aang,
 };
 
 export default ZH_CN;

@@ -14,11 +14,14 @@
 				"all": false
 			},
 			"correctness": {
-				"useExhaustiveDependencies": "off"
+				"noNodejsModules": "off",
+				"useExhaustiveDependencies": "off",
+				"useImportExtensions": "off"
 			},
 			"suspicious": {
 				"noArrayIndexKey": "off",
-				"useAwait": "off"
+				"useAwait": "off",
+				"noReactSpecificProps": "off"
 			},
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "off"

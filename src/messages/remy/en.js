@@ -2,7 +2,7 @@ export default {
 	title: "Remy Hospitality Platform",
 	tagline:
 		"An AI-powered platform bringing interactive experience to hospitality industries.",
-	date: "Oct 2023 - current",
+	date: "Oct 2023 - Nov 2024",
 	website: "//restaurants.circolo.us/demo",
 	github: "",
 	windows: "",
@@ -12,9 +12,9 @@ export default {
 	pdfName: "",
 	images: "",
 	content: `
-In my current job at Circolo, I am working on a integrated experience to bring
+During my time at Circolo, I worked on a integrated experience to bring
 interactive menu and promotional display to the hospitality industry including
-restaurants and hotels. Codenamed “Remy”, the project I am leading involves
+restaurants and hotels. Codenamed “Remy”, the project I was leading involves
 several parts including frontend, backend, and AI integration.
 
 I built a frontend management system using React and Next.js that allows

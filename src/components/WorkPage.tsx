@@ -76,7 +76,7 @@ const WorkPage: React.ComponentType<{ color: Color; part: string }> = ({
 
 	useScroll(scrollHandler);
 
-	const mainClassNames = [];
+	const mainClassNames: string[] = [];
 	if (canUseWebP()) {
 		mainClassNames.push("webp");
 	}

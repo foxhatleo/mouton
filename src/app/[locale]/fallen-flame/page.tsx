@@ -1,11 +1,11 @@
 import type React from "react";
 import WorkPage from "@/components/WorkPage";
-import { green } from "material-colors-ts";
+import { purple } from "material-colors-ts";
 import type { Viewport } from "next";
 import { getTranslations } from "next-intl/server";
 
 const WorkCircolo: React.ComponentType = () => {
-	return <WorkPage color={green} part={"FallenFlame"} />;
+	return <WorkPage color={purple} part={"FallenFlame"} />;
 };
 
 export default WorkCircolo;
@@ -24,7 +24,7 @@ export async function generateMetadata(ctx: any) {
 
 export const viewport: Viewport = {
 	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: green[500] },
-		{ media: "(prefers-color-scheme: dark)", color: green[700] },
+		{ media: "(prefers-color-scheme: light)", color: purple[500] },
+		{ media: "(prefers-color-scheme: dark)", color: purple[700] },
 	],
 };
