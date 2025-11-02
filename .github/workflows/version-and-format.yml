@@ -20,7 +20,7 @@ jobs:
       - name: Skip if commit is from this workflow
         id: skip-check
         run: |
-          COMMIT_MESSAGE="${{ github.event.head_commit.message || github.event.commits[0].message || '' }}"
+          COMMIT_MESSAGE="${{ github.event.head_commit.message || '' }}"
           if [[ "$COMMIT_MESSAGE" == *"chore: update version and apply biome auto-fixes"* ]]; then
             echo "skip=true" >> $GITHUB_OUTPUT
             echo "Skipping: commit appears to be from this workflow"
@@ -75,13 +75,22 @@ jobs:
         id: version-check
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-          EXPECTED_PREFIX="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
-          if [[ "$CURRENT_VERSION" == "$EXPECTED_PREFIX"* ]]; then
+          EXPECTED_VERSION="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
+          COMMIT_SHA="${{ github.event.after }}"
+          
+          echo "Debug info:"
+          echo "  Current version in package.json: $CURRENT_VERSION"
+          echo "  Expected version for commit $COMMIT_SHA: $EXPECTED_VERSION"
+          echo "  Commit timestamp: ${{ steps.commit-time.outputs.timestamp }}"
+          
+          # Check if the current version EXACTLY matches what we expect for this commit
+          # Only skip if versions match exactly (not just prefix match)
+          if [[ "$CURRENT_VERSION" == "$EXPECTED_VERSION" ]]; then
             echo "already-updated=true" >> $GITHUB_OUTPUT
-            echo "Version already matches expected format"
+            echo "Version already matches expected version for this commit"
           else
             echo "already-updated=false" >> $GITHUB_OUTPUT
-            echo "Version needs update: $CURRENT_VERSION -> $EXPECTED_PREFIX"
+            echo "Version needs update: $CURRENT_VERSION -> $EXPECTED_VERSION"
           fi
 
       - name: Update package version
@@ -151,12 +160,23 @@ jobs:
             if ! git merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
               echo "Local branch is behind, rebasing..."
               if git rebase origin/main; then
-                # After rebase, check if version was already updated
+                # After rebase, re-check if version was already updated for THIS commit
+                COMMIT_SHA="${{ github.event.after }}"
+                EXPECTED_VERSION="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
                 CURRENT_VERSION=$(node -p "require('./package.json').version")
-                if [[ "$CURRENT_VERSION" == "$EXPECTED_PREFIX"* ]]; then
-                  echo "Version already updated by another workflow run, skipping"
+                
+                echo "After rebase - checking version:"
+                echo "  Current version: $CURRENT_VERSION"
+                echo "  Expected version for commit $COMMIT_SHA: $EXPECTED_VERSION"
+                
+                # Only skip if the current version EXACTLY matches what we expect
+                # This means another workflow run already updated it for this commit
+                if [[ "$CURRENT_VERSION" == "$EXPECTED_VERSION" ]]; then
+                  echo "Version already updated by another workflow run (exact match), skipping"
                   exit 0
                 fi
+                
+                echo "Version check passed, continuing with updates..."
                 
                 # Re-run biome after rebase to catch any new formatting issues
                 yarn biome check --write . || true
