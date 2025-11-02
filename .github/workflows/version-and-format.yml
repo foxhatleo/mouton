@@ -34,6 +34,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
 
       - name: Setup Node.js
         if: steps.skip-check.outputs.skip != 'true'
@@ -54,6 +55,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global --add safe.directory ${{ github.workspace }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git checkout main || git checkout -b main
+          git branch -u origin/main main || true
 
       - name: Get commit timestamp
         if: steps.skip-check.outputs.skip != 'true'
@@ -113,9 +118,20 @@ jobs:
 
       - name: Commit and push changes
         if: steps.changes.outputs.has-changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Ensure we're on main branch
+          git checkout main || {
+            echo "Failed to checkout main branch"
+            exit 1
+          }
+          
           git add -A
-          git commit -m "chore: update version and apply biome auto-fixes [skip ci]"
+          if ! git commit -m "chore: update version and apply biome auto-fixes [skip ci]"; then
+            echo "Failed to commit changes"
+            exit 1
+          fi
           
           # Retry logic for race conditions
           MAX_RETRIES=5
@@ -124,10 +140,15 @@ jobs:
           
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
             # Fetch latest changes before pushing
-            git fetch origin main
+            git fetch origin main || {
+              echo "Failed to fetch origin/main"
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              sleep $((RETRY_COUNT * 2))
+              continue
+            }
             
             # Check if we're behind
-            if ! git merge-base --is-ancestor HEAD origin/main; then
+            if ! git merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
               echo "Local branch is behind, rebasing..."
               if git rebase origin/main; then
                 # After rebase, check if version was already updated
@@ -141,11 +162,11 @@ jobs:
                 yarn biome check --write . || true
                 if [ -n "$(git status --porcelain)" ]; then
                   git add -A
-                  git commit -m "chore: update version and apply biome auto-fixes [skip ci]"
+                  git commit -m "chore: update version and apply biome auto-fixes [skip ci]" || true
                 fi
               else
                 echo "Rebase failed, aborting..."
-                git rebase --abort
+                git rebase --abort || true
                 RETRY_COUNT=$((RETRY_COUNT + 1))
                 if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
                   echo "Retrying after rebase failure... (attempt $RETRY_COUNT/$MAX_RETRIES)"
@@ -158,11 +179,14 @@ jobs:
               fi
             fi
             
-            # Try to push
-            if git push origin main; then
+            # Try to push with verbose output for debugging
+            echo "Attempting to push to origin/main..."
+            if git push origin main 2>&1; then
               echo "Successfully pushed changes"
               exit 0
             else
+              PUSH_ERROR=$?
+              echo "Push failed with exit code: $PUSH_ERROR"
               RETRY_COUNT=$((RETRY_COUNT + 1))
               if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
                 echo "Push failed, will retry... (attempt $RETRY_COUNT/$MAX_RETRIES)"
