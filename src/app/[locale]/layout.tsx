@@ -19,13 +19,13 @@ export default async function RootLayout({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale: localeParam } = await params;
-	
+
 	// Validate and type assert locale
 	if (!LOCALES.includes(localeParam as Locale)) {
 		notFound();
 	}
 	const locale = localeParam as Locale;
-	
+
 	unstable_setRequestLocale(locale);
 
 	let localeMessages: Messages;

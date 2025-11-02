@@ -2,4 +2,3 @@
 	"installCommand": "corepack enable && corepack prepare yarn@4.10.3 --activate && yarn install --frozen-lockfile",
 	"framework": "nextjs"
 }
-
