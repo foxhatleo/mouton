@@ -130,14 +130,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "=== DEBUG: Starting commit and push step ==="
+          echo "=== Starting commit and push step ==="
           echo "Workflow trigger commit: ${{ github.event.after }}"
           echo "Expected timestamp: ${{ steps.commit-time.outputs.timestamp }}"
           echo "Expected version: 1.0.0-${{ steps.commit-time.outputs.timestamp }}"
           
           # Ensure we're on main branch
           echo ""
-          echo "=== DEBUG: Initial Git State ==="
+          echo "=== Initial Git State ==="
           echo "Current branch: $(git branch --show-current 2>/dev/null || echo 'unknown')"
           echo "HEAD commit: $(git rev-parse HEAD 2>/dev/null || echo 'unknown')"
           echo "HEAD commit message: $(git log -1 --format='%s' HEAD 2>/dev/null || echo 'unknown')"
@@ -149,13 +149,13 @@ jobs:
           }
           
           echo ""
-          echo "=== DEBUG: Staged Changes ==="
+          echo "=== Staged Changes ==="
           git status --short || true
           
           git add -A
           
           echo ""
-          echo "=== DEBUG: After git add ==="
+          echo "=== After git add ==="
           echo "Staged files:"
           git diff --cached --name-status || true
           git status --short || true
@@ -167,7 +167,7 @@ jobs:
           
           COMMIT_AFTER_ADD=$(git rev-parse HEAD)
           echo ""
-          echo "=== DEBUG: After Commit ==="
+          echo "=== After Commit ==="
           echo "New commit hash: $COMMIT_AFTER_ADD"
           echo "Commit message: $(git log -1 --format='%s' $COMMIT_AFTER_ADD)"
           echo "Commit author: $(git log -1 --format='%an <%ae>' $COMMIT_AFTER_ADD)"
@@ -184,7 +184,7 @@ jobs:
           
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
             echo ""
-            echo "=== DEBUG: Retry Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES ==="
+            echo "=== Retry Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES ==="
             # Fetch latest changes before pushing
             echo "Fetching latest from origin/main..."
             git fetch origin main || {
@@ -195,7 +195,7 @@ jobs:
             }
             
             echo ""
-            echo "=== DEBUG: After Fetch ==="
+            echo "=== After Fetch ==="
             LOCAL_HEAD=$(git rev-parse HEAD)
             REMOTE_HEAD=$(git rev-parse origin/main 2>/dev/null || echo "unknown")
             echo "Local HEAD: $LOCAL_HEAD"
@@ -227,7 +227,7 @@ jobs:
             # Check if we're behind
             if ! git merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
               echo ""
-              echo "=== DEBUG: Starting Rebase ==="
+              echo "=== Starting Rebase ==="
               echo "Rebasing local commits on top of origin/main..."
               
               COMMITS_TO_REBASE=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
@@ -239,7 +239,7 @@ jobs:
               
               if git rebase origin/main; then
                 echo ""
-                echo "=== DEBUG: After Rebase ==="
+                echo "=== After Rebase ==="
                 NEW_HEAD=$(git rev-parse HEAD)
                 echo "New HEAD after rebase: $NEW_HEAD"
                 echo "HEAD commit message: $(git log -1 --format='%s' $NEW_HEAD)"
@@ -273,7 +273,7 @@ jobs:
                 UNCOMMITTED_CHANGES=$(git status --porcelain | wc -l | tr -d ' ' || echo "0")
                 
                 echo ""
-                echo "=== DEBUG: After Rebase Status ==="
+                echo "=== After Rebase Status ==="
                 echo "Commits ahead of origin/main: $COMMITS_AHEAD"
                 echo "Uncommitted changes count: $UNCOMMITTED_CHANGES"
                 echo "Local HEAD: $(git rev-parse HEAD)"
@@ -298,7 +298,7 @@ jobs:
                 else
                   # We're not ahead and no uncommitted changes, check if version was already updated on origin/main
                   echo ""
-                  echo "=== DEBUG: Version Check After Rebase ==="
+                  echo "=== Version Check After Rebase ==="
                   COMMIT_SHA="${{ github.event.after }}"
                   EXPECTED_VERSION="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
                   
@@ -358,7 +358,7 @@ jobs:
                 fi
               else
                 echo ""
-                echo "=== DEBUG: No Rebase Needed ==="
+                echo "=== No Rebase Needed ==="
                 echo "Local branch is up to date with or ahead of origin/main"
                 echo "Local HEAD: $(git rev-parse HEAD)"
                 echo "Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
@@ -367,7 +367,7 @@ jobs:
             
             # Before pushing, verify we have something to push
             echo ""
-            echo "=== DEBUG: Pre-Push Verification ==="
+            echo "=== Pre-Push Verification ==="
             COMMITS_AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
             UNCOMMITTED_CHANGES=$(git status --porcelain | wc -l | tr -d ' ' || echo "0")
             
@@ -426,13 +426,17 @@ jobs:
               echo "Version mismatch or couldn't verify:"
               echo "  - Version on origin/main: '$VERSION_ON_ORIGIN'"
               echo "  - Expected version: '$EXPECTED_VERSION'"
-              echo "  - Match: $([[ -n "$VERSION_ON_ORIGIN" && "$VERSION_ON_ORIGIN" == "$EXPECTED_VERSION" ]] && echo 'YES' || echo 'NO')"
+              if [[ -n "$VERSION_ON_ORIGIN" && "$VERSION_ON_ORIGIN" == "$EXPECTED_VERSION" ]]; then
+                echo "  - Match: YES"
+              else
+                echo "  - Match: NO"
+              fi
               echo "Will attempt push anyway to ensure changes are propagated"
             fi
             
             # Try to push with verbose output for debugging
             echo ""
-            echo "=== DEBUG: Attempting Push ==="
+            echo "=== Attempting Push ==="
             echo "Pushing to origin/main..."
             echo "Local branch: $(git branch --show-current)"
             echo "Remote tracking: $(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo 'not set')"
