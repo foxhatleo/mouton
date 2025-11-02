@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 concurrency:
   group: version-and-format-${{ github.ref }}
@@ -34,7 +35,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: main
+          ref: ${{ github.ref_name }}
 
       - name: Setup Node.js
         if: steps.skip-check.outputs.skip != 'true'
@@ -53,12 +54,13 @@ jobs:
       - name: Configure Git
         if: steps.skip-check.outputs.skip != 'true'
         run: |
+          BRANCH_NAME="${{ github.ref_name }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory ${{ github.workspace }}
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git checkout main || git checkout -b main
-          git branch -u origin/main main || true
+          git checkout "$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
+          git branch -u "origin/$BRANCH_NAME" "$BRANCH_NAME" || true
 
       - name: Get commit timestamp
         if: steps.skip-check.outputs.skip != 'true'
@@ -133,5 +135,6 @@ jobs:
           chmod +x .github/scripts/commit-and-push.sh
           .github/scripts/commit-and-push.sh \
             "${{ github.event.after }}" \
-            "${{ steps.commit-time.outputs.timestamp }}"
+            "${{ steps.commit-time.outputs.timestamp }}" \
+            "${{ github.ref_name }}"
 

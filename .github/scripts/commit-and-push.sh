@@ -2,15 +2,29 @@
 set -euo pipefail
 
 # Script to commit and push version updates and biome auto-fixes
-# Usage: commit-and-push.sh <trigger-commit-sha> <expected-timestamp>
+# Usage: commit-and-push.sh <trigger-commit-sha> <expected-timestamp> <branch-name>
 
 TRIGGER_COMMIT_SHA="${1:-}"
 EXPECTED_TIMESTAMP="${2:-}"
+BRANCH_NAME="${3:-}"
+
+# Detect branch name if not provided
+if [ -z "$BRANCH_NAME" ]; then
+  BRANCH_NAME=$(git branch --show-current 2>/dev/null || echo "main")
+  # Fallback: try to detect from remote
+  if [ "$BRANCH_NAME" = "main" ] || [ -z "$BRANCH_NAME" ]; then
+    DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "")
+    if [ -n "$DEFAULT_BRANCH" ]; then
+      BRANCH_NAME="$DEFAULT_BRANCH"
+    fi
+  fi
+fi
+
 EXPECTED_VERSION="1.0.0-${EXPECTED_TIMESTAMP}"
 
 if [ -z "$TRIGGER_COMMIT_SHA" ] || [ -z "$EXPECTED_TIMESTAMP" ]; then
   echo "Error: Missing required arguments"
-  echo "Usage: $0 <trigger-commit-sha> <expected-timestamp>"
+  echo "Usage: $0 <trigger-commit-sha> <expected-timestamp> [branch-name]"
   exit 1
 fi
 
@@ -18,17 +32,19 @@ echo "=== Starting commit and push step ==="
 echo "Workflow trigger commit: $TRIGGER_COMMIT_SHA"
 echo "Expected timestamp: $EXPECTED_TIMESTAMP"
 echo "Expected version: $EXPECTED_VERSION"
+echo "Branch name: $BRANCH_NAME"
 
-# Ensure we're on main branch
+# Ensure we're on the correct branch
 echo ""
 echo "=== Initial Git State ==="
 echo "Current branch: $(git branch --show-current 2>/dev/null || echo 'unknown')"
 echo "HEAD commit: $(git rev-parse HEAD 2>/dev/null || echo 'unknown')"
 echo "HEAD commit message: $(git log -1 --format='%s' HEAD 2>/dev/null || echo 'unknown')"
 echo "Git remote URL: $(git config --get remote.origin.url 2>/dev/null || echo 'unknown')"
+echo "Target branch: $BRANCH_NAME"
 
-git checkout main || {
-  echo "Failed to checkout main branch"
+git checkout "$BRANCH_NAME" || {
+  echo "Failed to checkout branch: $BRANCH_NAME"
   exit 1
 }
 
@@ -70,9 +86,9 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   echo ""
   echo "=== Retry Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES ==="
   # Fetch latest changes before pushing
-  echo "Fetching latest from origin/main..."
-  git fetch origin main || {
-    echo "Failed to fetch origin/main"
+  echo "Fetching latest from origin/$BRANCH_NAME..."
+  git fetch origin "$BRANCH_NAME" || {
+    echo "Failed to fetch origin/$BRANCH_NAME"
     RETRY_COUNT=$((RETRY_COUNT + 1))
     sleep $((RETRY_COUNT * 2))
     continue
@@ -81,47 +97,47 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   echo ""
   echo "=== After Fetch ==="
   LOCAL_HEAD=$(git rev-parse HEAD)
-  REMOTE_HEAD=$(git rev-parse origin/main 2>/dev/null || echo "unknown")
+  REMOTE_HEAD=$(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo "unknown")
   echo "Local HEAD: $LOCAL_HEAD"
-  echo "Remote origin/main: $REMOTE_HEAD"
+  echo "Remote origin/$BRANCH_NAME: $REMOTE_HEAD"
   echo "Local HEAD message: $(git log -1 --format='%s' $LOCAL_HEAD)"
   if [ "$REMOTE_HEAD" != "unknown" ]; then
     echo "Remote HEAD message: $(git log -1 --format='%s' $REMOTE_HEAD)"
   fi
   
   # Check branch relationship
-  if git merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
-    echo "Local HEAD is ancestor of origin/main (we're behind or equal)"
+  if git merge-base --is-ancestor HEAD "origin/$BRANCH_NAME" 2>/dev/null; then
+    echo "Local HEAD is ancestor of origin/$BRANCH_NAME (we're behind or equal)"
   else
-    echo "Local HEAD is NOT ancestor of origin/main (we're ahead or diverged)"
+    echo "Local HEAD is NOT ancestor of origin/$BRANCH_NAME (we're ahead or diverged)"
   fi
   
-  if git merge-base --is-ancestor origin/main HEAD 2>/dev/null; then
-    echo "Origin/main is ancestor of local HEAD (we're ahead)"
-    COMMITS_AHEAD_BEFORE=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
-    echo "Commits ahead of origin/main: $COMMITS_AHEAD_BEFORE"
+  if git merge-base --is-ancestor "origin/$BRANCH_NAME" HEAD 2>/dev/null; then
+    echo "Origin/$BRANCH_NAME is ancestor of local HEAD (we're ahead)"
+    COMMITS_AHEAD_BEFORE=$(git rev-list --count "origin/$BRANCH_NAME..HEAD" 2>/dev/null || echo "0")
+    echo "Commits ahead of origin/$BRANCH_NAME: $COMMITS_AHEAD_BEFORE"
     if [ "$COMMITS_AHEAD_BEFORE" -gt 0 ]; then
       echo "Commits to push:"
-      git log --oneline origin/main..HEAD || true
+      git log --oneline "origin/$BRANCH_NAME..HEAD" || true
     fi
   else
-    echo "Origin/main is NOT ancestor of local HEAD (we're behind or diverged)"
+    echo "Origin/$BRANCH_NAME is NOT ancestor of local HEAD (we're behind or diverged)"
   fi
   
   # Check if we're behind
-  if ! git merge-base --is-ancestor HEAD origin/main 2>/dev/null; then
+  if ! git merge-base --is-ancestor HEAD "origin/$BRANCH_NAME" 2>/dev/null; then
     echo ""
     echo "=== Starting Rebase ==="
-    echo "Rebasing local commits on top of origin/main..."
+    echo "Rebasing local commits on top of origin/$BRANCH_NAME..."
     
-    COMMITS_TO_REBASE=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
+    COMMITS_TO_REBASE=$(git rev-list --count "origin/$BRANCH_NAME..HEAD" 2>/dev/null || echo "0")
     echo "Commits to rebase: $COMMITS_TO_REBASE"
     if [ "$COMMITS_TO_REBASE" -gt 0 ]; then
       echo "Commits that will be rebased:"
-      git log --oneline origin/main..HEAD || true
+      git log --oneline "origin/$BRANCH_NAME..HEAD" || true
     fi
     
-    if git rebase origin/main; then
+    if git rebase "origin/$BRANCH_NAME"; then
       echo ""
       echo "=== After Rebase ==="
       NEW_HEAD=$(git rev-parse HEAD)
@@ -150,22 +166,22 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
       fi
       
       # After rebase, check if we have commits to push
-      # Check if we're ahead of origin/main (meaning we have local commits to push)
-      COMMITS_AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
+      # Check if we're ahead of origin/$BRANCH_NAME (meaning we have local commits to push)
+      COMMITS_AHEAD=$(git rev-list --count "origin/$BRANCH_NAME..HEAD" 2>/dev/null || echo "0")
       
       # Also check for uncommitted changes
       UNCOMMITTED_CHANGES=$(git status --porcelain | wc -l | tr -d ' ' || echo "0")
       
       echo ""
       echo "=== After Rebase Status ==="
-      echo "Commits ahead of origin/main: $COMMITS_AHEAD"
+      echo "Commits ahead of origin/$BRANCH_NAME: $COMMITS_AHEAD"
       echo "Uncommitted changes count: $UNCOMMITTED_CHANGES"
       echo "Local HEAD: $(git rev-parse HEAD)"
-      echo "Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
+      echo "Remote origin/$BRANCH_NAME: $(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo 'unknown')"
       
       if [ "$COMMITS_AHEAD" -gt 0 ]; then
         echo "Commits ahead details:"
-        git log --oneline origin/main..HEAD || true
+        git log --oneline "origin/$BRANCH_NAME..HEAD" || true
       fi
       
       if [ "$UNCOMMITTED_CHANGES" -gt 0 ]; then
@@ -174,13 +190,13 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
       fi
       
       if [ "$COMMITS_AHEAD" -gt 0 ]; then
-        echo "We have $COMMITS_AHEAD commit(s) ahead of origin/main after rebase, will push"
+        echo "We have $COMMITS_AHEAD commit(s) ahead of origin/$BRANCH_NAME after rebase, will push"
       elif [ "$UNCOMMITTED_CHANGES" -gt 0 ]; then
         echo "We have uncommitted changes after rebase, will commit and push"
         git add -A
         git commit -m "chore: update version and apply biome auto-fixes [skip ci]" || true
       else
-        # We're not ahead and no uncommitted changes, check if version was already updated on origin/main
+        # We're not ahead and no uncommitted changes, check if version was already updated on origin/$BRANCH_NAME
         echo ""
         echo "=== Version Check After Rebase ==="
         COMMIT_SHA="$TRIGGER_COMMIT_SHA"
@@ -188,10 +204,10 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
         echo "Trigger commit SHA: $COMMIT_SHA"
         echo "Expected version: $EXPECTED_VERSION"
         
-        # Check version in origin/main HEAD (the actual remote branch)
+        # Check version in origin/$BRANCH_NAME HEAD (the actual remote branch)
         # Use a temporary file to avoid stdin issues
-        echo "Reading package.json from origin/main..."
-        git show origin/main:package.json > /tmp/package_remote.json 2>/dev/null || echo '{}' > /tmp/package_remote.json
+        echo "Reading package.json from origin/$BRANCH_NAME..."
+        git show "origin/$BRANCH_NAME:package.json" > /tmp/package_remote.json 2>/dev/null || echo '{}' > /tmp/package_remote.json
         
         if [ -f /tmp/package_remote.json ]; then
           echo "Remote package.json content (version line):"
@@ -207,24 +223,24 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
         LOCAL_VERSION=$(node -p "require('./package.json').version")
         
         echo "Local version (after rebase): $LOCAL_VERSION"
-        echo "Version on origin/main (remote): $VERSION_ON_ORIGIN"
+        echo "Version on origin/$BRANCH_NAME (remote): $VERSION_ON_ORIGIN"
         echo "Expected version for commit $COMMIT_SHA: $EXPECTED_VERSION"
         
         # Only skip if:
         # 1. We have no commits to push (already checked above)
         # 2. AND no uncommitted changes (already checked above)
-        # 3. AND the version on origin/main EXACTLY matches what we expect
+        # 3. AND the version on origin/$BRANCH_NAME EXACTLY matches what we expect
         # This means another workflow run already pushed it for this commit
         if [[ -n "$VERSION_ON_ORIGIN" && "$VERSION_ON_ORIGIN" == "$EXPECTED_VERSION" ]]; then
-          echo "Version already updated on origin/main by another workflow run (exact match) and no local commits, skipping"
+          echo "Version already updated on origin/$BRANCH_NAME by another workflow run (exact match) and no local commits, skipping"
           exit 0
         fi
         
         # If version doesn't match or we couldn't read it, we should still push
         if [[ -z "$VERSION_ON_ORIGIN" ]]; then
-          echo "Could not read version from origin/main, will push to be safe"
+          echo "Could not read version from origin/$BRANCH_NAME, will push to be safe"
         else
-          echo "Version on origin/main is '$VERSION_ON_ORIGIN', not '$EXPECTED_VERSION' - continuing with push..."
+          echo "Version on origin/$BRANCH_NAME is '$VERSION_ON_ORIGIN', not '$EXPECTED_VERSION' - continuing with push..."
         fi
       fi
     else
@@ -243,30 +259,30 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   else
     echo ""
     echo "=== No Rebase Needed ==="
-    echo "Local branch is up to date with or ahead of origin/main"
+    echo "Local branch is up to date with or ahead of origin/$BRANCH_NAME"
     echo "Local HEAD: $(git rev-parse HEAD)"
-    echo "Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
+    echo "Remote origin/$BRANCH_NAME: $(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo 'unknown')"
   fi
   
   # Before pushing, verify we have something to push
   echo ""
   echo "=== Pre-Push Verification ==="
-  COMMITS_AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0")
+  COMMITS_AHEAD=$(git rev-list --count "origin/$BRANCH_NAME..HEAD" 2>/dev/null || echo "0")
   UNCOMMITTED_CHANGES=$(git status --porcelain | wc -l | tr -d ' ' || echo "0")
   
   FINAL_LOCAL_HEAD=$(git rev-parse HEAD)
-  FINAL_REMOTE_HEAD=$(git rev-parse origin/main 2>/dev/null || echo "unknown")
+  FINAL_REMOTE_HEAD=$(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo "unknown")
   
-  echo "Commits ahead of origin/main: $COMMITS_AHEAD"
+  echo "Commits ahead of origin/$BRANCH_NAME: $COMMITS_AHEAD"
   echo "Uncommitted changes count: $UNCOMMITTED_CHANGES"
   echo "Local HEAD: $FINAL_LOCAL_HEAD"
-  echo "Remote origin/main: $FINAL_REMOTE_HEAD"
+  echo "Remote origin/$BRANCH_NAME: $FINAL_REMOTE_HEAD"
   
   if [ "$COMMITS_AHEAD" -gt 0 ]; then
     echo "Commits that will be pushed:"
-    git log --oneline origin/main..HEAD || true
+    git log --oneline "origin/$BRANCH_NAME..HEAD" || true
     echo "Full commit details:"
-    git log origin/main..HEAD --format='%H | %an | %ae | %ai | %s' || true
+    git log "origin/$BRANCH_NAME..HEAD" --format='%H | %an | %ae | %ai | %s' || true
   fi
   
   if [ "$UNCOMMITTED_CHANGES" -gt 0 ]; then
@@ -280,7 +296,7 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
     COMMIT_SHA="$TRIGGER_COMMIT_SHA"
     
     echo "Reading remote package.json for version check..."
-    git show origin/main:package.json > /tmp/package_remote_pre.json 2>/dev/null || echo '{}' > /tmp/package_remote_pre.json
+    git show "origin/$BRANCH_NAME:package.json" > /tmp/package_remote_pre.json 2>/dev/null || echo '{}' > /tmp/package_remote_pre.json
     
     if [ -f /tmp/package_remote_pre.json ]; then
       echo "Remote package.json version line:"
@@ -299,14 +315,14 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
     
     if [[ -n "$VERSION_ON_ORIGIN" && "$VERSION_ON_ORIGIN" == "$EXPECTED_VERSION" ]]; then
       echo ""
-      echo "=== RESULT: Version already correct on origin/main, nothing to push ==="
-      echo "Skipping push as version '$EXPECTED_VERSION' already exists on origin/main"
+      echo "=== RESULT: Version already correct on origin/$BRANCH_NAME, nothing to push ==="
+      echo "Skipping push as version '$EXPECTED_VERSION' already exists on origin/$BRANCH_NAME"
       exit 0
     fi
     
     echo ""
     echo "Version mismatch or couldn't verify:"
-    echo "  - Version on origin/main: '$VERSION_ON_ORIGIN'"
+    echo "  - Version on origin/$BRANCH_NAME: '$VERSION_ON_ORIGIN'"
     echo "  - Expected version: '$EXPECTED_VERSION'"
     if [[ -n "$VERSION_ON_ORIGIN" && "$VERSION_ON_ORIGIN" == "$EXPECTED_VERSION" ]]; then
       echo "  - Match: YES"
@@ -319,12 +335,12 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   # Try to push with verbose output for debugging
   echo ""
   echo "=== Attempting Push ==="
-  echo "Pushing to origin/main..."
+  echo "Pushing to origin/$BRANCH_NAME..."
   echo "Local branch: $(git branch --show-current)"
   echo "Remote tracking: $(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo 'not set')"
   echo "Git config remote.origin.url: $(git config --get remote.origin.url)"
   
-  PUSH_OUTPUT=$(git push origin main 2>&1)
+  PUSH_OUTPUT=$(git push origin "$BRANCH_NAME" 2>&1)
   PUSH_EXIT_CODE=$?
   
   echo "Push command exit code: $PUSH_EXIT_CODE"
@@ -335,9 +351,9 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
     echo ""
     echo "=== SUCCESS: Push completed ==="
     echo "Verifying push was successful..."
-    git fetch origin main
-    PUSHED_HEAD=$(git rev-parse origin/main)
-    echo "Remote origin/main HEAD after push: $PUSHED_HEAD"
+    git fetch origin "$BRANCH_NAME"
+    PUSHED_HEAD=$(git rev-parse "origin/$BRANCH_NAME")
+    echo "Remote origin/$BRANCH_NAME HEAD after push: $PUSHED_HEAD"
     echo "Local HEAD: $FINAL_LOCAL_HEAD"
     
     if [ "$PUSHED_HEAD" == "$FINAL_LOCAL_HEAD" ]; then
@@ -362,8 +378,8 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
       echo ""
       echo "Final state:"
       echo "  Local HEAD: $(git rev-parse HEAD)"
-      echo "  Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
-      echo "  Commits ahead: $(git rev-list --count origin/main..HEAD 2>/dev/null || echo '0')"
+      echo "  Remote origin/$BRANCH_NAME: $(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo 'unknown')"
+      echo "  Commits ahead: $(git rev-list --count "origin/$BRANCH_NAME..HEAD" 2>/dev/null || echo '0')"
       echo "  Last push exit code: $PUSH_EXIT_CODE"
       echo "  Last push output:"
       echo "$PUSH_OUTPUT"
@@ -377,6 +393,6 @@ echo "=== FATAL: Retry Loop Exhausted ==="
 echo "Unexpected exit from retry loop without success or failure"
 echo "Final state:"
 echo "  Local HEAD: $(git rev-parse HEAD)"
-echo "  Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
+echo "  Remote origin/$BRANCH_NAME: $(git rev-parse "origin/$BRANCH_NAME" 2>/dev/null || echo 'unknown')"
 exit 1
 
