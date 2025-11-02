@@ -47,11 +47,9 @@
 			"correctness": {
 				"noNodejsModules": "off",
 				"useExhaustiveDependencies": "off",
-				"useImportExtensions": "off",
-				"noSwitchDeclarations": "off"
+				"useImportExtensions": "off"
 			},
 			"suspicious": {
-				"noArrayIndexKey": "off",
 				"useAwait": "off",
 				"noReactSpecificProps": "off"
 			},
