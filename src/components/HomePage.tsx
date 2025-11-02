@@ -116,7 +116,7 @@ const HomePage: React.ComponentType = () => {
 				<div className="v-layout center">
 					<h2 className="entry-transition">{paragraph(t("works"))}</h2>
 					<ul className="v-layout">
-						{WORKS.map((data) => (
+						{WORKS.map((data, ind) => (
 							<li
 								key={data.link}
 								className="entry-transition"
