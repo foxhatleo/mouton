@@ -356,13 +356,13 @@ jobs:
                   echo "Failed to rebase after $MAX_RETRIES attempts"
                   exit 1
                 fi
-              else
-                echo ""
-                echo "=== No Rebase Needed ==="
-                echo "Local branch is up to date with or ahead of origin/main"
-                echo "Local HEAD: $(git rev-parse HEAD)"
-                echo "Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
               fi
+            else
+              echo ""
+              echo "=== No Rebase Needed ==="
+              echo "Local branch is up to date with or ahead of origin/main"
+              echo "Local HEAD: $(git rev-parse HEAD)"
+              echo "Remote origin/main: $(git rev-parse origin/main 2>/dev/null || echo 'unknown')"
             fi
             
             # Before pushing, verify we have something to push
