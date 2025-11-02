@@ -1,6 +1,7 @@
 {
 	"name": "mouton",
 	"version": "1.0.0-20251102112700",
+	"author": "Leo Liang <developer@leoliang.com>",
 	"private": true,
 	"engines": {
 		"node": "22.x",
