@@ -69,7 +69,7 @@ const Images: React.ComponentType<ImagesType> = ({
 					return (
 						<div
 							className={`image i-${rnd + ind}`}
-							key={ind}
+							key={baseUrl}
 							style={
 								{
 									"--bg-image-jpg": `url(${baseUrl}.jpg)`,
