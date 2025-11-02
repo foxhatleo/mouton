@@ -1,6 +1,6 @@
 {
 	"name": "mouton",
-	"version": "1.0.0-20251102110811",
+	"version": "1.0.0-20251102112700",
 	"private": true,
 	"engines": {
 		"node": "22.x",
