@@ -16,8 +16,8 @@ export function newLineAsP(s: string): (string | ReactElement)[] {
 	return s.split("\n").map((i, ind) => <p key={ind}>{i}</p>);
 }
 
-const LINK_REGEX = /(\[[^\[\]()]+]\([^\[\]()]+\))/gi;
-const LINK_REGEX2 = /^\[([^\[\]()]+)]\(([^\[\]()]+)\)$/i;
+const LINK_REGEX = /(\[[^[\]()]+]\([^[\]()]+\))/gi;
+const LINK_REGEX2 = /^\[([^[\]()]+)]\(([^[\]()]+)\)$/i;
 
 export function paragraph(s: string): ReactElement[] {
 	return s

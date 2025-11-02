@@ -5,4 +5,3 @@ export type Locale = (typeof LOCALES)[number];
 export function isLocale(locale: string): locale is Locale {
 	return LOCALES.includes(locale as Locale);
 }
-

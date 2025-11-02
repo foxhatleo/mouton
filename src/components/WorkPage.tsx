@@ -191,8 +191,7 @@ const WorkPage: React.ComponentType<{ color: Color; part: string }> = ({
 					<Images
 						urlPrefix={image[0]}
 						urls={image[1].split(",")}
-						// biome-ignore lint/security/noGlobalEval:
-						aspectRatio={eval(image[2]) as number}
+						aspectRatio={image[2] ? Number.parseFloat(image[2]) : undefined}
 					/>
 				)}
 				{paragraph(content)}

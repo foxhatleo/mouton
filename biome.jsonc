@@ -1,22 +1,54 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.7.2/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
 	"files": {
-		"ignore": [".next/", "public/", "**/.next/", ".heroku/", ".git/"]
+		"ignoreUnknown": true,
+		"includes": [
+			"**/*.ts",
+			"**/*.tsx",
+			"**/*.js",
+			"**/*.jsx",
+			"**/*.json",
+			"**/*.jsonc",
+			"!!**/.next",
+			"!!**/node_modules",
+			"!!**/public",
+			"!!**/.git",
+			"!!**/.heroku",
+			"!!**/__tests__",
+			"!!**/*.test.ts",
+			"!!**/*.test.tsx",
+			"!!**/vitest.config.ts",
+			"!!**/vitest.setup.ts"
+		]
 	},
-	"organizeImports": {
-		"enabled": false
-	},
+	"assist": { "actions": { "source": { "organizeImports": "off" } } },
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"all": true,
 			"a11y": {
-				"all": false
+				"noAccessKey": "error",
+				"noAriaUnsupportedElements": "error",
+				"noAutofocus": "warn",
+				"noDistractingElements": "error",
+				"noHeaderScope": "error",
+				"noInteractiveElementToNoninteractiveRole": "error",
+				"noNoninteractiveElementToInteractiveRole": "error",
+				"noNoninteractiveTabindex": "error",
+				"noPositiveTabindex": "error",
+				"noRedundantAlt": "warn",
+				"noRedundantRoles": "warn",
+				"useKeyWithClickEvents": "warn",
+				"useKeyWithMouseEvents": "warn",
+				"useValidAnchor": "error",
+				"useValidAriaProps": "error",
+				"useValidAriaValues": "error",
+				"useValidLang": "warn"
 			},
 			"correctness": {
 				"noNodejsModules": "off",
 				"useExhaustiveDependencies": "off",
-				"useImportExtensions": "off"
+				"useImportExtensions": "off",
+				"noSwitchDeclarations": "off"
 			},
 			"suspicious": {
 				"noArrayIndexKey": "off",
@@ -30,8 +62,10 @@
 				"noDefaultExport": "off",
 				"noNonNullAssertion": "off",
 				"useNamingConvention": "off",
-				"useNodejsImportProtocol": "off",
-				"useSingleCaseStatement": "off"
+				"useNodejsImportProtocol": "off"
+			},
+			"security": {
+				"noBlankTarget": "error"
 			}
 		}
 	}

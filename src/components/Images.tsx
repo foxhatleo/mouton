@@ -1,7 +1,17 @@
 "use client";
 
-import React, { useRef } from "react";
+import type React from "react";
+import { useRef } from "react";
 import ReactSwipe from "react-swipe";
+
+// Type assertion for ReactSwipe compatibility with React 19
+const SwipeComponent = ReactSwipe as unknown as React.ForwardRefExoticComponent<
+	{
+		className?: string;
+		swipeOptions?: { auto?: number };
+		children?: React.ReactNode;
+	} & React.RefAttributes<ReactSwipe>
+>;
 
 export interface ImagesType {
 	urls: string[];
@@ -16,7 +26,9 @@ const Arrow = () => (
 		width="30px"
 		height="30px"
 		viewBox="0 0 123.959 123.959"
+		aria-hidden="true"
 	>
+		<title>Navigation arrow</title>
 		<g>
 			<path
 				d={
@@ -34,61 +46,56 @@ const Images: React.ComponentType<ImagesType> = ({
 	urlPrefix,
 }) => {
 	const swipe = useRef<ReactSwipe>(null);
-	const prev = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+	const prev = (evt: React.MouseEvent<HTMLButtonElement>) => {
 		evt.preventDefault();
 		swipe.current!.prev();
 	};
-	const next = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+	const next = (evt: React.MouseEvent<HTMLButtonElement>) => {
 		evt.preventDefault();
 		swipe.current!.next();
 	};
 
 	const rnd = Math.floor(Math.random() * 100000);
 
-	const rs = React.createElement(
-		// biome-ignore lint/suspicious/noExplicitAny:
-		ReactSwipe as any,
-		{
-			className: "carousel",
-			swipeOptions: { auto: 2500 },
-			ref: swipe,
-		},
-		urls.map((url, ind) => (
-			<div className={`image i-${rnd + ind}`} key={ind}>
-				<style jsx={true} global={true}>
-					{`
-                    .image.i-${rnd + ind} {
-                        background-image: url(${(urlPrefix ?? "") + url}.jpg);
-                    }
-
-                    .webp .image.i-${rnd + ind} {
-                        background-image: url(${(urlPrefix ?? "") + url}.webp);
-                    }
-                `}
-				</style>
-			</div>
-		)),
-	);
-
 	return (
 		<div className="images">
-			{rs}
-			<a
-				href="#"
+			<SwipeComponent
+				className="carousel"
+				swipeOptions={{ auto: 2500 }}
+				ref={swipe}
+			>
+				{urls.map((url, ind) => {
+					const baseUrl = (urlPrefix ?? "") + url;
+					return (
+						<div
+							className={`image i-${rnd + ind}`}
+							key={ind}
+							style={
+								{
+									"--bg-image-jpg": `url(${baseUrl}.jpg)`,
+									"--bg-image-webp": `url(${baseUrl}.webp)`,
+								} as React.CSSProperties
+							}
+						/>
+					);
+				})}
+			</SwipeComponent>
+			<button
+				type="button"
 				onClick={prev}
 				aria-label="Previous slide"
 				className="nav-button left"
 			>
 				<Arrow />
-			</a>
-			<a
-				href="#"
+			</button>
+			<button
+				type="button"
 				onClick={next}
 				aria-label="Next slide"
 				className="nav-button right"
 			>
 				<Arrow />
-			</a>
+			</button>
 			<style jsx={true} global={true}>
 				{`
                     .image {
@@ -98,28 +105,35 @@ const Images: React.ComponentType<ImagesType> = ({
                         background-repeat: no-repeat;
                         background-color: #eee;
                         z-index: -2;
+                        background-image: var(--bg-image-jpg);
+                    }
+
+                    .webp .image {
+                        background-image: var(--bg-image-webp);
                     }
 
                     :global(body.has-hover) .images:hover .nav-button {
                         opacity: 1;
                     }
 
-                    .nav-button {
-                        opacity: 0;
-                        transition: .3s ease-in-out opacity;
-                        position: absolute;
-                        display: flex;
-                        align-items: center;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        height: 100%;
-                        padding: 1em;
-                        text-decoration: none;
-                        color: white;
-                        text-shadow: 0 0 7px #000000;
-                        font-size: 1.5em;
-                    }
+					.nav-button {
+						opacity: 0;
+						transition: .3s ease-in-out opacity;
+						position: absolute;
+						display: flex;
+						align-items: center;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						height: 100%;
+						padding: 1em;
+						background: none;
+						border: none;
+						cursor: pointer;
+						color: white;
+						text-shadow: 0 0 7px #000000;
+						font-size: 1.5em;
+					}
 
                     .nav-button::before {
                         content: "";

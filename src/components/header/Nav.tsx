@@ -98,9 +98,9 @@ const Nav: React.ComponentType = () => {
 		<>
 			<nav className="mobile nav">
 				<span className="glow" />
-				<a
+				<button
+					type="button"
 					aria-label="Toggle menu"
-					href="#"
 					className="mobile-button"
 					onClick={mobileToggleHandler}
 				>
@@ -108,7 +108,7 @@ const Nav: React.ComponentType = () => {
 					<div className="line" />
 					<div className="line" />
 					<div className="line" />
-				</a>
+				</button>
 			</nav>
 			<nav className="desktop nav" ref={desktopNav}>
 				<NavItem label="✕" href="/" onclick={mobileToggleHandler} />

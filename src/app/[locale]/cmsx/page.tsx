@@ -1,8 +1,13 @@
 import type React from "react";
-import WorkPage from "@/components/WorkPage";
+import dynamic from "next/dynamic";
 import { indigo } from "material-colors-ts";
 import type { Viewport } from "next";
 import { getTranslations } from "next-intl/server";
+import type { GenerateMetadataParams } from "@/types/next-intl";
+
+const WorkPage = dynamic(() => import("@/components/WorkPage"), {
+	loading: () => <main style={{ opacity: 0 }} />,
+});
 
 const WorkCMSX: React.ComponentType = () => (
 	<WorkPage part={"CMSX"} color={indigo} />
@@ -10,9 +15,8 @@ const WorkCMSX: React.ComponentType = () => (
 
 export default WorkCMSX;
 
-// biome-ignore lint/suspicious/noExplicitAny:
-export async function generateMetadata(ctx: any) {
-	const locale = ctx.params.locale as string;
+export async function generateMetadata(ctx: GenerateMetadataParams) {
+	const { locale } = await ctx.params;
 	const t = await getTranslations({ locale, namespace: "CMSX" });
 	const t2 = await getTranslations({ locale, namespace: "Home" });
 

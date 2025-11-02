@@ -17,7 +17,11 @@ import {
 	indigo,
 	pink,
 } from "material-colors-ts";
-import Avatar from "@/components/Avatar";
+import dynamic from "next/dynamic";
+
+const Avatar = dynamic(() => import("@/components/Avatar"), {
+	ssr: false,
+});
 import Responsive from "@/components/Responsive";
 import type { Color } from "@/components/Color";
 import useScroll from "@/hooks/useScroll";

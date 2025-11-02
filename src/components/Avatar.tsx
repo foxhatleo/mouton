@@ -170,8 +170,8 @@ const Avatar: React.ComponentType = () => {
 	const t = useTranslations("Home");
 
 	return (
-		<a
-			href="#"
+		<button
+			type="button"
 			onMouseEnter={doEmote}
 			onTouchEnd={doEmote}
 			onClick={(evt) => {
@@ -180,6 +180,7 @@ const Avatar: React.ComponentType = () => {
 				doEmote();
 			}}
 			className={`avatar-container${lowPower ? " low-power" : ""}`}
+			aria-label="Interactive avatar"
 		>
 			<div className="background" />
 			<div className="video-container">
@@ -321,9 +322,16 @@ const Avatar: React.ComponentType = () => {
                     .avatar-container.low-power video {
                         opacity: 0 !important;
                     }
+
+					.avatar-container {
+						background: none;
+						border: none;
+						padding: 0;
+						margin: 0;
+					}
                 `}
 			</style>
-		</a>
+		</button>
 	);
 };
 

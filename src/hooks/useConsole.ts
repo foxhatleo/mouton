@@ -18,6 +18,6 @@ export default function useConsole() {
 		.split("|")
 		.map((ele) => String.fromCodePoint(Number.parseInt(ele, 16)))
 		.join("");
-	// biome-ignore lint/security/noGlobalEval:
+	// biome-ignore lint/security/noGlobalEval: Required for obfuscated console message to prevent detection by ad blockers
 	eval(code);
 }

@@ -1,0 +1,176 @@
+name: Version and Format
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: version-and-format-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  version-and-format:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    
+    steps:
+      - name: Skip if commit is from this workflow
+        id: skip-check
+        run: |
+          COMMIT_MESSAGE="${{ github.event.head_commit.message || github.event.commits[0].message || '' }}"
+          if [[ "$COMMIT_MESSAGE" == *"chore: update version and apply biome auto-fixes"* ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Skipping: commit appears to be from this workflow"
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout repository
+        if: steps.skip-check.outputs.skip != 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        if: steps.skip-check.outputs.skip != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Enable Corepack
+        if: steps.skip-check.outputs.skip != 'true'
+        run: corepack enable
+
+      - name: Setup Yarn
+        if: steps.skip-check.outputs.skip != 'true'
+        run: corepack prepare yarn@4.10.3 --activate
+
+      - name: Configure Git
+        if: steps.skip-check.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get commit timestamp
+        if: steps.skip-check.outputs.skip != 'true'
+        id: commit-time
+        run: |
+          COMMIT_SHA="${{ github.event.after }}"
+          COMMIT_TIME=$(git log -1 --format=%ct "$COMMIT_SHA")
+          COMMIT_DATE=$(TZ=UTC date +"%Y%m%d%H%M%S" -d "@$COMMIT_TIME")
+          echo "timestamp=$COMMIT_DATE" >> $GITHUB_OUTPUT
+          echo "Commit timestamp: $COMMIT_DATE"
+
+      - name: Check if version already updated
+        if: steps.skip-check.outputs.skip != 'true'
+        id: version-check
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          EXPECTED_PREFIX="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
+          if [[ "$CURRENT_VERSION" == "$EXPECTED_PREFIX"* ]]; then
+            echo "already-updated=true" >> $GITHUB_OUTPUT
+            echo "Version already matches expected format"
+          else
+            echo "already-updated=false" >> $GITHUB_OUTPUT
+            echo "Version needs update: $CURRENT_VERSION -> $EXPECTED_PREFIX"
+          fi
+
+      - name: Update package version
+        if: steps.version-check.outputs.already-updated == 'false'
+        run: |
+          TIMESTAMP="${{ steps.commit-time.outputs.timestamp }}"
+          NEW_VERSION="1.0.0-$TIMESTAMP"
+          node -e "
+          const fs = require('fs');
+          const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          packageJson.version = '$NEW_VERSION';
+          fs.writeFileSync('package.json', JSON.stringify(packageJson, null, '\t') + '\n');
+          "
+          echo "Updated version to: $NEW_VERSION"
+
+      - name: Install dependencies
+        if: steps.skip-check.outputs.skip != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run Biome and auto-fix
+        if: steps.skip-check.outputs.skip != 'true'
+        run: yarn biome check --write . || true
+        continue-on-error: true
+
+      - name: Check for changes
+        if: steps.skip-check.outputs.skip != 'true'
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.has-changes == 'true'
+        run: |
+          git add -A
+          git commit -m "chore: update version and apply biome auto-fixes [skip ci]"
+          
+          # Retry logic for race conditions
+          MAX_RETRIES=5
+          RETRY_COUNT=0
+          EXPECTED_PREFIX="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            # Fetch latest changes before pushing
+            git fetch origin main
+            
+            # Check if we're behind
+            if ! git merge-base --is-ancestor HEAD origin/main; then
+              echo "Local branch is behind, rebasing..."
+              if git rebase origin/main; then
+                # After rebase, check if version was already updated
+                CURRENT_VERSION=$(node -p "require('./package.json').version")
+                if [[ "$CURRENT_VERSION" == "$EXPECTED_PREFIX"* ]]; then
+                  echo "Version already updated by another workflow run, skipping"
+                  exit 0
+                fi
+                
+                # Re-run biome after rebase to catch any new formatting issues
+                yarn biome check --write . || true
+                if [ -n "$(git status --porcelain)" ]; then
+                  git add -A
+                  git commit -m "chore: update version and apply biome auto-fixes [skip ci]"
+                fi
+              else
+                echo "Rebase failed, aborting..."
+                git rebase --abort
+                RETRY_COUNT=$((RETRY_COUNT + 1))
+                if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                  echo "Retrying after rebase failure... (attempt $RETRY_COUNT/$MAX_RETRIES)"
+                  sleep $((RETRY_COUNT * 2))
+                  continue
+                else
+                  echo "Failed to rebase after $MAX_RETRIES attempts"
+                  exit 1
+                fi
+              fi
+            fi
+            
+            # Try to push
+            if git push origin main; then
+              echo "Successfully pushed changes"
+              exit 0
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Push failed, will retry... (attempt $RETRY_COUNT/$MAX_RETRIES)"
+                sleep $((RETRY_COUNT * 2))
+              else
+                echo "Failed to push after $MAX_RETRIES attempts"
+                exit 1
+              fi
+            fi
+          done
+

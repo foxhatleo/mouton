@@ -1,7 +1,11 @@
 export default function getReleaseIdentifier(): string {
 	const info: string[] = [];
 
-	if (typeof process !== "undefined" && typeof process.env !== "undefined") {
+	if (
+		typeof process !== "undefined" &&
+		process.env &&
+		typeof process.env === "object"
+	) {
 		if (typeof process.env.VERCEL_ENV === "string") {
 			info.push(process.env.VERCEL_ENV);
 		}
@@ -16,4 +20,3 @@ export default function getReleaseIdentifier(): string {
 
 	return info.join("-");
 }
-
