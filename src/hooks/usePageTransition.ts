@@ -12,7 +12,7 @@ export default function usePageTransition() {
 		for (const i of mains) {
 			i.style.opacity = "0";
 		}
-		gsap.to(mains, 0.3, { opacity: 1 });
+		gsap.to(mains, { opacity: 1, duration: 0.3 });
 		const containers = Array.from(
 			document.body.querySelectorAll(".entry-transition-group"),
 		);
