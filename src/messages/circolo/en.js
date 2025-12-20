@@ -3,7 +3,7 @@ export default {
 	tagline:
 		"Complete website overhaul using React with e-commerce functionalities.",
 	date: "Jun 2022 - Aug 2022",
-	website: "https://circolo.us",
+	website: "",
 	github: "",
 	windows: "",
 	macos: "",
@@ -46,8 +46,12 @@ merging into the main codebase. As a final task, I assisted my supervisor
 in launching the new production site with minimal downtime, ensuring
 minimal disruption to our customers.
 
+The new website significantly improved user experience and performance,
+enabling seamless e-commerce operations and better customer engagement.
+Unfortunately, Circolo has since gone out of business, and the website is
+no longer accessible.
+
 Please note that the source code is not publicly accessible, given the
-commercial nature of the project. The live site can be accessed at
-[circolo.us](https://circolo.us).
+commercial nature of the project.
 `,
 };

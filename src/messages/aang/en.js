@@ -2,7 +2,7 @@ export default {
 	title: "Aang Avatar Assistant",
 	tagline: "A virtual assistant platform with client-customizable avatar.",
 	date: "Aug 2024 - Nov 2024",
-	website: "//avatar.circolo.us/go",
+	website: "",
 	github: "",
 	windows: "",
 	macos: "",
@@ -26,8 +26,14 @@ and lifelike experience instead of a generic animation or robotic interaction.
 One notable implementation is at a nearby hospital, where doctors and medical
 staff serve as avatars on multiple kiosks. Here, Aang assists with basic
 triaging and addresses minor health inquiries, receiving positive feedback
-from both patients and stakeholders. While the source code is private,
-a [demo](https://avatar.circolo.us/go) is
-publicly available for anyone interested in exploring its capabilities.
+from both patients and stakeholders.
+
+Aang successfully demonstrated the potential of AI-powered virtual assistants
+in healthcare and hospitality settings, providing accessible and personalized
+interactions. Unfortunately, Circolo has since gone out of business, and the
+system is no longer available.
+
+Please note that the source code is not publicly accessible, given the
+commercial nature of the project.
 `,
 };

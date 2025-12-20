@@ -3,7 +3,7 @@
 import type React from "react";
 import Logo from "@/components/header/Logo";
 import Nav from "@/components/header/Nav";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export interface HeaderProps {
 	absolute?: boolean;

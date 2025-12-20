@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import Responsive from "@/components/Responsive";
 
 export interface NavItemProps {

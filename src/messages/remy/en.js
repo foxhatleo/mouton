@@ -3,7 +3,7 @@ export default {
 	tagline:
 		"An AI-powered platform bringing interactive experience to hospitality industries.",
 	date: "Oct 2023 - Nov 2024",
-	website: "//restaurants.circolo.us/demo",
+	website: "",
 	github: "",
 	windows: "",
 	macos: "",
@@ -39,5 +39,13 @@ connection, as the display stand may not have Internet access in production,
 but I was able to get around these challenges by building a custom caching
 solution that makes sure all dependent images, fonts, and scripts can be
 downloaded by the device in one go.
+
+Remy successfully brought interactive digital experiences to multiple
+restaurants and hotels, streamlining menu management and enhancing customer
+engagement. Unfortunately, Circolo has since gone out of business, and the
+platform is no longer available.
+
+Please note that the source code is not publicly accessible, given the
+commercial nature of the project.
 `,
 };

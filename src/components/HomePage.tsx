@@ -5,7 +5,7 @@ import { useState } from "react";
 import Header from "@/components/header/Header";
 import Rainbow from "@/components/Rainbow";
 import usePageTransition from "@/hooks/usePageTransition";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import Footer from "@/components/Footer";
 import {
 	blue,

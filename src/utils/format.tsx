@@ -24,8 +24,8 @@ export function paragraph(s: string): ReactElement[] {
 	return s
 		.trim()
 		.split(/\n{2,}/gm)
-		.map((i) => {
-			const res: (string | ReactElement)[] = i.split(LINK_REGEX);
+		.map((paragraphText, index) => {
+			const res: (string | ReactElement)[] = paragraphText.split(LINK_REGEX);
 			for (let a = 0, b = res.length; a < b; a += 1) {
 				const c = (res[a] as string).match(LINK_REGEX2);
 				if (c) {
@@ -36,7 +36,7 @@ export function paragraph(s: string): ReactElement[] {
 					);
 				}
 			}
-			return res.flatMap((i2) =>
+			const processed = res.flatMap((i2) =>
 				typeof i2 === "string"
 					? (() => {
 							const parts = i2.split("`");
@@ -57,6 +57,12 @@ export function paragraph(s: string): ReactElement[] {
 						})()
 					: i2,
 			);
-		})
-		.map((i) => <p key={`para-${JSON.stringify(i).slice(0, 50)}`}>{i}</p>);
+			return (
+				<p
+					key={`para-${index}-${paragraphText.slice(0, 50).replace(/\s+/g, "-")}`}
+				>
+					{processed}
+				</p>
+			);
+		});
 }
