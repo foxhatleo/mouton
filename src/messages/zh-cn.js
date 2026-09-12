@@ -23,7 +23,7 @@ const ZH_CN = {
 		"scroll-down": "向下滑动了解更多",
 		"about-me": "关于我",
 		"about-me-text": `
-欢迎！我是 Leo 梁文皓，一名有抱负的软件工程师，目前就职于 [Sigma Computing](https://sigmacomputing.com)。
+欢迎！我是 Leo 梁文皓，一名有抱负的软件工程师，目前就职于 [Scribe](https://scribe.com)。
 我于 2023 年从[康奈尔大学](https://cornell.edu)获得计算机科学硕士学位，自那时起一直从事软件工程领域的工作。
 我渴望在一个充满活力的团队中贡献我的技能和专业知识，坚定地相信技术能够改善和丰富人们的生活。
 

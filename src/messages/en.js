@@ -24,7 +24,7 @@ const EN = {
 		"about-me": "About Me",
 		"about-me-text": `
 Welcome! I’m Leo, an ambitious software engineer currently at
-[Sigma Computing](https://sigmacomputing.com).
+[Scribe](https://scribe.com).
 I graduated from [Cornell](https://cornell.edu)
 with a Master’s in Computer Science in 2023, and have been working in the field
 of software engineering since then.
