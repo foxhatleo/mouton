@@ -18,22 +18,22 @@ const EN = {
 	},
 	Home: {
 		title: "Leo Liang",
-		desc: "Personal website of Leo Liang, an aspiring software engineer whose passion is to create useful & delightful experience with the power of technology.",
+		desc: "Personal website of Leo Liang, a software engineer whose passion is to create useful & delightful experience with the power of technology.",
 		hero: "My passion is to\ncreate useful &\ndelightful experience\nwith the power of\ntechnology.",
 		"scroll-down": "Scroll down to learn more",
 		"about-me": "About Me",
 		"about-me-text": `
-Welcome! I’m Leo, an ambitious software engineer currently at
-[Sigma Computing](https://sigmacomputing.com).
+Welcome! I’m Leo, a software engineer currently at
+[Scribe](https://scribe.com), formerly [Sigma Computing](https://sigmacomputing.com).
 I graduated from [Cornell](https://cornell.edu)
 with a Master’s in Computer Science in 2023, and have been working in the field
 of software engineering since then.
-I’m eager to contribute my skills and expertise to a dynamic team,
+I’m passionate about building software that people genuinely enjoy using,
 with a firm belief in using technology
 to improve and enrich lives.
 
-Born in China and fluent in Mandarin, Cantonese, and English, I revel in embracing diverse cultures. I’m currently on
-an exciting journey learning Japanese and French, further extending my linguistic capabilities.
+Born in China and fluent in Mandarin, Cantonese, and English, I revel in embracing diverse cultures. I’ve since grown
+comfortable in Japanese and am currently learning French, further extending my linguistic capabilities.
 
 When I’m not immersed in coding or languages, I find solace in playing the piano and exploring the world. Thank you
 for visiting my website — enjoy discovering more about my passions and pursuits.
