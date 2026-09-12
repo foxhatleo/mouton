@@ -20,8 +20,9 @@ jobs:
     steps:
       - name: Skip if commit is from this workflow
         id: skip-check
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message || '' }}
         run: |
-          COMMIT_MESSAGE="${{ github.event.head_commit.message || '' }}"
           if [[ "$COMMIT_MESSAGE" == *"chore: update version and apply biome auto-fixes"* ]]; then
             echo "skip=true" >> $GITHUB_OUTPUT
             echo "Skipping: commit appears to be from this workflow"
@@ -53,20 +54,25 @@ jobs:
 
       - name: Configure Git
         if: steps.skip-check.outputs.skip != 'true'
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          WORKSPACE: ${{ github.workspace }}
         run: |
-          BRANCH_NAME="${{ github.ref_name }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global --add safe.directory ${{ github.workspace }}
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git config --global --add safe.directory "$WORKSPACE"
+          git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/$REPOSITORY.git"
           git checkout "$BRANCH_NAME" || git checkout -b "$BRANCH_NAME"
           git branch -u "origin/$BRANCH_NAME" "$BRANCH_NAME" || true
 
       - name: Get commit timestamp
         if: steps.skip-check.outputs.skip != 'true'
         id: commit-time
+        env:
+          COMMIT_SHA: ${{ github.event.after }}
         run: |
-          COMMIT_SHA="${{ github.event.after }}"
           COMMIT_TIME=$(git log -1 --format=%ct "$COMMIT_SHA")
           COMMIT_DATE=$(TZ=UTC date +"%Y%m%d%H%M%S" -d "@$COMMIT_TIME")
           echo "timestamp=$COMMIT_DATE" >> $GITHUB_OUTPUT
@@ -75,15 +81,17 @@ jobs:
       - name: Check if version already updated
         if: steps.skip-check.outputs.skip != 'true'
         id: version-check
+        env:
+          COMMIT_SHA: ${{ github.event.after }}
+          TIMESTAMP: ${{ steps.commit-time.outputs.timestamp }}
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-          EXPECTED_VERSION="1.0.0-${{ steps.commit-time.outputs.timestamp }}"
-          COMMIT_SHA="${{ github.event.after }}"
-          
+          EXPECTED_VERSION="1.0.0-$TIMESTAMP"
+
           echo "Debug info:"
           echo "  Current version in package.json: $CURRENT_VERSION"
           echo "  Expected version for commit $COMMIT_SHA: $EXPECTED_VERSION"
-          echo "  Commit timestamp: ${{ steps.commit-time.outputs.timestamp }}"
+          echo "  Commit timestamp: $TIMESTAMP"
           
           # Check if the current version EXACTLY matches what we expect for this commit
           # Only skip if versions match exactly (not just prefix match)
@@ -97,13 +105,14 @@ jobs:
 
       - name: Update package version
         if: steps.version-check.outputs.already-updated == 'false'
+        env:
+          TIMESTAMP: ${{ steps.commit-time.outputs.timestamp }}
         run: |
-          TIMESTAMP="${{ steps.commit-time.outputs.timestamp }}"
           NEW_VERSION="1.0.0-$TIMESTAMP"
-          node -e "
+          NEW_VERSION="$NEW_VERSION" node -e "
           const fs = require('fs');
           const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-          packageJson.version = '$NEW_VERSION';
+          packageJson.version = process.env.NEW_VERSION;
           fs.writeFileSync('package.json', JSON.stringify(packageJson, null, '\t') + '\n');
           "
           echo "Updated version to: $NEW_VERSION"
@@ -131,10 +140,13 @@ jobs:
         if: steps.changes.outputs.has-changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_SHA: ${{ github.event.after }}
+          TIMESTAMP: ${{ steps.commit-time.outputs.timestamp }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           chmod +x .github/scripts/commit-and-push.sh
           .github/scripts/commit-and-push.sh \
-            "${{ github.event.after }}" \
-            "${{ steps.commit-time.outputs.timestamp }}" \
-            "${{ github.ref_name }}"
+            "$COMMIT_SHA" \
+            "$TIMESTAMP" \
+            "$BRANCH_NAME"
 
