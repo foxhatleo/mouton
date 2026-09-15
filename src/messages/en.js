@@ -1,3 +1,7 @@
+import requestTraces from "./request-traces/en";
+import listView from "./list-view/en";
+import inputTables from "./input-tables/en";
+import fileColumns from "./file-columns/en";
 import cmsx from "./cmsx/en";
 import circolo from "./circolo/en";
 import egos2000 from "./egos-2000-extension/en";
@@ -40,6 +44,10 @@ for visiting my website — enjoy discovering more about my passions and pursuit
 `,
 		"play-prompt": "Click or tap to play.",
 		works: "Works",
+		"request-traces": requestTraces,
+		"list-view": listView,
+		"input-tables": inputTables,
+		"file-columns": fileColumns,
 		circolo: circolo,
 		"egos-2000": egos2000,
 		xic: xic,
@@ -63,6 +71,10 @@ for visiting my website — enjoy discovering more about my passions and pursuit
 		pdf: "Report",
 		scroll: "Scroll down to learn more",
 	},
+	RequestTraces: requestTraces,
+	ListView: listView,
+	InputTables: inputTables,
+	FileColumns: fileColumns,
 	Circolo: circolo,
 	CMSX: cmsx,
 	EGOS2000: egos2000,

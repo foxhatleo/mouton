@@ -1,3 +1,7 @@
+import requestTraces from "./request-traces/zh-cn";
+import listView from "./list-view/zh-cn";
+import inputTables from "./input-tables/zh-cn";
+import fileColumns from "./file-columns/zh-cn";
 import cmsx from "./cmsx/zh-cn";
 import circolo from "./circolo/zh-cn";
 import egos2000 from "./egos-2000-extension/zh-cn";
@@ -35,6 +39,10 @@ const ZH_CN = {
 `,
 		"play-prompt": "点击或轻触头像即可播放",
 		works: "作品集",
+		"request-traces": requestTraces,
+		"list-view": listView,
+		"input-tables": inputTables,
+		"file-columns": fileColumns,
 		circolo: circolo,
 		"egos-2000": egos2000,
 		xic: xic,
@@ -58,6 +66,10 @@ const ZH_CN = {
 		pdf: "报告",
 		scroll: "向下滑动了解更多",
 	},
+	RequestTraces: requestTraces,
+	ListView: listView,
+	InputTables: inputTables,
+	FileColumns: fileColumns,
 	Circolo: circolo,
 	CMSX: cmsx,
 	EGOS2000: egos2000,
