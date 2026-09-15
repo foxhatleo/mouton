@@ -8,11 +8,15 @@ import usePageTransition from "@/hooks/usePageTransition";
 import { Link } from "@/i18n/routing";
 import Footer from "@/components/Footer";
 import {
+	amber,
 	blue,
+	deepPurple,
 	green,
+	lightGreen,
 	orange,
 	purple,
 	red,
+	teal,
 	yellow,
 	indigo,
 	pink,
@@ -45,6 +49,26 @@ const HomePage: React.ComponentType = () => {
 
 	const t = useTranslations("Home");
 	const WORKS: { t: string; link: string; color: Color }[] = [
+		{
+			t: "request-traces",
+			link: "/request-traces/",
+			color: teal,
+		},
+		{
+			t: "list-view",
+			link: "/list-view/",
+			color: amber,
+		},
+		{
+			t: "input-tables",
+			link: "/input-tables/",
+			color: deepPurple,
+		},
+		{
+			t: "file-columns",
+			link: "/file-columns/",
+			color: lightGreen,
+		},
 		{
 			t: "aang",
 			link: "/aang/",
